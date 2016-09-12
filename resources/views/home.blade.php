@@ -8,8 +8,13 @@
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
-                    あなたログインしています！
+                    あなたはログインしています!!
+					<div>
+					username: {{ Auth::user()->name }}<br>
+					e-mail: {{ Auth::user()->email }}
+					</div>
                 </div>
+
             </div>
         </div>
     </div>
