@@ -1,6 +1,6 @@
 # RSS Reader
 チーム"rss_reader"が作るWeb Applicationです。
-Laravel 5.2
+Laravel 5.3
 
 ## Laravel PHP Framework
 
