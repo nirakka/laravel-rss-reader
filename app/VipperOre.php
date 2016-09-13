@@ -17,5 +17,6 @@ class VipperOre extends Model
         'title', 'content', 'url', 'site_url', 'site_title',
     ];
 
+    
     public $timestamps = false;
 }
