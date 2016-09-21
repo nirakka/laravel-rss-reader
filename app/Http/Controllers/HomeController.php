@@ -34,74 +34,86 @@ class HomeController extends Controller
         $xmls = [
             'http://blog.livedoor.jp/news23vip/atom.xml',
             'http://nirakka.net/blog/?feed=rss2',
+            'http://www.nikkeibp.co.jp/rss/info.rdf',
+            'http://blog.livedoor.jp/dqnplus/index.rdf',
         ];
 
+        $start = microtime(true);
         foreach ($xmls as $xml){
             $xml = simplexml_load_file($xml);
-            //$xml = simplexml_load_file('http://nirakka.net/blog/?feed=rss2');
-            if ($xml->entry){
-                $articles = $xml->entry;
-                $site_title = $xml->title;
-                $site_url = $xml->link['href'];
-                foreach ($articles as $item)
-                {
-                    $query = new VipperOre();
-                    $query->title = $item->title;
-                    $query->content = $item->summary;
-                    $query->date = $item->issued;
-                    $query->url = $item->link['href'];
-                    $query->site_title = $site_title;
-                    $query->site_url = $site_url;
-
-                    $sub = VipperOre::where('url', '=', $item->url);
-
-                    if (is_null($sub)){
-                        $query->save();
-                    }
-                }
-            } else if ($xml->item){
+            if (isset($xml->entry)){
+                $this->storeAtom($xml);
+            } else if (isset($xml->item)){
                 $this->storeRss1($xml);
-            } else {
+            } else if (isset($xml->channel->item)) {
                 $this->storeRss2($xml);
+            } else {
+                return "Nothing can be stored";
+                
             }
         }
-
-        return "success!";
+        $end = microtime(true);
+        return "success! 処理時間:" . ($end - $start) . "秒" ;
     }
 
-    public function storeRss1($xml){
-        
-        
+    private function storeAtom($xml){
+        $articles = $xml->entry;
+        $site_title = $xml->title;
+        $site_url = $xml->link['href'];
+        foreach ($articles as $item)
+        {
+            $sub = VipperOre::where('url', '=', $item->link['href'])->first();
+            
+            if (is_null($sub)){
+                $query = new VipperOre();
+                $query->title = $item->title;
+                $query->content = $item->summary;
+                $query->date = date("Y-m-d H:i:s",strtotime($item->issued));
+                $query->url = $item->link['href'];
+                $query->site_title = $site_title;
+                $query->site_url = $site_url;
+                $query->save();
+            }
+        }
+    }
+
+    private function storeRss1($xml){
         $site_title = $xml->channel->title; // サイトのタイトル
 		$site_link = $xml->channel->link; // サイトのリンク
 		foreach($xml->item as $item){
-            $query = new Model();
-            $nameSpace = $xml->getNamespaces(true);
-            $gNode = $item->children($nameSpace['dc']);
-            $query->title = $item->title;
-            $query->url = $item->link;
-            $query->content = $gNode->subject;
-            $query->date = $gNode->date;
-
-            $query->save();
+            $sub = VipperOre::where('url', '=', $item->link)->first();
+            
+            if (is_null($sub)){
+                $query = new VipperOre();
+                $nameSpace = $xml->getNamespaces(true);
+                $gNode = $item->children($nameSpace['dc']);
+                $query->title = $item->title;
+                $query->url = $item->link;
+                $query->content = $item->description;
+                $query->date = date("Y-m-d H:i:s",strtotime($gNode->date));
+                $query->site_title = $site_title;
+                $query->site_url  = $site_link;
+                $query->save();
+            }
         }
     }
 
-    public function storeRss2($xml){
+    private function storeRss2($xml){
         $site_title = $xml->channel->title;
 		$site_link	= $xml->channel->link;
 		foreach($xml->channel->item as $item){
-            $query = new memo();
-			$query->title	= $item->title;
-			$query->url	= $item->link;
-			$date	= $item->pubDate;
-			$query->date	= date("Y-m-d H:i:s",strtotime($date));
-            $query->content = $item->description;
-            $query->site_url = $site_link;
-            $query->site_title = $site_title;
-            $sub = VipperOre::where('url', '=', $item->url);
+            $sub = VipperOre::where('url', '=', $item->link)->first();
             if (is_null($sub)){
-            $query->save();
+
+                $query = new VipperOre();
+                $query->title	= $item->title;
+                $query->url	= $item->link;
+                $date	= $item->pubDate;
+                $query->date	= date("Y-m-d H:i:s",strtotime($date));
+                $query->content = strip_tags($item->description);
+                $query->site_url = $site_link;
+                $query->site_title = $site_title;
+                $query->save();
             }
         }
     }
