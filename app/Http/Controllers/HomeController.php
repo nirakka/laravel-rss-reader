@@ -37,7 +37,6 @@ class HomeController extends Controller
             'http://news.2chblog.jp/index.rdf',
             'http://blog.livedoor.jp/dqnplus/index.rdf',
             'http://hamusoku.com/index.rdf',
-            'http://news020.blog13.fc2.com/?xml',
             'http://blog.livedoor.jp/jyoushiki43/atom.xml',
             'http://hypernews.2chblog.jp/atom.xml',
             'http://watch2ch.2chblog.jp/index.rdf',

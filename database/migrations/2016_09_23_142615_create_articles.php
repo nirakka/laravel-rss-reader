@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class VipperOre extends Migration
+class CreateArticles extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class VipperOre extends Migration
      */
     public function up()
     {
-        Schema::create('vipper_ore', function (Blueprint $table) {
+        Schema::create('articles', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
             $table->string('content');
@@ -31,6 +31,6 @@ class VipperOre extends Migration
      */
     public function down()
     {
-        Schema::drop('vipper_ore');
+        Schema::dropIfExists('articles');
     }
 }
