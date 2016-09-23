@@ -18,3 +18,10 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 
 Route::get('/rss', 'HomeController@store');
+
+Route::get('/a', function() {
+  $crawler = Goutte::request('GET', 'http://duckduckgo.com/?q=Laravel');
+  $url = $crawler->filter('.result__title > a')->first()->attr('href');
+  dump($url);
+  return view('welcome');
+});

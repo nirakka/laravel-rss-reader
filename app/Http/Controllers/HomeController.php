@@ -33,9 +33,10 @@ class HomeController extends Controller
     {
         $xmls = [
             'http://blog.livedoor.jp/news23vip/atom.xml',
-            'http://nirakka.net/blog/?feed=rss2',
-            'http://www.nikkeibp.co.jp/rss/info.rdf',
+            'http://alfalfalfa.com/index.rdf',
+            'http://news.2chblog.jp/index.rdf',
             'http://blog.livedoor.jp/dqnplus/index.rdf',
+            'http://hamusoku.com/index.rdf',
         ];
 
         $start = microtime(true);
@@ -49,7 +50,6 @@ class HomeController extends Controller
                 $this->storeRss2($xml);
             } else {
                 return "Nothing can be stored";
-                
             }
         }
         $end = microtime(true);

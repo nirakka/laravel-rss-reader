@@ -8,16 +8,12 @@
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
-                    あなたはログインしています!!
-		    <div>
-			username: {{ Auth::user()->name }}<br>
-			e-mail: {{ Auth::user()->email }}
-		    </div>
+                    
                     <div>
                         <ul>
                             @foreach ($articles as $i)
-                                <li><a href={{ $i->url }}>{{ $i->title  }}</a>&nbsp;{{ $i->date }}
-                                    &nbsp;<a href="{{ $i->site_url }}">{{ $i->site_title }}</a>
+                                <li><a href={{ $i->url }} target="_blank">{{ $i->title  }}</a>&nbsp;{{ $i->date }}
+                                    &nbsp;<a href="{{ $i->site_url }}" target="_blank">{{ $i->site_title }}</a>
 
                                 </li>
                                 <div>{{ $i->content }}</div>
