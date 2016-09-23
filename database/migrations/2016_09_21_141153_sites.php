@@ -18,8 +18,8 @@ class Sites extends Migration
             $table->increments('id');
             $table->string('site_title');
             $table->string('site_url')->unique();
-            $table->string('xml1');
-            $table->string('xml2');
+            $table->string('rss');
+            $table->string('atom');
         });
     }
 
