@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Article;
 use App\Site;
+use App\SiteReg;
 
 class HomeController extends Controller
 {
@@ -25,25 +26,17 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $articles = Article::orderBy('date', 'desc')->get();
+        $id = \Auth::user()->id;
+        $site_reg = SiteReg::where('user_id', '=', $id)->get();
+        $articles_id = $this->articleIdToArray($site_reg);
+        $articles = Article::whereIn('site_id', $articles_id)->orderBy('date', 'desc')->get();
+
         return view('home', ['articles' => $articles]);
     }
 
     public function store()
     {
-        /////////////////////////////////////////////////////////
-        // $xmls = [                                           //
-        //     'http://blog.livedoor.jp/news23vip/atom.xml',   //
-        //     'http://alfalfalfa.com/index.rdf',              //
-        //     'http://news.2chblog.jp/index.rdf',             //
-        //     'http://blog.livedoor.jp/dqnplus/index.rdf',    //
-        //     'http://hamusoku.com/index.rdf',                //
-        //     'http://blog.livedoor.jp/jyoushiki43/atom.xml', //
-        //     'http://hypernews.2chblog.jp/atom.xml',         //
-        //     'http://watch2ch.2chblog.jp/index.rdf',         //
-        // ];                                                  //
-        /////////////////////////////////////////////////////////
-
+        
         $start = microtime(true);
         $xmls = Site::all();
         foreach ($xmls as $rss){
@@ -124,6 +117,14 @@ class HomeController extends Controller
                 $query->save();
             }
         }
+    }
+
+    private function articleIdToArray($data){
+        $site = [];
+        foreach ($data as $i) {
+            $site[] = $i->site_id;
+        }
+        return $site;
     }
         
 }
