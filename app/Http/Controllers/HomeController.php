@@ -81,15 +81,13 @@ class HomeController extends Controller
                 $query->content = $item->summary;
                 $query->date = date("Y-m-d H:i:s",strtotime($item->issued));
                 $query->url = $item->link['href'];
-                $query->site_title = $site_title;
-                $query->site_url = $site_url;
                 $query->site_id = $site_id;
                 $query->save();
             }
         }
     }
 
-    private function storeRss1($xml){
+    private function storeRss1($xml, $site_id){
         $site_title = $xml->channel->title; // サイトのタイトル
 		$site_link = $xml->channel->link; // サイトのリンク
 		foreach($xml->item as $item){
@@ -103,14 +101,13 @@ class HomeController extends Controller
                 $query->url = $item->link;
                 $query->content = $item->description;
                 $query->date = date("Y-m-d H:i:s",strtotime($gNode->date));
-                $query->site_title = $site_title;
-                $query->site_url  = $site_link;
+                $query->site_id = $site_id;
                 $query->save();
             }
         }
     }
 
-    private function storeRss2($xml){
+    private function storeRss2($xml, $site_id){
         $site_title = $xml->channel->title;
 		$site_link	= $xml->channel->link;
 		foreach($xml->channel->item as $item){
@@ -123,8 +120,7 @@ class HomeController extends Controller
                 $date	= $item->pubDate;
                 $query->date	= date("Y-m-d H:i:s",strtotime($date));
                 $query->content = strip_tags($item->description);
-                $query->site_url = $site_link;
-                $query->site_title = $site_title;
+                $query->site_id = $site_id;
                 $query->save();
             }
         }
