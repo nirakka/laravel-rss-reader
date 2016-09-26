@@ -18,10 +18,13 @@ class SiteController extends Controller
         }
 
         $crawler = Goutte::request('GET', $url);
-        $rss = $crawler->filter('head >link[type="application/rss+xml"]')->first()->attr('href');
 
+
+        if ($crawler->filter('head >link[type="application/rss+xml"]')->count() !== 0){ // RSS系のフィードを保存
+            $rss = $crawler->filter('head >link[type="application/rss+xml"]')->first()->attr('href');
+        }
   
-        if ($crawler->filter('head > link[type="application/atom+xml"]')->count() !== 0){
+        if ($crawler->filter('head > link[type="application/atom+xml"]')->count() !== 0){ // Atomを保存
             $atom = $crawler->filter('head > link[type="application/atom+xml"]')->first()->attr('href');
         }
 

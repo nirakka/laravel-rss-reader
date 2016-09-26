@@ -36,3 +36,5 @@ Route::get('/a', function() {
 Route::get('/sites', 'SiteController@showRegisterForm');
 
 Route::post('/sites', 'SiteController@registerSite');
+
+Route::get('/sites_regs', 'SiteRegController@index');

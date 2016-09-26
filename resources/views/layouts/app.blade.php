@@ -19,6 +19,7 @@
             'csrfToken' => csrf_token(),
         ]); ?>
     </script>
+
 </head>
 <body>
     <nav class="navbar navbar-default navbar-static-top">
@@ -43,6 +44,7 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/sites') }}">サイト登録</a></li>
+                    <li><a href="{{ url('/sites_regs') }}">マイリスト</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -78,8 +80,9 @@
     </nav>
 
     @yield('content')
-
+    @section('endbody')
     <!-- Scripts -->
     <script src="/js/app.js"></script>
+    @show
 </body>
 </html>
