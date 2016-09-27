@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Site;
 use App\Http\Requests;
+use App\Http\Requests\SiteRequest;
 use Goutte;
+use App\SiteReg;
 
 class SiteController extends Controller
 {
     //
-    public function registerSite(Request $request){
+    public function registerSite(SiteRequest $request){
         $url = $request->site_reg;
 
         if (strpos($url, 'http://') === false) {
@@ -18,7 +20,7 @@ class SiteController extends Controller
         }
 
         $crawler = Goutte::request('GET', $url);
-
+        
 
         if ($crawler->filter('head >link[type="application/rss+xml"]')->count() !== 0){ // RSS系のフィードを保存
             $rss = $crawler->filter('head >link[type="application/rss+xml"]')->first()->attr('href');
@@ -45,7 +47,12 @@ class SiteController extends Controller
 
         $site->save();
 
-        
+        $site_id = Site::orderBy('id', 'desc')->first()->id;
+        $site_reg = new SiteReg();
+        $user_id = \Auth()->user()->id;
+        $site_reg->user_id = $user_id;
+        $site_reg->site_id = $site_id;
+        $site_reg->save();
         
         return "success";
     }

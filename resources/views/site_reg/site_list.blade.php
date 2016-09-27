@@ -81,7 +81,9 @@
     <script>
      $(function(){
          $('.add_blog').on('click', function(){
-             $('.modal').modal('hide');
+             if ( ("#site_reg").val() != "" ){
+                 $('.modal').modal('hide');
+             }
          });
      });
     </script>
