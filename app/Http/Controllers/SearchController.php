@@ -37,26 +37,17 @@ class SearchController extends Controller
 
     public function showresult()
     {
-        // $searchWord= Request::get('searchWord');
-        // $id = \Auth::user()->id;
-        // $site_reg = SiteReg::where('user_id', '=', $id)->get();
-
-        // $articles_id = $this->articleIdToArray($site_reg);
-        // $articles = Article::whereIn('site_id', $articles_id)->orderBy('date', 'desc')->get();
-        // return view('showresult');
-        $value= "F";
+        $searchWord = Request::get('searchWord');
         $id = \Auth::user()->id;
         $site_reg = SiteReg::where('user_id', '=', $id)->get();
         $articles_id = $this->articleIdToArray($site_reg);
         $articles = Article::whereIn('site_id', $articles_id)
-                                ->where('title', 'like', '%'.$value.'%')
-                                ->orWhere('content','like','%'.$value.'%')
+                                ->where('title', 'like', '%'.$searchWord.'%')
+                                ->orWhere('content','like','%'.$searchWord.'%')
                                 ->orderBy('date', 'desc')
                                 ->get();
 
-        // $articles = Article::whereIn('site_id', $articles_id)->orderBy('date', 'desc')->get();
-
-        return view('showresult', ['articles' => $articles]);
+       return view('showresult', ['articles' => $articles]);
     }
 
     private function articleIdToArray($data)
