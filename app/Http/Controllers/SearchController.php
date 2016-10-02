@@ -32,12 +32,6 @@ class SearchController extends Controller
 
     public function search()
     {
-        // $id = \Auth::user()->id;
-        // $site_reg = SiteReg::where('user_id', '=', $id)->get();
-        // $articles_id = $this->articleIdToArray($site_reg);
-        // $articles = Article::whereIn('site_id', $articles_id)->orderBy('date', 'desc')->get();
-
-        // return view('search', ['articles' => $articles]);
         return view('search');
     }
 
@@ -50,20 +44,26 @@ class SearchController extends Controller
         // $articles_id = $this->articleIdToArray($site_reg);
         // $articles = Article::whereIn('site_id', $articles_id)->orderBy('date', 'desc')->get();
         // return view('showresult');
+        $value= "F";
         $id = \Auth::user()->id;
         $site_reg = SiteReg::where('user_id', '=', $id)->get();
         $articles_id = $this->articleIdToArray($site_reg);
-        $articles = Article::whereIn('site_id', $articles_id)->orderBy('date', 'desc')->get();
+        $articles = Article::whereIn('site_id', $articles_id)
+                                ->where('title','like', '%'.$value.'%')
+                                ->orderBy('date', 'desc')
+                                ->get();
+
+//        $articles = Article::whereIn('site_id', $articles_id)->orderBy('date', 'desc')->get();
 
         return view('showresult', ['articles' => $articles]);
     }
 
-    private function articleIdToArray($data){
+    private function articleIdToArray($data)
+    {
         $site = [];
         foreach ($data as $i) {
             $site[] = $i->site_id;
         }
         return $site;
     }
-        
 }
