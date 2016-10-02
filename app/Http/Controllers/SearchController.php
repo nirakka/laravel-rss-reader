@@ -49,11 +49,12 @@ class SearchController extends Controller
         $site_reg = SiteReg::where('user_id', '=', $id)->get();
         $articles_id = $this->articleIdToArray($site_reg);
         $articles = Article::whereIn('site_id', $articles_id)
-                                ->where('title','like', '%'.$value.'%')
+                                ->where('title', 'like', '%'.$value.'%')
+                                ->orWhere('content','like','%'.$value.'%')
                                 ->orderBy('date', 'desc')
                                 ->get();
 
-//        $articles = Article::whereIn('site_id', $articles_id)->orderBy('date', 'desc')->get();
+        // $articles = Article::whereIn('site_id', $articles_id)->orderBy('date', 'desc')->get();
 
         return view('showresult', ['articles' => $articles]);
     }
