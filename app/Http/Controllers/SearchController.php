@@ -25,16 +25,6 @@ class SearchController extends Controller
      * @return \Illuminate\Http\Response
      */
     // public function index()
-
-
-    //     return view('home', ['articles' => $articles]);
-    // }
-
-    public function search()
-    {
-        return view('search');
-    }
-
     public function showresult()
     {
         $searchWord = Request::get('searchWord');
@@ -43,11 +33,11 @@ class SearchController extends Controller
         $articles_id = $this->articleIdToArray($site_reg);
         $articles = Article::whereIn('site_id', $articles_id)
                                 ->where('title', 'like', '%'.$searchWord.'%')
-                                ->orWhere('content','like','%'.$searchWord.'%')
+                                ->orWhere('content', 'like', '%'.$searchWord.'%')
                                 ->orderBy('date', 'desc')
                                 ->get();
 
-       return view('showresult', ['articles' => $articles]);
+        return view('showresult', ['articles' => $articles]);
     }
 
     private function articleIdToArray($data)
