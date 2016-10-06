@@ -19,9 +19,9 @@ Route::get('/home', 'HomeController@index');
 
 Route::get('/rss', 'HomeController@store');
 
-Route::get('/search','SearchController@search');
+Route::get('/search','SearchController@index');
 
-Route::post('/search','SearchController@showresult');
+//Route::post('/search','SearchController@showresult');
 
 
 //Route::post('/search',['as' => 'contact'])

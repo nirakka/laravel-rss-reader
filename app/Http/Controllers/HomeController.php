@@ -59,22 +59,6 @@ class HomeController extends Controller
         $end = microtime(true);
         return "success! 処理時間:" . ($end - $start) . "秒" ;
     }
-
-
-    public function search()
-    {
-        // $id = \Auth::user()->id;
-        // $site_reg = SiteReg::where('user_id', '=', $id)->get();
-        // $articles_id = $this->articleIdToArray($site_reg);
-        // $articles = Article::whereIn('site_id', $articles_id)->orderBy('date', 'desc')->get();
-
-        // return view('search', ['articles' => $articles]);
-        return view('search');
-    }
-
-
-
-
     private function storeAtom($xml, $site_id){
         $articles = $xml->entry;
         $site_title = $xml->title;
