@@ -19,6 +19,13 @@ Route::get('/home', 'HomeController@index');
 
 Route::get('/rss', 'HomeController@store');
 
+Route::get('/search','SearchController@index');
+
+//Route::post('/search','SearchController@showresult');
+
+
+//Route::post('/search',['as' => 'contact'])
+
 Route::get('/a', function() {
   $crawler = Goutte::request('GET', 'http://nirakka.net/blog');
   $url = $crawler->filter('head >link[type="application/rss+xml"]')->first()->attr('href');

@@ -59,7 +59,6 @@ class HomeController extends Controller
         $end = microtime(true);
         return "success! 処理時間:" . ($end - $start) . "秒" ;
     }
-
     private function storeAtom($xml, $site_id){
         $articles = $xml->entry;
         $site_title = $xml->title;
@@ -128,5 +127,4 @@ class HomeController extends Controller
     }
         
 }
-
 
