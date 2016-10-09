@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Article;
 use App\Site;
 use App\SiteReg;
+use Illuminate\Database\Query\paginate;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -29,7 +30,7 @@ class HomeController extends Controller
         $id = \Auth::user()->id;
         $site_reg = SiteReg::where('user_id', '=', $id)->get();
         $articles_id = $this->articleIdToArray($site_reg);
-        $articles = Article::whereIn('site_id', $articles_id)->orderBy('date', 'desc')->get();
+        $articles = Article::whereIn('site_id', $articles_id)->orderBy('date', 'desc')->paginate(15);
 
         return view('home', ['articles' => $articles]);
     }
