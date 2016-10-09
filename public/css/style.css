@@ -1,0 +1,424 @@
+/* 親要素にclearfix*/
+.clearfix:after{
+	content: "";
+	clear: both;
+	display: block;
+}
+
+#header a{
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: #555;
+}
+
+/* header */
+
+/* html,bodyタグの設定 */
+html, body{
+    margin: 0;         /* 余白の削除 */
+    padding: 0;        /* 余白の削除 */
+    width:100%;
+    height:100%;
+}
+
+#header
+{
+    position: fixed;            /* ヘッダーの固定 */
+    top: 0px;                   /* 位置(上0px) */
+    left: 0px;                  /* 位置(右0px) */
+    width: 100%;                /* 横幅100%　*/
+    height: 60px;              /* 縦幅140px */
+	background: #fff;
+	border-bottom: 1px solid #ddd;
+	z-index: 100;
+}
+
+#header-back
+{
+    height: 60px;              /* 縦幅140px */
+	background: black;
+}
+
+#header-innner-wrap {
+    margin: 0 auto;
+    max-width: 620px;
+    background: #fff;
+}
+
+#header {
+    height: 50px;
+	padding-top: 10px;
+}
+
+#header h1 {
+    font-size: 20px;
+    font-family: 'BioRhyme', sans-serif;
+    font-weight: normal;
+}
+
+#header #h1:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+#header #menu-button {
+    float: left;
+    font-size: 25px;
+    text-align: center;
+    width: 25px;
+    margin: 10px;
+}
+
+#header #check-button {
+    float: right;
+    font-size: 25px;
+    text-align: center;
+    width: 25px;
+    margin: 10px 5px;
+}
+
+#header #reload-button:after {
+    conten: "";
+    display: block;
+    clear: both;
+}
+
+#header #reload-button {
+    float: right;
+    font-size: 25px;
+	color: black;
+    text-align: center;
+    width: 25px;
+    margin: 10px 5px;
+}
+#header #reload-button a{
+	color: black;
+}
+#header #reload-button a:visited{
+	color: black;
+}
+
+#header #setting-button {
+    float: right;
+    font-size: 25px;
+    text-align: center;
+    width: 25px;
+    margin: 10px 5px;
+}
+
+#header #title-box {
+	float: left;
+	margin: 8px 20px 10px 10px;
+}
+
+#header-buttons {
+	margin-right: 10px;
+}
+
+#info-about-current-page {
+	font-size: 13px;
+	color: #ddd;
+}
+
+#wrap {
+    margin: 0 auto;
+    max-width: 620px;
+    background: #fff;
+}
+
+
+/* test for textOverflow in the article_content*/
+.article_content .textOverflow {
+  overflow: hidden;
+  max-width: 500px;
+  height: 65px;
+}
+
+/* #articles in main column*/
+.article_magazine_content {
+    margin: 5px auto;
+    max-width: 500px;
+    border-radius:5px;
+    border: 1px solid #ccc;
+    padding: 10px
+}
+
+.article_title {
+    margin-bottom:6px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.article_content {
+    font-size: 12px;
+}
+
+.article_footer .site_title{
+    float: left;
+    font-size: 10px;
+    color: #555;
+}
+
+.article_footer .article_date{
+    float: right;
+    font-size: 10px;
+    color: #555;
+}
+
+
+/* 以下、リストビュー用のCSS */
+
+#articles_listview .read_or_unread {
+	display: block;
+	position: absolute;
+	width: 4px;
+	top: 4px;
+	bottom: 4px;
+	left: 4px;
+	background: #ddd;
+	float: left;
+	margin-right: 5px;
+}
+
+#articles_listview .article_list_content {
+	position: relative;
+	max-width: 90%;
+	border-bottom: 1px solid #ccc;
+	padding: 5px auto;
+	margin: 0 auto;
+	height: 30px;
+	z-index: 1;
+}
+
+#articles_listview .article_title_listview {
+	float: left;
+	max-width: 60%;
+	overflow: hidden;
+	/* ▼改行を禁止した上で、はみ出る分量は「…」記号で省略 */
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	font-size: 12px;
+	font-weight: bold;
+	margin: 4px 0 6px 0;
+}
+
+.article_magazine_content_wrap ul > li{
+	margin: 0;
+	padding: 0;
+}
+
+#articles_listview .article_date {
+	font-size: 10px;
+	float: right;
+	text-align: right;
+	margin: 4px 5px 6px 0;
+}
+
+
+
+#articles_listview .site_title_listview {
+	font-size: 12px;
+	float: left;
+	max-width: 20%;
+	overflow: hidden;
+	/* ▼改行を禁止した上で、はみ出る分量は「…」記号で省略 */
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	margin: 4px 5px 6px 0;
+	color: #aaa;
+	font-weight: lighter;
+}
+
+#articles_listview .favo-icon {
+	font-size: 12px;
+	margin-right: 5px;
+	margin-left: 15px;
+	float: left;
+	color: #aaa;
+	margin: 4px 5px 6px 15px;
+}
+
+#articles_listview a {
+ display: block;
+}
+#articles_listview .article_list_content:hover{
+  background: #f0f0f0;
+}
+
+#articles_listview a:visited{
+  color: black;
+}
+
+
+/* 下までスクロールで追加読み込み */
+#list{
+	padding:10px;
+    list-style: none;
+}
+#list li{
+	font-size:14px;
+	line-height:1.5em;
+	text-shadow:none;
+}
+#list li.load-li{
+	background-color:#fff;
+}
+
+#magazinelist{
+	padding:10px;
+    list-style: none;
+}
+#magazinelist li{
+	font-size:14px;
+	line-height:1.5em;
+	text-shadow:none;
+}
+#magazinelist li.load-li{
+	background-color:#fff;
+}
+
+#listlist{
+	padding:10px;
+    list-style: none;
+}
+#listlist li{
+	font-size:14px;
+	line-height:1.5em;
+	text-shadow:none;
+}
+#listlist li.load-li{
+	background-color:#fff;
+}
+/* sidemenu */
+
+#user_info {
+    margin-left: 60px;
+    margin-top:
+}
+
+#user_info #user_name{
+    margin: 3px;
+}
+
+#user_info #user_mail{
+    margin: 3px;
+}
+
+.user_photo {
+    border-radius: 100px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    float: left;
+}
+
+#wrap_my_menu dl {
+    margin: 20px 10px 10px;
+}
+#wrap_my_menu dt {
+    font-weight: bold;
+}
+
+#wrap_my_menu dd {
+    margin-left: -10px;
+}
+
+/* for dropmenu */
+
+#header-buttons {
+	float: right;
+}
+
+#dropmenu {
+	list-style: none;
+	width: 120px;
+}
+
+#dropmenu li{
+  position: relative;
+  width: 20%;
+  float: right;
+  margin: 0 5px 0 5px;
+  padding: 0;
+  text-align: center;
+}
+
+#dropmenu li a {
+	display: block;
+	line-height: 1;
+}
+
+#dropmenu li ul{
+  list-style: none;
+  position: absolute;
+  top: 100%;
+  left: -50%;
+  width: 300%;
+  margin: 0;
+  padding: 0;
+}
+
+/* ここでメニューのズレを修正 */
+#dropmenu li:first-child ul{
+  left: -180%;
+  width: 300%;
+}
+
+
+#dropmenu li ul li{
+  overflow: hidden;
+  width: 300%;
+  height: 0;
+  -moz-transition: .2s;
+  -webkit-transition: .2s;
+  -o-transition: .2s;
+  -ms-transition: .2s;
+  transition: .2s;
+
+}
+
+#dropmenu li ul li a{
+  text-align: center;
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 30px;
+  text-decoration: none;
+}
+
+#dropmenu li:hover ul li{
+  overflow: visible;
+  background: #fff;
+  text-align: center;
+  height: 30px;
+  border: 1px solid #ddd;
+  line-height: 30px;
+}
+
+#dropmenu li:hover ul li:hover{
+  background: #f0f0f0;
+}
+
+#dropmenu li:hover ul li:first-child{
+	border-radius: 3px 3px 0 0;
+}
+
+#dropmenu li:hover ul li:last-child{
+	border-radius: 0 0 3px 3px;
+}
+
+/* for tabs */
+
+/* Caution! Ensure accessibility in print and other media types... */
+@media projection, screen { /* Use class for showing/hiding tab content, so that visibility can be better controlled in different media types... */
+    .ui-tabs-hide {
+        display: none;
+    }
+}
+
+/* Hide useless elements in print layouts... */
+@media print {
+    .ui-tabs-nav {
+        display: none;
+    }
+}
