@@ -4,7 +4,7 @@
             <div id="articles_magazineview">
                 <div class="article_magazine_content_wrap">
                         <ul id="magazinelist">
-                            <li>
+                            <li>+
                                 <div class="article_magazine_content">
                                     <div class="article_title">
                                         はじめての記事 1
@@ -39,23 +39,6 @@
                                     </div>
                                 </div>
                             </li>
-                            <li>
-                                <div class="article_magazine_content">
-                                    <div class="article_title">
-                                        はじめての記事 6
-                                    </div>
-                                    <!-- url は別に表示しなくても良いかな？
-                                        <div class="article_url">http://example.com/index.html</div>
-                                    -->
-                                    <div class="article_content">
-                                        <p class="textOverflow">これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。</p>
-                                    </div>
-                                    <div class="article_footer clearfix">
-                                        <span class="site_title">はじめてのWEBサイト</span>
-                                        <span class="article_date">27/09/2015</span>
-                                    </div>
-                                </div>
-                            </li>
 
                             @foreach ($articles as $i)
                             <li>
@@ -67,7 +50,7 @@
                                         <div class="article_url">http://example.com/index.html</div>
                                     -->
                                     <div class="article_content">
-                                        <p class="textOverflow">    {{ $i->title  }}
+                                        <p class="textOverflow">    {{ $i->content  }}
                                     </div>
                                     <div class="article_footer clearfix">
                                         <span class="site_title"> {{ $i->site()->first()->site_title }} </span>
@@ -84,10 +67,6 @@
                                     <!-- url は別に表示しなくても良いかな？
                                         <div class="article_url">http://example.com/index.html</div>
                                     -->
-
-                                    <div class="article_content">
-                                        <p class="textOverflow">これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。</p>
-                                    </div>
                                     <div class="article_footer clearfix">
                                         <span class="site_title">はじめてのWEBサイト</span>
                                         <span class="article_date">27/09/2015</span>
@@ -121,7 +100,6 @@
                                    
                                 </li>
                             @endforeach
-<!--                             
                             <li>
                                 <a href="">
                                     <div class="article_list_content clearfix">
@@ -192,8 +170,4 @@
                 $('html,body').animate({ scrollTop: 0 }, '1');
             });
         </script>
- -->
-<!--
-
-                            -->
 @endsection

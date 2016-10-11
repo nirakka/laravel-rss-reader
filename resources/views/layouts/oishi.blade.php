@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
-        <title>RSS REEEEEEEEEDER</title>
+        <title>RSS READER</title>
 
 
         <link href="css/reset.css" type="text/css" rel="stylesheet" />
@@ -90,8 +90,8 @@
                         <img src="img/profile.jpg" class="user_photo" width="50" height="50" alt="Nobuyuki's photo">
                         <div id="user_info">
                             <!-- フォントサイズ変えたいかも -->
-                            <p id="user_name">Nobuyuki Oishi</p>
-                            <p id="user_mail">b.b.bluescratch@gmail.com</p>
+                            <p id="user_name">{{$username}}</p>
+                            <p id="user_mail">{{$useremail}}</p>
                         </div>
                     </div>
                     <dl id="box1">

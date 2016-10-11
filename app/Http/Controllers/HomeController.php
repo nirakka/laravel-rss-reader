@@ -27,13 +27,23 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $id = \Auth::user()->id;
+        $user = \Auth::user();
+        $id=$user->id;
+        $username=$user->name;
+        $useremail=$user->email;
+
         $site_reg = SiteReg::where('user_id', '=', $id)->get();
         $articles_id = $this->articleIdToArray($site_reg);
-        $articles = Article::whereIn('site_id', $articles_id)->orderBy('date', 'desc')->paginate(15);
+        $articles = Article::whereIn('site_id', $articles_id)->orderBy('date', 'desc')->paginate(30);
 
-        return view('home', ['articles' => $articles]);
+        return view('home', 
+            [
+                'articles' => $articles ,
+                'username' => $username ,
+                'useremail' => $useremail
+            ]);
     }
+
         public function oldhome()
     {
 
