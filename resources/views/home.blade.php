@@ -76,6 +76,7 @@
                         </ul>
                 </div>
             </div>
+            <div>
                   <div id="articles_listview">
                 <div class="article_magazine_content_wrap">
                         <ul id="listlist">
@@ -89,11 +90,11 @@
                                             </div>
                                             <div class="site_title_listview">
                                               <!-- <a href={{ $i->url }} target="_blank">{{ $i->title  }}</a> -->
-                                              {{ $i->title  }}
+                                                {{ $i->site()->first()->site_title }}
                                             </div>
                                             <div class="article_title_listview">
                                                  <!-- <a href="{{ $i->site()->first()->site_url }}" target="_blank">{{ $i->site()->first()->site_title }}</a> -->
-                                                {{ $i->site()->first()->site_title }}
+                                                {{ $i->title  }}
                                             </div>
                                             <div class="article_date">{{ date('H:i', strtotime($i->date)) }}</div>
                                         </div>
@@ -121,6 +122,8 @@
                         </ul>
                 </div>
             </div>
+
+
 
         <script type="text/javascript">
            $(document).ready(function() {

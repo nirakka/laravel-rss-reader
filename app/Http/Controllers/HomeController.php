@@ -35,12 +35,14 @@ class HomeController extends Controller
         $site_reg = SiteReg::where('user_id', '=', $id)->get();
         $articles_id = $this->articleIdToArray($site_reg);
         $articles = Article::whereIn('site_id', $articles_id)->orderBy('date', 'desc')->paginate(30);
+        
 
         return view('home', 
             [
                 'articles' => $articles ,
                 'username' => $username ,
-                'useremail' => $useremail
+                'useremail' => $useremail ,
+
             ]);
     }
 
