@@ -1,31 +1,15 @@
 @extends('layouts.oishi')
 
 @section('content')
+            <div id="header-back">
+            </div>
             <div id="articles_magazineview">
                 <div class="article_magazine_content_wrap">
                         <ul id="magazinelist">
-                            <li>+
-                                <div class="article_magazine_content">
-                                    <div class="article_title">
-                                        はじめての記事 1
-                                    </div>
-                                    <!-- url は別に表示しなくても良いかな？
-                                        <div class="article_url">http://example.com/index.html</div>
-                                    -->
-                            
-                                    <div class="article_content">
-                                        <p class="textOverflow">これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。</p>
-                                    </div>
-                                    <div class="article_footer clearfix">
-                                        <span class="site_title">はじめてのWEBサイト</span>
-                                        <span class="article_date">27/09/2015</span>
-                                    </div>
-                                </div>
-                            </li>
                             <li>
                                 <div class="article_magazine_content">
                                     <div class="article_title">
-                                        はじめての記事 5
+                                        はじめての記事 1
                                     </div>
                                     <!-- url は別に表示しなくても良いかな？
                                         <div class="article_url">http://example.com/index.html</div>
@@ -43,36 +27,36 @@
                             @foreach ($articles as $i)
                             <li>
                                 <div class="article_magazine_content">
-                                    <div class="article_title">
-                                   {{ $i->title  }}
+                                    <!-- このaタグに記事のURLを挟めばOK -->
+                                    <a href="">
+                                        <div class="article_title">
+                                           {{ $i->title  }}
+                                        </div>
+                                        <!-- url は別に表示しなくても良いかな？
+                                            <div class="article_url">http://example.com/index.html</div>
+                                        -->
+                                        <div class="article_content">
+                                            <p class="textOverflow">
+                                                {{ $i->content  }}
+                                            </p>
+                                        </div>
+                                        <div class="article_footer clearfix">
+                                            <span class="site_title">{{ $i->site()->first()->site_title }}</span>
+                                            <span class="article_date">{{ date('d/m/Y', strtotime($i->date)) }}</span>
+                                        </div>
+                                    </a>
+                                    <!-- 記事下のアクションボタンはココから -->
+                                    <!-- 正直アイコンは何でも良いけど、とりあえず -->
+                                    <div class="action_buttons">
+                                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                                        <i class="fa fa-commenting-o" aria-hidden="true"></i>
+                                        <i class="fa fa-check" aria-hidden="true"></i>
+                                        <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
                                     </div>
-                                    <!-- url は別に表示しなくても良いかな？
-                                        <div class="article_url">http://example.com/index.html</div>
-                                    -->
-                                    <div class="article_content">
-                                        <p class="textOverflow">    {{ $i->content  }}
-                                    </div>
-                                    <div class="article_footer clearfix">
-                                        <span class="site_title"> {{ $i->site()->first()->site_title }} </span>
-                                        <span class="article_date">{{ date('H:i', strtotime($i->date)) }}</span>
-                                    </div>
+                                    <!-- 記事下のアクションボタンはココまで -->
                                 </div>
                             </li>
                             @endforeach
-                            <li>
-                                <div class="article_magazine_content">
-                                    <div class="article_title">
-                                        はじめての記事 8
-                                    </div>
-                                    <!-- url は別に表示しなくても良いかな？
-                                        <div class="article_url">http://example.com/index.html</div>
-                                    -->
-                                    <div class="article_footer clearfix">
-                                        <span class="site_title">はじめてのWEBサイト</span>
-                                        <span class="article_date">27/09/2015</span>
-                                    </div>
-                                </div>
-                            </li>
                         </ul>
                 </div>
             </div>
@@ -122,6 +106,10 @@
                         </ul>
                 </div>
             </div>
+
+@endsection
+
+@section('extendedarticles')
 
 
 

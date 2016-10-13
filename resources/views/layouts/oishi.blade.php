@@ -8,9 +8,14 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ config('app.name', 'Laravel') }}</title>
+        <!-- Scripts -->
+        <script>
+            window.Laravel = <?php echo json_encode([
+                'csrfToken' => csrf_token(),
+            ]); ?>
+        </script>
         <link href="css/reset.css" type="text/css" rel="stylesheet" />
         <link href="css/style.css" type="text/css" rel="stylesheet" />
-
 
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js" ></script>
         <script src="js/jquery.mmenu.min.js" type="text/javascript"></script>
@@ -82,12 +87,21 @@
                     </div>
                 </div>
             </header>
-            <div id="header-back"> <!-- kotei suru tame  -->
-            </div>
+
+
+    @yield('content')
+
 
             <div id="my-menu">
                 <div id="wrap_my_menu">
                     <div id="wrap_user_info" class="clearfix">
+                        <!--検索ボックス ココから -->
+                        <div id="search_box">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                            <input type="text" placeholder=" Search box">
+                        </div>
+                        <!--検索ボックス ココまで -->
+
                         <img src="img/profile.jpg" class="user_photo" width="50" height="50" alt="Nobuyuki's photo">
                         <div id="user_info">
                             <!-- フォントサイズ変えたいかも -->
@@ -105,9 +119,13 @@
                       </dd>
                     </dl>
                     <dl id="box2">
-                      <dt>購読サイト一覧</dt>
-                      <dd>
+                     <!-- 購読サイト追加部 始まり-->
+                    <dt class="clearfix"><span class="float-left">購読サイト一覧</span><input id="add-sites-edit" name="add-sites" style="display:none;" placeholder=" Feed's url"><i id="add-sites" class="fa fa-plus-square-o" aria-hidden="true"></i>
+                    </dt>
+                             <!-- 購読サイト追加部 終わり-->                      
+                         <dd>
                         <ul>
+
                           <li><a href=""> nobuyukioishi.com (未読数出したい)</a></li>
                           <li><a href=""> godaiazuma.com (未読数)</a></li>
                           <li><a href=""> aokii.com (未読数)</a></li>
@@ -153,9 +171,22 @@
               $("#my-menu").mmenu();
            });
         </script>
+    @yield('extendedarticles')
 
-    @yield('content')
+      <!-- 購読サイト追加用のボックスを表示 -->
+    <script type="text/javascript">
+    $('#add-sites').click(function() {
+        //$('#add-sites').css( 'display', 'none');
+        $('#add-sites-edit')
+            .val( $( '#add-sites').text())
+            .toggle('slow')
+            .focus();
+    });
+    $('#add-sites-edit').blur(function() {
+        $('#add-sites-edit').toggle('slow');
+    });
+    </script>
+
     @section('endbody')
-
     </body>
 </html>

@@ -1,8 +1,8 @@
 /* 親要素にclearfix*/
 .clearfix:after{
-	content: "";
-	clear: both;
-	display: block;
+  content: "";
+  clear: both;
+  display: block;
 }
 
 #header a{
@@ -29,15 +29,15 @@ html, body{
     left: 0px;                  /* 位置(右0px) */
     width: 100%;                /* 横幅100%　*/
     height: 60px;              /* 縦幅140px */
-	background: #fff;
-	border-bottom: 1px solid #ddd;
-	z-index: 100;
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+  z-index: 100;
 }
 
 #header-back
 {
     height: 60px;              /* 縦幅140px */
-	background: black;
+  background: black;
 }
 
 #header-innner-wrap {
@@ -48,7 +48,7 @@ html, body{
 
 #header {
     height: 50px;
-	padding-top: 10px;
+  padding-top: 10px;
 }
 
 #header h1 {
@@ -88,16 +88,16 @@ html, body{
 #header #reload-button {
     float: right;
     font-size: 25px;
-	color: black;
+  color: black;
     text-align: center;
     width: 25px;
     margin: 10px 5px;
 }
 #header #reload-button a{
-	color: black;
+  color: black;
 }
 #header #reload-button a:visited{
-	color: black;
+  color: black;
 }
 
 #header #setting-button {
@@ -109,17 +109,17 @@ html, body{
 }
 
 #header #title-box {
-	float: left;
-	margin: 8px 20px 10px 10px;
+  float: left;
+  margin: 8px 20px 10px 10px;
 }
 
 #header-buttons {
-	margin-right: 10px;
+  margin-right: 10px;
 }
 
 #info-about-current-page {
-	font-size: 13px;
-	color: #ddd;
+  font-size: 13px;
+  color: #ddd;
 }
 
 #wrap {
@@ -171,73 +171,109 @@ html, body{
 /* 以下、リストビュー用のCSS */
 
 #articles_listview .read_or_unread {
-	display: block;
-	position: absolute;
-	width: 4px;
-	top: 4px;
-	bottom: 4px;
-	left: 4px;
-	background: #ddd;
-	float: left;
-	margin-right: 5px;
+  display: block;
+  position: absolute;
+  width: 4px;
+  top: 4px;
+  bottom: 4px;
+  left: 4px;
+  background: #ddd;
+  float: left;
+  margin-right: 5px;
 }
 
 #articles_listview .article_list_content {
-	position: relative;
-	max-width: 90%;
-	border-bottom: 1px solid #ccc;
-	padding: 5px auto;
-	margin: 0 auto;
-	height: 30px;
-	z-index: 1;
+  position: relative;
+  max-width: 90%;
+  border-bottom: 1px solid #ccc;
+  padding: 5px auto;
+  margin: 0 auto;
+  height: 30px;
+  z-index: 1;
 }
 
 #articles_listview .article_title_listview {
-	float: left;
-	max-width: 60%;
-	overflow: hidden;
-	/* ▼改行を禁止した上で、はみ出る分量は「…」記号で省略 */
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	font-size: 12px;
-	font-weight: bold;
-	margin: 4px 0 6px 0;
+  float: left;
+  max-width: 60%;
+  overflow: hidden;
+  /* ▼改行を禁止した上で、はみ出る分量は「…」記号で省略 */
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: bold;
+  margin: 4px 0 6px 0;
 }
 
 .article_magazine_content_wrap ul > li{
-	margin: 0;
-	padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
+.article_magazine_content .action_buttons {
+  font-size: 20px;
+  text-align: center;
+  border-top: 1px solid #ddd;
+  padding-top: 5px;
+}
+
+.article_magazine_content .action_buttons a:visited {
+  color: black;
+}
+
+.article_magazine_content .action_buttons .fa-star-o {
+  margin-right: 20%;
+}
+
+.article_magazine_content .action_buttons .fa-check {
+  margin-left: 10%;
+}
+.article_magazine_content .action_buttons .fa-ellipsis-h {
+  margin-left: 20%;
+}
+
+.article_magazine_content .action_buttons .fa-commenting-o {
+  margin-right: 10%;
+}
+
+.article_magazine_content a{
+  text-decoration: none;
+}
+
+.article_magazine_content a:visited {
+  color: black;
+}
+
+
+
 #articles_listview .article_date {
-	font-size: 10px;
-	float: right;
-	text-align: right;
-	margin: 4px 5px 6px 0;
+  font-size: 10px;
+  float: right;
+  text-align: right;
+  margin: 4px 5px 6px 0;
 }
 
 
 
 #articles_listview .site_title_listview {
-	font-size: 12px;
-	float: left;
-	max-width: 20%;
-	overflow: hidden;
-	/* ▼改行を禁止した上で、はみ出る分量は「…」記号で省略 */
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	margin: 4px 5px 6px 0;
-	color: #aaa;
-	font-weight: lighter;
+  font-size: 12px;
+  float: left;
+  max-width: 20%;
+  overflow: hidden;
+  /* ▼改行を禁止した上で、はみ出る分量は「…」記号で省略 */
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: 4px 5px 6px 0;
+  color: #aaa;
+  font-weight: lighter;
 }
 
 #articles_listview .favo-icon {
-	font-size: 12px;
-	margin-right: 5px;
-	margin-left: 15px;
-	float: left;
-	color: #aaa;
-	margin: 4px 5px 6px 15px;
+  font-size: 12px;
+  margin-right: 5px;
+  margin-left: 15px;
+  float: left;
+  color: #aaa;
+  margin: 4px 5px 6px 15px;
 }
 
 #articles_listview a {
@@ -254,45 +290,59 @@ html, body{
 
 /* 下までスクロールで追加読み込み */
 #list{
-	padding:10px;
+  padding:10px;
     list-style: none;
 }
 #list li{
-	font-size:14px;
-	line-height:1.5em;
-	text-shadow:none;
+  font-size:14px;
+  line-height:1.5em;
+  text-shadow:none;
 }
 #list li.load-li{
-	background-color:#fff;
+  background-color:#fff;
 }
 
 #magazinelist{
-	padding:10px;
+  padding:10px;
     list-style: none;
 }
 #magazinelist li{
-	font-size:14px;
-	line-height:1.5em;
-	text-shadow:none;
+  font-size:14px;
+  line-height:1.5em;
+  text-shadow:none;
 }
 #magazinelist li.load-li{
-	background-color:#fff;
+  background-color:#fff;
 }
 
 #listlist{
-	padding:10px;
+  padding:10px;
     list-style: none;
 }
 #listlist li{
-	font-size:14px;
-	line-height:1.5em;
-	text-shadow:none;
+  font-size:14px;
+  line-height:1.5em;
+  text-shadow:none;
 }
 #listlist li.load-li{
-	background-color:#fff;
+  background-color:#fff;
 }
 /* sidemenu */
 
+#search_box {
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+#search_box input{
+  width: 90%;
+  border-style: none;
+  border-radius: 3px;
+  border: 1px solid #ddd;
+  font-size: 15px;
+}
+#search_box .fa-search {
+  font-size: 15px;
+}
 #user_info {
     margin-left: 60px;
     margin-top:
@@ -318,21 +368,51 @@ html, body{
 }
 #wrap_my_menu dt {
     font-weight: bold;
+  font-size: 18px;
 }
 
 #wrap_my_menu dd {
     margin-left: -10px;
 }
+#wrap_my_menu .fa-clock-o {
+  font-size: 15px;
+}
+#wrap_my_menu .fa-star-o {
+  font-size: 15px;
+}
+#wrap_my_menu .fa-plus-square-o {
+  float: right;
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+#wrap_my_menu .float-left {
+  float: left;
+}
+
+#add-sites-edit {
+  float: right;
+  width: 50%;
+  font-size: 15px;
+  margin: 0;
+  padding: 0;
+}
+
+#add-sites-edit:focus{
+  border-style: none;
+}
+
+
 
 /* for dropmenu */
 
 #header-buttons {
-	float: right;
+  float: right;
 }
 
 #dropmenu {
-	list-style: none;
-	width: 120px;
+  list-style: none;
+  width: 120px;
 }
 
 #dropmenu li{
@@ -345,8 +425,8 @@ html, body{
 }
 
 #dropmenu li a {
-	display: block;
-	line-height: 1;
+  display: block;
+  line-height: 1;
 }
 
 #dropmenu li ul{
@@ -400,11 +480,11 @@ html, body{
 }
 
 #dropmenu li:hover ul li:first-child{
-	border-radius: 3px 3px 0 0;
+  border-radius: 3px 3px 0 0;
 }
 
 #dropmenu li:hover ul li:last-child{
-	border-radius: 0 0 3px 3px;
+  border-radius: 0 0 3px 3px;
 }
 
 /* for tabs */
