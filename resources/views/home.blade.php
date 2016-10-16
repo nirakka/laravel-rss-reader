@@ -10,7 +10,7 @@
                             <li>
                                 <div class="article_magazine_content">
                                     <!-- このaタグに記事のURLを挟めばOK -->
-                                    <a href="{{ $i->url}}">
+                                    <a href="{{ $i->url}}"  target="_blank">
                                         <div class="article_title">
                                            {{ $i->title  }}
                                         </div>
