@@ -12,10 +12,9 @@ class FollowArticleController extends Controller
 {
     //
     public function followArticle(Request $request){
-        $follow = new FollowArticle();
-        $follow->user_id = \Auth::user()->id;
-        $follow->article_id = $request->article_id;
+        $follow = FollowArticle::create($request->all());
 
-        $follow->save();
+        return response()->json($follow);
+
     }
 }

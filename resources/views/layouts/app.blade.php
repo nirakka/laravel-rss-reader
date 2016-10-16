@@ -83,6 +83,6 @@
     @section('endbody')
     <!-- Scripts -->
     <script src="/js/app.js"></script>
-    @shows
+    @show
 </body>
 </html>

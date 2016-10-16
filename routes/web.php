@@ -32,3 +32,5 @@ Route::get('/sites', 'SiteController@showRegisterForm');
 Route::post('/sites', 'SiteController@registerSite');
 
 Route::get('/sites_regs', 'SiteRegController@index');
+
+Route::post('/follow', 'FollowArticleController@followArticle');
