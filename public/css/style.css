@@ -216,6 +216,10 @@ html, body{
   padding-top: 5px;
 }
 
+.article_magazine_content .action_buttons a {
+  color: black;
+}
+
 .article_magazine_content .action_buttons a:visited {
   color: black;
 }
@@ -239,6 +243,9 @@ html, body{
   text-decoration: none;
 }
 
+.article_magazine_content a {
+  color: black;
+}
 .article_magazine_content a:visited {
   color: black;
 }

@@ -14,13 +14,12 @@
                 'csrfToken' => csrf_token(),
             ]); ?>
         </script>
-        <link rel="stylesheet" href="/css/bootstrap.min.css">
-        <link href="/css/reset.css" type="text/css" rel="stylesheet" />
-        <link href="/css/style.css" type="text/css" rel="stylesheet" />
+        <link href="css/reset.css" type="text/css" rel="stylesheet" />
+        <link href="css/style.css" type="text/css" rel="stylesheet" />
 
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js" ></script>
-        <script src="/js/jquery.mmenu.min.js" type="text/javascript"></script>
-        <link href="/css/jquery.mmenu.css" type="text/css" rel="stylesheet" />
+        <script src="js/jquery.mmenu.min.js" type="text/javascript"></script>
+        <link href="css/jquery.mmenu.css" type="text/css" rel="stylesheet" />
 
         <!-- Google Webfont -->
         <link href="http://fonts.googleapis.com/css?family=BioRhyme" rel="Stylesheet" type="text/css">
@@ -28,15 +27,15 @@
         <!-- font awesome -->
         <link href="http://netdna.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.css" rel="stylesheet" />
 
-        <!-- textOverflow -->   
-        <script src="/js/jquery.textOverflowEllipsis.js"></script>
+        <!-- textOverflow -->
+        <script src="js/jquery.textOverflowEllipsis.js"></script>
 
         <!-- スクロールでコンテンツ自動読み込み -->
-        <script src="/js/jquery.bottom-1.0.js"></script>
+        <script src="js/jquery.bottom-1.0.js"></script>
 
         <!-- ui tabs.js -->
-        <script type="text/javascript" src="/js/ui.core.js"></script>
-        <script type="text/javascript" src="/js/ui.tabs.js"></script>
+        <script type="text/javascript" src="js/ui.core.js"></script>
+        <script type="text/javascript" src="js/ui.tabs.js"></script>
         <script type="text/javascript">
             $(function() {
             /* selected: N で初期の番号指定 */
@@ -103,7 +102,7 @@
                         </div>
                         <!--検索ボックス ココまで -->
 
-                        <img src="/img/profile.jpg" class="user_photo" width="50" height="50" alt="Nobuyuki's photo">
+                        <img src="img/profile.jpg" class="user_photo" width="50" height="50" alt="Nobuyuki's photo">
                         <div id="user_info">
                             <!-- フォントサイズ変えたいかも -->
                             <p id="user_name">{{$username}}</p>
@@ -121,11 +120,7 @@
                     </dl>
                     <dl id="box2">
                      <!-- 購読サイト追加部 始まり-->
-                    <dt class="clearfix">
-                        <span class="float-left">購読サイト一覧</span>
-                        <input id="add-sites-edit" name="add-sites" style="display:none;" placeholder=" Feed's url">
-                        </form>
-                        <i id="add-sites" class="fa fa-plus-square-o" aria-hidden="true"></i>
+                    <dt class="clearfix"><span class="float-left">購読サイト一覧</span><input id="add-sites-edit" name="add-sites" style="display:none;" placeholder=" Feed's url"><i id="add-sites" class="fa fa-plus-square-o" aria-hidden="true"></i>
                     </dt>
                              <!-- 購読サイト追加部 終わり-->                      
                          <dd>
