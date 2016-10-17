@@ -149,6 +149,7 @@ html, body{
     margin-bottom:6px;
     font-size: 20px;
     font-weight: bold;
+    overflow:hidden;
 }
 
 .article_content {
