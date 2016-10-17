@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Article;
 use App\Site;
 use App\SiteReg;
+use Illuminate\Database\Query\paginate;
+use Illuminate\Http\Request;
+use laravelcollective\Html\HtmlFacade;
 
 class HomeController extends Controller
 {
@@ -26,12 +28,61 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $user = \Auth::user();
+        $id=$user->id;
+        $username=$user->name;
+        $useremail=$user->email;
+
+        $user_reg_site_ids = SiteReg::where('user_id', '=', $id)->get();
+        $user_reg_site_ids = $this->articleIdToArray($user_reg_site_ids);
+        $user_reg_sites = Site::whereIn('id' , $user_reg_site_ids)->get();
+     
+        $articles = Article::whereIn('site_id', $user_reg_site_ids)->orderBy('date', 'desc')->paginate(15);
+     
+        return view('home', 
+            [
+                'title_name' => 'All Articles' ,
+                'articles' => $articles ,
+                'user_reg_sites' => $user_reg_sites ,
+                'username' => $username ,
+                'useremail' => $useremail ,
+     
+            ]);
+    }
+    public function showArticlesofTargetSite($target_site_id)
+    {
+
+        $user = \Auth::user();
+        $id=$user->id;
+        $username=$user->name;
+        $useremail=$user->email;
+
+        $user_reg_site_ids = SiteReg::where('user_id', '=', $id)->get();
+        $user_reg_site_ids = $this->articleIdToArray($user_reg_site_ids);
+
+        $user_reg_sites = Site::whereIn('id' , $user_reg_site_ids)->get();
+        $target_site_title = Site::where('id' , '=' , $target_site_id)->value('site_title');
+        //get articles of target_site_id
+        $articles = Article::where('site_id','=',  $target_site_id)->orderBy('date', 'desc')->paginate(15);
+        
+        return view('home', 
+            [
+                'title_name' =>$target_site_title ,
+                'articles' => $articles ,
+                'user_reg_sites' => $user_reg_sites ,
+                'username' => $username ,
+                'useremail' => $useremail ,
+            ]);
+    }
+        public function oldhome()
+    {
+
         $id = \Auth::user()->id;
         $site_reg = SiteReg::where('user_id', '=', $id)->get();
         $articles_id = $this->articleIdToArray($site_reg);
         $articles = Article::whereIn('site_id', $articles_id)->orderBy('date', 'desc')->get();
 
-        return view('home', ['articles' => $articles]);
+        return view('oldhome', ['articles' => $articles]);
     }
 
     public function store()
