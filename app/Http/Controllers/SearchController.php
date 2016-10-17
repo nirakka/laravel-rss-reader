@@ -27,9 +27,10 @@ class SearchController extends Controller
     public function index()
     {
         $searchWord = \Request::get('searchWord');
-        // $searchWord = \Request::all();
         $id = \Auth::user()->id;
         $site_reg = SiteReg::where('user_id', '=', $id)->get();
+        $articles_id = SiteReg::where('user_id', '=', $id)->get()->toArray();
+     
         $articles_id = $this->articleIdToArray($site_reg);
      
         $articles = Article::whereIn('site_id', $articles_id)

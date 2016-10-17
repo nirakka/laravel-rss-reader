@@ -12,10 +12,14 @@
 */
 
 Route::get('/', 'HomeController@index');
+Route::get('/oldhome', 'HomeController@oldhome');
+
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+Route::get('/home/pid={site_id}', 'HomeController@showArticlesofTargetSite');
 
 Route::get('/rss', 'HomeController@store');
 
