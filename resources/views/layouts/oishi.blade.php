@@ -14,7 +14,7 @@
                 'csrfToken' => csrf_token(),
             ]); ?>
         </script>
-        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
         <link href="/css/reset.css" type="text/css" rel="stylesheet" />
         <link href="/css/style.css" type="text/css" rel="stylesheet" />
 
@@ -99,7 +99,7 @@
                         <!--検索ボックス ココから -->
                         <div id="search_box">
                             <i class="fa fa-search" aria-hidden="true"></i>
-                            <input type="text" placeholder=" Search box">
+                            <input type="text" id="searchText" placeholder=" Search box">
                         </div>
                         <!--検索ボックス ココまで -->
 
@@ -169,15 +169,15 @@
                 </ul>
             </div>
         </div>
-        <script type="text/javascript">
-           $(document).ready(function() {
-              $("#my-menu").mmenu();
-           });
-        </script>
     @yield('extendedarticles')
 
       <!-- 購読サイト追加用のボックスを表示 -->
     <script type="text/javascript">
+
+   $(document).ready(function() {
+        $("#my-menu").mmenu();
+   });
+   
     $('#add-sites').click(function() {
         //$('#add-sites').css( 'display', 'none');
         $('#add-sites-edit')
@@ -187,6 +187,19 @@
     });
     $('#add-sites-edit').blur(function() {
         $('#add-sites-edit').toggle('slow');
+    });
+
+    // $('#add-sites-edit').blur(function() {
+    //     $('#add-sites-edit').toggle('slow');
+    // });
+    $("#search_box").keyup(function(event){
+    if(event.keyCode == 13){
+            var searchLink = document.getElementById("searchText").value;
+            var str1= "http://homestead.app/search?searchWord=";
+            var searchLink= str1.concat(searchLink);
+            // console.log(searchLink);
+            window.location.href= searchLink;
+        }
     });
     </script>
 
