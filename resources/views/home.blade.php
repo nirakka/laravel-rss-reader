@@ -29,15 +29,18 @@
                             </a>
                             <!-- 記事下のアクションボタンはココから -->
                             <!-- 正直アイコンは何でも良いけど、とりあえず -->
-                            <div class="action_buttons clearfix">
-                                <button class="star-button btn btn-primary">
+                            <div class="action_buttons" id="{{ $i->id }}">
+                                <button class="star-button btn">
                                     <i class="fa fa-star-o" aria-hidden="true"></i>
+                                    お気に入り
                                 </button>
                                 <button class="read_later btn">
                                     <i class="fa fa-check" aria-hidden="true"></i>
+                                    既読
                                 </button>
                                 <button class="has_read btn">
-                                    <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                                    <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                    後で読む
                                 </button>
                             </div>
                             <!-- 記事下のアクションボタンはココまで -->

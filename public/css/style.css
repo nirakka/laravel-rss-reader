@@ -225,20 +225,15 @@ html, body{
   color: black;
 }
 
-.article_magazine_content .action_buttons .fa-star-o {
-  margin-right: 20%;
-}
-
-.article_magazine_content .action_buttons .fa-check {
-  margin-left: 10%;
-}
-.article_magazine_content .action_buttons .fa-ellipsis-h {
-  margin-left: 20%;
-}
-
-.article_magazine_content .action_buttons .fa-commenting-o {
-  margin-right: 10%;
-}
+/**********************************************************/
+/* .article_magazine_content .action_buttons .fa-star-o { */
+/*   margin-right: 20%;                                   */
+/* }                                                      */
+/*                                                        */
+/* .article_magazine_content .action_buttons .fa-check {  */
+/*   margin-left: 10%;                                    */
+/* }                                                      */
+/**********************************************************/
 
 .article_magazine_content a{
   text-decoration: none;
@@ -509,4 +504,17 @@ html, body{
     .ui-tabs-nav {
         display: none;
     }
+}
+
+.btn {
+    background-color: #fff; /* Green */
+    border: none;
+    color: #000;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    border-radius: 8px;
+    cursor:pointer;
 }
