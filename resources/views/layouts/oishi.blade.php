@@ -169,27 +169,30 @@
                 </ul>
             </div>
         </div>
+        @section('endbody')
+
         <script type="text/javascript">
-           $(document).ready(function() {
-              $("#my-menu").mmenu();
-           });
+         $(document).ready(function() {
+             $("#my-menu").mmenu();
+         });
         </script>
-    @yield('extendedarticles')
 
-      <!-- 購読サイト追加用のボックスを表示 -->
-    <script type="text/javascript">
-    $('#add-sites').click(function() {
-        //$('#add-sites').css( 'display', 'none');
-        $('#add-sites-edit')
-            .val( $( '#add-sites').text())
-            .toggle('slow')
-            .focus();
-    });
-    $('#add-sites-edit').blur(function() {
-        $('#add-sites-edit').toggle('slow');
-    });
-    </script>
 
-    @section('endbody')
+        <!-- 購読サイト追加用のボックスを表示 -->
+        <script type="text/javascript">
+         $('#add-sites').click(function() {
+             //$('#add-sites').css( 'display', 'none');
+             $('#add-sites-edit')
+                 .val( $( '#add-sites').text())
+                 .toggle('slow')
+                 .focus();
+         });
+         $('#add-sites-edit').blur(function() {
+             $('#add-sites-edit').toggle('slow');
+         });
+
+        </script>
+        
+        @show
     </body>
 </html>

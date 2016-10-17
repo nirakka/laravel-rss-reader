@@ -99,7 +99,8 @@
 
 @endsection
 
-@section('extendedarticles')
+@section('endbody')
+    @parent
 
 
 
