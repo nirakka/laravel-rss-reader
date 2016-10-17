@@ -14,7 +14,7 @@
                 'csrfToken' => csrf_token(),
             ]); ?>
         </script>
-        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link href="/css/reset.css" type="text/css" rel="stylesheet" />
         <link href="/css/style.css" type="text/css" rel="stylesheet" />
 

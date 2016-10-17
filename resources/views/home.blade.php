@@ -29,11 +29,16 @@
                             </a>
                             <!-- 記事下のアクションボタンはココから -->
                             <!-- 正直アイコンは何でも良いけど、とりあえず -->
-                            <div class="action_buttons">
-                                <i class="fa fa-star-o" aria-hidden="true"></i>
-                                <i class="fa fa-commenting-o" aria-hidden="true"></i>
-                                <i class="fa fa-check" aria-hidden="true"></i>
-                                <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                            <div class="action_buttons clearfix">
+                                <button class="star-button btn btn-primary">
+                                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                                </button>
+                                <button class="read_later btn">
+                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                </button>
+                                <button class="has_read btn">
+                                    <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                                </button>
                             </div>
                             <!-- 記事下のアクションボタンはココまで -->
                         </div>
