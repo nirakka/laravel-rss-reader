@@ -184,11 +184,15 @@
              //$('#add-sites').css( 'display', 'none');
              $('#add-sites-edit')
                  .val( $( '#add-sites').text())
-                 .toggle('slow')
+                 .show()
+         //        .toggle('slow')
                  .focus();
          });
          $('#add-sites-edit').blur(function() {
-             $('#add-sites-edit').toggle('slow');
+             $('#add-sites-edit')
+
+             //.toggle('slow');
+             .hide();
          });
 
         </script>

@@ -103,14 +103,6 @@
     @parent
 
 
-
-    <script type="text/javascript">
-     $(document).ready(function() {
-         $("#my-menu").mmenu();
-     });
-    </script>
-
-
     <script type="text/javascript">
 
      //変数[addText]と[Num]を宣言
@@ -128,7 +120,7 @@
                  obj.data("loading", true);
 
                  //「Loading」画像を表示
-                 $('#magazinelist').append('<li class="load-li" style="text-align: center;"><img src="img/load.gif"></li>');
+                 $('#magazinelist').append('<li class="load-li" style="text-align: center;"><img src="/img/load.gif"></li>');
 
                  //追加する処理を記述
                  setTimeout(function() {
@@ -150,6 +142,24 @@
              }
          });
          $('html,body').animate({ scrollTop: 0 }, '1');
+     });
+
+     /* Create new Item */
+     $(".crud-submit").click(function(e){
+         e.preventDefault();
+         var form_action = $("#create-item").find("form").attr("action");
+         var user_id = $("#create-item").find("input[name='user_id']").val();
+         var article_id = $("#create-item").find("textarea[name='article_id']").val();
+
+         $.ajax({
+             dataType: 'json',
+             type:'POST',
+             url: form_action,
+             data:{user_id:user_id, article_id:article_id}
+         }).done(function(data){
+
+         });
+
      });
     </script>
 @endsection
