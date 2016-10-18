@@ -114,10 +114,13 @@
 
      //変数[addText]と[Num]を宣言
      var Num = 1;
+     // var link = $articles->nextPageUrl();
 
      $(document).ready(function() {
          $(window).bottom();
          $(window).bind("bottom", function() {
+
+             
              var obj = $(this);
 
              //「loading」がfalseの時に実行する
@@ -135,6 +138,8 @@
 
                      // 繰り返しfor文を記述
                      for (i=0; i<5; i++, Num++) {
+
+
 
                          //追加するhtmlを記述
                          // ここで追加の記事を出したい

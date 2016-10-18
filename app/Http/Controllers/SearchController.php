@@ -44,6 +44,7 @@ class SearchController extends Controller
                                     ->orWhere('content', 'like', '%'.$searchWord.'%')
                                     ->orderBy('date', 'desc')
                                     ->paginate(15);
+                                    
         return view('home', 
             [
                 'title_name' =>'Search Result of "' . $searchWord . '"' ,
