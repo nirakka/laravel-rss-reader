@@ -32,15 +32,12 @@
                             <div class="action_buttons" id="{{ $i->id }}">
                                 <button class="star-button btn">
                                     <i class="fa fa-star-o" aria-hidden="true"></i>
-                                    お気に入り
                                 </button>
                                 <button class="read_later btn">
                                     <i class="fa fa-check" aria-hidden="true"></i>
-                                    既読
                                 </button>
                                 <button class="has_read btn">
                                     <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                    後で読む
                                 </button>
                             </div>
                             <!-- 記事下のアクションボタンはココまで -->
@@ -107,10 +104,13 @@
 
      //変数[addText]と[Num]を宣言
      var Num = 1;
+     // var link = $articles->nextPageUrl();
 
      $(document).ready(function() {
          $(window).bottom();
          $(window).bind("bottom", function() {
+
+             
              var obj = $(this);
 
              //「loading」がfalseの時に実行する
@@ -128,6 +128,8 @@
 
                      // 繰り返しfor文を記述
                      for (i=0; i<5; i++, Num++) {
+
+
 
                          //追加するhtmlを記述
                          // ここで追加の記事を出したい
@@ -160,6 +162,28 @@
 
          });
 
+     });
+
+     $('#add-sites').click(function() {
+         //$('#add-sites').css( 'display', 'none');
+         $('#add-sites-edit')
+             .val( $( '#add-sites').text())
+             .toggle('slow')
+             .focus();
+     });
+
+     $('#add-sites-edit').blur(function() {
+         $('#add-sites-edit').toggle('slow');
+     });
+
+     $("#search_box").keyup(function(event){
+         if(event.keyCode == 13){
+             var searchLink = document.getElementById("searchText").value;
+             var str1= "http://homestead.app/search?searchWord=";
+             var searchLink= str1.concat(searchLink);
+             // console.log(searchLink);
+             window.location.href= searchLink;
+         }
      });
     </script>
 @endsection

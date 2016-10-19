@@ -14,7 +14,7 @@
                 'csrfToken' => csrf_token(),
             ]); ?>
         </script>
-        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+        <!-- <link rel="stylesheet" href="/css/bootstrap.min.css"> -->
         <link href="/css/reset.css" type="text/css" rel="stylesheet" />
         <link href="/css/style.css" type="text/css" rel="stylesheet" />
 
@@ -99,7 +99,7 @@
                         <!--検索ボックス ココから -->
                         <div id="search_box">
                             <i class="fa fa-search" aria-hidden="true"></i>
-                            <input type="text" placeholder=" Search box">
+                            <input type="text" id="searchText" placeholder=" Search box">
                         </div>
                         <!--検索ボックス ココまで -->
 
@@ -169,34 +169,18 @@
                 </ul>
             </div>
         </div>
+
         @section('endbody')
-
-        <script type="text/javascript">
-         $(document).ready(function() {
-             $("#my-menu").mmenu();
-         });
-        </script>
-
 
         <!-- 購読サイト追加用のボックスを表示 -->
         <script type="text/javascript">
-         $('#add-sites').click(function() {
-             //$('#add-sites').css( 'display', 'none');
-             $('#add-sites-edit')
-                 .val( $( '#add-sites').text())
-                 .show()
-         //        .toggle('slow')
-                 .focus();
-         });
-         $('#add-sites-edit').blur(function() {
-             $('#add-sites-edit')
-
-             //.toggle('slow');
-             .hide();
+         $(document).ready(function() {
+             $("#my-menu").mmenu();
          });
 
         </script>
         
         @show
+
     </body>
 </html>

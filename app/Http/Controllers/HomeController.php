@@ -74,7 +74,7 @@ class HomeController extends Controller
                 'useremail' => $useremail ,
             ]);
     }
-        public function oldhome()
+    public function oldhome()
     {
 
         $id = \Auth::user()->id;
