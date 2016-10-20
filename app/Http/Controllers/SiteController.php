@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Site;
 use App\Http\Requests;
 use App\Http\Requests\SiteRequest;
-use Goutte;
+use Goutte\Client;
 use App\SiteReg;
 
 class SiteController extends Controller
@@ -15,11 +15,20 @@ class SiteController extends Controller
     public function registerSite(SiteRequest $request){
         $url = $request->site_reg;
 
-        if (strpos($url, 'http://') === false) {
-            $url =  'http://' . $url;
-        }
+        
+        if (strpos($url, 'http://') === false || strpos($url, 'https://')) {
+            $url =  'http://' . $url;            
+        }                                       
+        
 
-        $crawler = Goutte::request('GET', $url);
+
+        $client = new Client();
+        $guzzleClient = new \GuzzleHttp\Client([
+                                                   'timeout' => 90,
+                                                   'verify' => false,
+                                               ]);
+        $client->setClient($guzzleClient);
+        $crawler = $client->request('GET', $url);
         
 
         if ($crawler->filter('head >link[type="application/rss+xml"]')->count() !== 0){ // RSS系のフィードを保存
