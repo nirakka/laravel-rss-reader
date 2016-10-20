@@ -522,3 +522,12 @@ html, body{
     border-radius: 8px;
     cursor:pointer;
 }
+
+.favorited, .read-later-flg{
+    color:Gold;
+    
+}
+
+.has-read-flg {
+    opacity:0.4;
+}

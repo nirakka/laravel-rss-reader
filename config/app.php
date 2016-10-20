@@ -178,7 +178,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Weidner\Goutte\GoutteServiceProvider::class,
-        Barryvdh\Debugbar\ServiceProvider::class,
+        //        Barryvdh\Debugbar\ServiceProvider::class,
        
     ],
 

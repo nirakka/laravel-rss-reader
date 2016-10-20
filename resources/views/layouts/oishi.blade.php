@@ -10,9 +10,9 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
         <!-- Scripts -->
         <script>
-            window.Laravel = <?php echo json_encode([
-                'csrfToken' => csrf_token(),
-            ]); ?>
+         window.Laravel = <?php echo json_encode([
+             'csrfToken' => csrf_token(),
+         ]); ?>
         </script>
         <!-- <link rel="stylesheet" href="/css/bootstrap.min.css"> -->
         <link href="/css/reset.css" type="text/css" rel="stylesheet" />
@@ -23,7 +23,7 @@
         <link href="/css/jquery.mmenu.css" type="text/css" rel="stylesheet" />
 
         <!-- Google Webfont -->
-        <link href="http://fonts.googleapis.com/css?family=BioRhyme" rel="Stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=BioRhyme" rel="stylesheet" type="text/css">
 
         <!-- font awesome -->
         <link href="http://netdna.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.css" rel="stylesheet" />

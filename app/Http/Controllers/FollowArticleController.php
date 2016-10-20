@@ -15,6 +15,6 @@ class FollowArticleController extends Controller
         $follow = FollowArticle::create($request->all());
 
         return response()->json($follow);
-
+        //return $request->all();
     }
 }

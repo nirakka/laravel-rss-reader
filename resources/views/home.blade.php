@@ -8,38 +8,51 @@
             <ul id="magazinelist">
                 @foreach ($articles as $i)
                     <li>
-                        <div class="article_magazine_content">
+                        <div class="article_magazine_content" id="{{ $i->id }}">
                             <!-- このaタグに記事のURLを挟めばOK -->
                             <a href="{{ $i->url}}"  target="_blank">
-                                <div class="article_title">
-                                    {{ $i->title  }}
-                                </div>
-                                <!-- url は別に表示しなくても良いかな？
-                                     <div class="article_url">http://example.com/index.html</div>
-                                   -->
-                                <div class="article_content">
-                                    <p class="textOverflow">
-                                        {{ $i->content  }}
-                                    </p>
-                                </div>
-                                <div class="article_footer clearfix">
-                                    <span class="site_title">{{ $i->site()->first()->site_title }}</span>
-                                    <span class="article_date">{{ date('d/m/Y', strtotime($i->date)) }}</span>
+                                <div class="article_wrap">
+                                    <div class="article_title">
+                                        {{ $i->title  }}
+                                    </div>
+                                    <!-- url は別に表示しなくても良いかな？
+                                         <div class="article_url">http://example.com/index.html</div>
+                                       -->
+                                    <div class="article_content">
+                                        <p class="textOverflow">
+                                            {{ $i->content  }}
+                                        </p>
+                                    </div>
+                                    <div class="article_footer clearfix">
+                                        <span class="site_title">{{ $i->site()->first()->site_title }}</span>
+                                        <span class="article_date">{{ date('Y/m/d', strtotime($i->date)) }}</span>
+                                    </div>
                                 </div>
                             </a>
                             <!-- 記事下のアクションボタンはココから -->
                             <!-- 正直アイコンは何でも良いけど、とりあえず -->
-                            <div class="action_buttons" id="{{ $i->id }}">
-                                <button class="star-button btn">
-                                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                            <div class="action_buttons" data-id="{{ $i->id }}" style="display:inline;">
+                                <form action="/articles" method="POST">
+                                    {{ csrf_field() }}
+                                
+                                    <button type="submit" class="star-button btn" data-id="{{ $i->id }}">
+                                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                                    </button>
+                                </form>
+
+                                <form action="">
                                 </button>
-                                <button class="read_later btn">
-                                    <i class="fa fa-check" aria-hidden="true"></i>
-                                </button>
-                                <button class="has_read btn">
+                                <button type="submit" class="read-later btn">
                                     <i class="fa fa-clock-o" aria-hidden="true"></i>
                                 </button>
+                                </form>
+                                <form action="">
+                                    <button type="submit" class="has-read btn">
+                                        <i class="fa fa-check" aria-hidden="true"></i>
+                                    </button>
+                                </form>
                             </div>
+                            
                             <!-- 記事下のアクションボタンはココまで -->
                         </div>
                     </li>
@@ -102,6 +115,49 @@
 
     <script type="text/javascript">
 
+     $.ajaxSetup({
+         headers: {
+             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+         }
+     });
+     
+     $(function(){
+        
+         $(".star-button").click(function(e){
+             e.preventDefault();
+             
+             var user_id = {{ Auth::user()->id }};
+             var article_id = $(this).data('id');
+
+             $.ajax({
+                 dataType: 'json',
+                 type:'POST',
+                 url: '/articles',
+                 data:{
+                     user_id: user_id,
+                     article_id: article_id
+                 }
+             }).done(function(){
+                 $(".star-button").toggleClass('favorited');
+                 $(".star-button").find('i').toggleClass('fa-star-o');
+                 $(".star-button").find('i').toggleClass('fa-star'); 
+             });
+         });
+             
+             
+
+         $(".read-later").click(function(){
+             $(this).toggleClass('read-later-flg');
+         });
+         $(".has-read").click(function(){
+             var article_id = $(this).parent().data('id');
+             $('#' + article_id + ' .article_wrap').toggleClass('has-read-flg');
+
+         });
+     });
+
+
+    
      //変数[addText]と[Num]を宣言
      var Num = 1;
      // var link = $articles->nextPageUrl();
@@ -146,23 +202,7 @@
          $('html,body').animate({ scrollTop: 0 }, '1');
      });
 
-     /* Create new Item */
-     $(".crud-submit").click(function(e){
-         e.preventDefault();
-         var form_action = $("#create-item").find("form").attr("action");
-         var user_id = $("#create-item").find("input[name='user_id']").val();
-         var article_id = $("#create-item").find("textarea[name='article_id']").val();
-
-         $.ajax({
-             dataType: 'json',
-             type:'POST',
-             url: form_action,
-             data:{user_id:user_id, article_id:article_id}
-         }).done(function(data){
-
-         });
-
-     });
+     
 
      $('#add-sites').click(function() {
          //$('#add-sites').css( 'display', 'none');

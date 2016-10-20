@@ -16,18 +16,13 @@ class SiteController extends Controller
         $url = $request->site_reg;
 
         
-        if (strpos($url, 'http://') === false || strpos($url, 'https://')) {
-            $url =  'http://' . $url;            
-        }                                       
+        //        if (strpos($url, 'http://') === false || strpos($url, 'https://')) {
+            //            $url =  'http://' . $url;            
+            //}                                       
         
-
-
         $client = new Client();
-        $guzzleClient = new \GuzzleHttp\Client([
-                                                   'timeout' => 90,
-                                                   'verify' => false,
-                                               ]);
-        $client->setClient($guzzleClient);
+        
+      
         $crawler = $client->request('GET', $url);
         
 
@@ -39,8 +34,11 @@ class SiteController extends Controller
             $atom = $crawler->filter('head > link[type="application/atom+xml"]')->first()->attr('href');
         }
 
-        $title = $crawler->filter('head meta[property="og:site_name"]')->first()->attr('content');
-        
+        if ($title = $crawler->filter('head meta[property="og:site_name"]')->count() !== 0){ 
+            $title = $crawler->filter('head meta[property="og:site_name"]')->first()->attr('content');
+        }
+
+        $title = $crawler->filter('head title')->text();
         $site = new Site();
 
         $site->site_title = $title;
