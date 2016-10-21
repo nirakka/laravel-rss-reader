@@ -31,28 +31,28 @@
                             </a>
                             <!-- 記事下のアクションボタンはココから -->
                             <!-- 正直アイコンは何でも良いけど、とりあえず -->
-                            <div class="action_buttons" data-id="{{ $i->id }}" style="display:inline;">
-                                <form action="/articles" method="POST">
+                            <div class="action_buttons clearfix" data-id="{{ $i->id }}" style="display:inline;">
+                                <form action="/articles" method="POST" class="test1">
                                     {{ csrf_field() }}
-                                
+
                                     <button type="submit" class="star-button btn" data-id="{{ $i->id }}">
                                         <i class="fa fa-star-o" aria-hidden="true"></i>
                                     </button>
                                 </form>
 
-                                <form action="">
+                                <form action="" class="test2">
                                 </button>
-                                <button type="submit" class="read-later btn">
+                                <button type="submit" class="read-later btn" >
                                     <i class="fa fa-clock-o" aria-hidden="true"></i>
                                 </button>
                                 </form>
-                                <form action="">
+                                <form action="" class="test3">
                                     <button type="submit" class="has-read btn">
                                         <i class="fa fa-check" aria-hidden="true"></i>
                                     </button>
                                 </form>
                             </div>
-                            
+
                             <!-- 記事下のアクションボタンはココまで -->
                         </div>
                     </li>
@@ -82,7 +82,7 @@
                                 </div>
                                 <div class="article_date">{{ date('H:i', strtotime($i->date)) }}</div>
                             </div>
-                            
+
                         </li>
                     @endforeach
                     <li>
@@ -120,12 +120,12 @@
              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
          }
      });
-     
+
      $(function(){
-        
+
          $(".star-button").click(function(e){
              e.preventDefault();
-             
+
              var user_id = {{ Auth::user()->id }};
              var article_id = $(this).data('id');
 
@@ -140,11 +140,11 @@
              }).done(function(){
                  $(".star-button").toggleClass('favorited');
                  $(".star-button").find('i').toggleClass('fa-star-o');
-                 $(".star-button").find('i').toggleClass('fa-star'); 
+                 $(".star-button").find('i').toggleClass('fa-star');
              });
          });
-             
-             
+
+
 
          $(".read-later").click(function(){
              $(this).toggleClass('read-later-flg');
@@ -157,7 +157,7 @@
      });
 
 
-    
+
      //変数[addText]と[Num]を宣言
      var Num = 1;
      // var link = $articles->nextPageUrl();
@@ -166,7 +166,7 @@
          $(window).bottom();
          $(window).bind("bottom", function() {
 
-             
+
              var obj = $(this);
 
              //「loading」がfalseの時に実行する
@@ -202,7 +202,7 @@
          $('html,body').animate({ scrollTop: 0 }, '1');
      });
 
-     
+
 
      $('#add-sites').click(function() {
          //$('#add-sites').css( 'display', 'none');

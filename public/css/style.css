@@ -138,11 +138,26 @@ html, body{
 
 /* #articles in main column*/
 .article_magazine_content {
-    margin: 5px auto;
+    margin: 7px auto;
     max-width: 500px;
     border-radius:5px;
     border: 1px solid #ccc;
-    padding: 10px
+    padding: 10px;
+    padding-bottom: 3px;
+}
+
+.action_buttons .test1 {
+    float: left;
+    width: 33%;
+}
+
+.action_buttons .test2 {
+    float: left;
+    width: 33%;
+}
+.action_buttons .test3 {
+    float: left;
+    width: 33%;
 }
 
 .article_title {
@@ -213,7 +228,7 @@ html, body{
   font-size: 20px;
   text-align: center;
   border-top: 1px solid #ddd;
-  padding-top: 5px;
+  display: block !important;
 }
 
 .article_magazine_content .action_buttons a {
@@ -311,6 +326,7 @@ html, body{
 
 #magazinelist{
   padding:10px;
+  padding-top: 5px;
     list-style: none;
 }
 #magazinelist li{
@@ -510,11 +526,12 @@ html, body{
     }
 }
 
+
 .btn {
-    background-color: #fff; /* Green */
+    background-color: #fff;
     border: none;
     color: #000;
-    padding: 8px 45px;
+    padding: 5px 5px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -523,9 +540,14 @@ html, body{
     cursor:pointer;
 }
 
+
+
+
+
+
 .favorited, .read-later-flg{
     color:Gold;
-    
+
 }
 
 .has-read-flg {
