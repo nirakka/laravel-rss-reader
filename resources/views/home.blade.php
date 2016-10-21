@@ -163,46 +163,60 @@
 
 
 
+
+
      //変数[addText]と[Num]を宣言
-     var Num = 1;
-     // var link = $articles->nextPageUrl();
+     var Num1 = 1;
+     var Num2 = 1;
 
      $(document).ready(function() {
-         $(window).bottom();
+     $(window).bottom();
          $(window).bind("bottom", function() {
-
-
              var obj = $(this);
 
-             //「loading」がfalseの時に実行する
-             if (!obj.data("loading")) {
+                     //「loading」がfalseの時に実行する
+                     if (!obj.data("loading")) {
 
-                 //「loading」をtrueにする
-                 obj.data("loading", true);
+                         //「loading」をtrueにする
+                         obj.data("loading", true);
 
-                 //「Loading」画像を表示
-                 $('#magazinelist').append('<li class="load-li" style="text-align: center;"><img src="/img/load.gif"></li>');
+                         //「Loading」画像を表示
+                         if(flag === 0) {
+                             $('#magazinelist').append('<li class="load-li" style="text-align: center;"><img src="img/load.gif"></li>');
+                         } else if(flag === 1) {
+                             $('#listlist').append('<li class="load-li" style="text-align: center;"><img src="img/load.gif"></li>');
+                         }
 
-                 //追加する処理を記述
-                 setTimeout(function() {
-                     $('#magazinelist li:last').remove();
+                         //追加する処理を記述
+                         setTimeout(function() {
 
-                     // 繰り返しfor文を記述
-                     for (i=0; i<5; i++, Num++) {
+                             console.log("flag ="+flag);
+                             if(flag === 0) {
+                                 $('#magazinelist li:last').remove();
+                                 for (i=0; i<10; i++, Num1++) {
+                                     //追加するhtmlを記述
+                                     // ここで追加の記事を出したい
+                                     $('#magazinelist').append(
+                                         '<li><div class="article_magazine_content"><div class="article_title">追加の記事'+Num1+'</div><div class="article_content"><p class="textOverflow">これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。</p></div><div class="article_footer clearfix"><span class="site_title">はじめてのWEBサイト</span><span class="article_date">27/09/2015</span></div></div></li>'
+                                     );
+                                 }
+                             } else if(flag === 1) {
+                                 $('#listlist li:last').remove();
+                                 // 繰り返しfor文を記述
+                                 for (i=0; i<30; i++, Num2++) {
 
+                                     //追加するhtmlを記述
+                                     // ここで追加の記事を出したい
+                                     $('#listlist').append(
+                                         '<li><a href=""><div class="article_list_content clearfix"><div class="read_or_unread"></div><div class="favo-icon"><i class="fa fa-star-o" aria-hidden="true"></i></div><div class="site_title_listview">はじめてのWEBサイトはじめてのWEBサイト</div><div class="article_title_listview">追加の記事'+Num2+'（リストビュー用でござんす）追加の記事'+Num2+'（リストビュー用でござんす）</div><div class="article_date">27/09/2015</div></div></a></li>'
+                                     );
+                                 }
+                             }
 
-
-                         //追加するhtmlを記述
-                         // ここで追加の記事を出したい
-                         $('#magazinelist').append(
-                             '<li><div class="article_magazine_content"><div class="article_title">追加の記事'+Num+'</div><div class="article_content"><p class="textOverflow">これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。</p></div><div class="article_footer clearfix"><span class="site_title">はじめてのWEBサイト</span><span class="article_date">27/09/2015</span></div></div></li>'
-                         );
+                             //処理が完了したら「Loading...」をfalseにする
+                             obj.data("loading", false);
+                         }, 1000);
                      }
-
-                     //処理が完了したら「Loading...」をfalseにする
-                     obj.data("loading", false);
-                 }, 1000);
-             }
          });
          $('html,body').animate({ scrollTop: 0 }, '1');
      });
@@ -234,16 +248,22 @@
 
     <!-- css 切り替え用 スクリプト -->
     <script type="text/javascript">
+    var flag = 0; // 0: magazine_view 1: list_view
     function listViewMode() {
         document.getElementById("header-innner-wrap").style.maxWidth="90%";
-        document.getElementById("header-innner-wrap").style.width="90%";
+        document.getElementById("header-innner-wrap").style.maxWidth="90%";
         document.getElementById("wrap").style.maxWidth="95%";
         document.getElementById("wrap").style.width="95%";
+        flag = 1;
+        console.log("flag = "+flag);
     }
     function magazineViewMode() {
         document.getElementById("header-innner-wrap").style.maxWidth="620px";
-        document.getElementById("header-innner-wrap").style.width="620px";
+        document.getElementById("header-innner-wrap").style.maxWidth="620px";
         document.getElementById("wrap").style.maxWidth="620px";
+        document.getElementById("wrap").style.width="620px";
+        flag = 0;
+        console.log("flag = "+flag);
     }
     </script>
 @endsection
