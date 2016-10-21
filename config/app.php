@@ -129,7 +129,7 @@ return [
     | Autoloaded Service Providers
     |--------------------------------------------------------------------------
     |
-    | The service providers listed here will be automatically loaded on the
+    | The service providers listed here will be automatically loaded on theP
     | request to your application. Feel free to add your own services to
     | this array to grant expanded functionality to your applications.
     |
@@ -178,7 +178,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Weidner\Goutte\GoutteServiceProvider::class,
-        //        Barryvdh\Debugbar\ServiceProvider::class,
+        // Barryvdh\Debugbar\ServiceProvider::class,
        
     ],
 
@@ -229,7 +229,7 @@ return [
         'Goutte' => Weidner\Goutte\GoutteFacade::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
-        'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        // 'Debugbar' => Barryvdh\Debugbar\Facade::class,
 
     ],
 

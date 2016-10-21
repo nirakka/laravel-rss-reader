@@ -124,7 +124,7 @@
      $(function(){
         
          $(".star-button").click(function(e){
-             e.preventDefault();
+        //     e.preventDefault();
              
              var user_id = {{ Auth::user()->id }};
              var article_id = $(this).data('id');
@@ -139,6 +139,7 @@
                  }
              }).done(function(){
                  $(".star-button").toggleClass('favorited');
+                 alert("yeee");
                  $(".star-button").find('i').toggleClass('fa-star-o');
                  $(".star-button").find('i').toggleClass('fa-star'); 
              });
