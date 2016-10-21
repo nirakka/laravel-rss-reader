@@ -6,6 +6,7 @@
     <div id="articles_magazineview">
         <div class="article_magazine_content_wrap">
             <ul id="magazinelist">
+
                 @foreach ($articles as $i)
                     <li>
                         <div class="article_magazine_content" id="{{ $i->id }}">
@@ -32,12 +33,23 @@
                             <!-- 記事下のアクションボタンはココから -->
                             <!-- 正直アイコンは何でも良いけど、とりあえず -->
                             <div class="action_buttons" data-id="{{ $i->id }}" style="display:inline;">
-                                <form action="/articles" method="POST">
+                                
+                                <form action="/articles" method="POST" class="fav" @if (in_array($i->id, $fav_article)) style="display:none;" @endif>
                                     {{ csrf_field() }}
                                 
                                     <button type="submit" class="star-button btn" data-id="{{ $i->id }}">
                                         <i class="fa fa-star-o" aria-hidden="true"></i>
                                     </button>
+
+                                </form>
+                                
+                                <form action="/delete-fav" method="POST" class="fav" @if (!in_array($i->id, $fav_article)) style="display:none;" @endif>
+                                    {{ csrf_field() }}
+                                    
+                                    <button type="submit" class="favorited btn" data-id="{{ $i->id }}">
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                    </button>
+
                                 </form>
 
                                 <form action="">
@@ -124,11 +136,14 @@
      $(function(){
         
          $(".star-button").click(function(e){
+             // 多重送信を防ぐため通信完了までボタンをdisableにする
+             var button = $(this);
+             button.attr("disabled", true);
              e.preventDefault();
              
              var user_id = {{ Auth::user()->id }};
              var article_id = $(this).data('id');
-
+             var art_id_sel = '#' + article_id + ' .star-button';
              $.ajax({
                  dataType: 'json',
                  type:'POST',
@@ -138,12 +153,35 @@
                      article_id: article_id
                  }
              }).done(function(){
-                 $(".star-button").toggleClass('favorited');
-                 $(".star-button").find('i').toggleClass('fa-star-o');
-                 $(".star-button").find('i').toggleClass('fa-star'); 
+                 $('#' + article_id + ' .fav').toggle();
+             }).always(function(){
+                 button.attr("disabled", false); 
              });
          });
-             
+         $(".favorited").click(function(e){
+             var button = $(this);
+             button.attr("disabled", true);
+             e.preventDefault();
+
+             var user_id = {{ Auth::user()->id }};
+             var article_id = $(this).data('id');
+             var art_id_sel = '#' + article_id + ' .favorited';
+             $.ajax({
+                 dataType: 'json',
+                 type:'POST',
+                 url: '/delete-fav',
+                 data:{
+                     user_id: user_id,
+                     article_id: article_id
+                 }
+             }).done(function(){
+                 $('#' + article_id + ' .fav').toggle(); 
+             }).fail(function(){
+                 alert('Error occurred!');
+             }).always(function(){
+                 button.attr("disabled", false);
+             });
+         });    
              
 
          $(".read-later").click(function(){

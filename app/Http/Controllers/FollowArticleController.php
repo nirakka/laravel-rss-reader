@@ -15,6 +15,13 @@ class FollowArticleController extends Controller
         $follow = FollowArticle::create($request->all());
 
         return response()->json($follow);
-        //return $request->all();
+    }
+
+    public function destroy(Request $request){
+        $delete = FollowArticle::where('user_id', '=', $request->user_id)
+            ->where('article_id', '=', $request->article_id)
+            ->delete();
+
+        return response()->json($delete);
     }
 }

@@ -38,3 +38,5 @@ Route::post('/sites', 'SiteController@registerSite');
 Route::get('/sites_regs', 'SiteRegController@index');
 
 Route::post('/articles', 'FollowArticleController@followArticle');
+
+Route::post('/delete-fav', 'FollowArticleController@destroy');

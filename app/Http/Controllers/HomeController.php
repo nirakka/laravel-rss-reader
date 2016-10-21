@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Article;
 use App\Site;
 use App\SiteReg;
+use App\FollowArticle;
 use Illuminate\Database\Query\paginate;
 use Illuminate\Http\Request;
 use laravelcollective\Html\HtmlFacade;
@@ -34,11 +35,15 @@ class HomeController extends Controller
         $useremail=$user->email;
 
         $user_reg_site_ids = SiteReg::where('user_id', '=', $id)->get();
-        $user_reg_site_ids = $this->articleIdToArray($user_reg_site_ids);
+        $user_reg_site_ids = $this->objectIdToArray($user_reg_site_ids, 'site_id');
         $user_reg_sites = Site::whereIn('id' , $user_reg_site_ids)->get();
      
         $articles = Article::whereIn('site_id', $user_reg_site_ids)->orderBy('date', 'desc')->paginate(15);
-     
+
+        $fav_article_query = FollowArticle::where('user_id', '=', $id)->get();
+
+        $fav_article = $this->objectIdToArray($fav_article_query, 'article_id');
+        
         return view('home', 
             [
                 'title_name' => 'All Articles' ,
@@ -46,6 +51,7 @@ class HomeController extends Controller
                 'user_reg_sites' => $user_reg_sites ,
                 'username' => $username ,
                 'useremail' => $useremail ,
+                'fav_article' => $fav_article ,
      
             ]);
     }
@@ -58,7 +64,7 @@ class HomeController extends Controller
         $useremail=$user->email;
 
         $user_reg_site_ids = SiteReg::where('user_id', '=', $id)->get();
-        $user_reg_site_ids = $this->articleIdToArray($user_reg_site_ids);
+        $user_reg_site_ids = $this->objectIdToArray($user_reg_site_ids, 'site_id');
 
         $user_reg_sites = Site::whereIn('id' , $user_reg_site_ids)->get();
         $target_site_title = Site::where('id' , '=' , $target_site_id)->value('site_title');
@@ -169,10 +175,10 @@ class HomeController extends Controller
         }
     }
 
-    private function articleIdToArray($data){
+    private function objectIdToArray($data, $column){
         $site = [];
         foreach ($data as $i) {
-            $site[] = $i->site_id;
+            $site[] = $i->$column;
         }
         return $site;
     }
