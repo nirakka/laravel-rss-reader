@@ -228,19 +228,44 @@
 
                  }).done(function(data){
                     pageNum = pageNum +1 ;
-                    //記事の末尾からアッペンド
+                    //記事の末尾からアッペンド(pagination が初期値１５)
                     var articleNum = 15;
 
-                    // console.log(data);
-                    for (i=0; i<5; i++, Num++) {
+                    var obj = $(this);
 
-                    $('#magazinelist').append(
-                            '<li><div class="article_magazine_content"><div class="article_title">'+data.data[i].title+'</div><div class="article_content"><p class="textOverflow">'+data.data[i].content+'</p></div><div class="article_footer clearfix"><span class="site_title">'+data.data[i].url+'</span><span class="article_date">{{ date("Y/m/d", strtotime('+data.data[i].date+')) }}</span></div></div></li>'
-                          );
-                }
+                     //「loading」がfalseの時に実行する
+                     if (!obj.data("loading")) 
+                     {
+
+                         //「loading」をtrueにする
+                         obj.data("loading", true);
+
+                         //「Loading」画像を表示
+                         $('#magazinelist').append('<li class="load-li" style="text-align: center;"><img src="/img/load.gif"></li>');
+
+                         //追加する処理を記述
+                         setTimeout(function() 
+                         {
+                             $('#magazinelist li:last').remove();
+
+
+
+                            for (i=0; i<15; i++, Num++) 
+                            {
+                                $('#magazinelist').append(
+                                        '<li><div class="article_magazine_content"><div class="article_title">'+data.data[i].title+'</div><div class="article_content"><p class="textOverflow">'+data.data[i].content+'</p></div><div class="article_footer clearfix"><span class="site_title">'+data.data[i].url+'</span><span class="article_date">{{ date("Y/m/d", strtotime('+data.data[i].date+')) }}</span></div></div></li>');
+                            }
+
+                             //処理が完了したら「Loading...」をfalseにする
+                             obj.data("loading", false);
+                         }, 1000);
+                    }
+
+
                  });
-
          });
+
+
          $('html,body').animate({ scrollTop: 0 }, '1');
      });
 
