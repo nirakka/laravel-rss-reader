@@ -161,6 +161,7 @@
     
      //変数[addText]と[Num]を宣言
      var Num = 1;
+    var pageNum = 2;
      // var link = $articles->nextPageUrl();
 
      $(document).ready(function() {
@@ -207,17 +208,15 @@
 
              
              var user_id = {{ Auth::user()->id }};
-             var pageNum = 2;
              var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');  
 
              $.ajax({
                  dataType: 'json',
-                 type:'POST',
-                 url: '/tempArticle',
+                 type:'GET',
+                 url: '/tempArticleGet',
                  data:{
-                    _token: CSRF_TOKEN , 
-                     user_id: user_id,
-                     pageNum: pageNum
+                    _token: CSRF_TOKEN,
+                     page: pageNum
                  },
              // }).done(function(data){
              //    console.log(data);
@@ -228,10 +227,18 @@
                 }
 
                  }).done(function(data){
-                    
-                    console.log(data);
-                 });
+                    pageNum = pageNum +1 ;
+                    //記事の末尾からアッペンド
+                    var articleNum = 15;
 
+                    // console.log(data);
+                    for (i=0; i<5; i++, Num++) {
+
+                    $('#magazinelist').append(
+                            '<li><div class="article_magazine_content"><div class="article_title">'+data.data[i].title+'</div><div class="article_content"><p class="textOverflow">'+data.data[i].content+'</p></div><div class="article_footer clearfix"><span class="site_title">'+data.data[i].url+'</span><span class="article_date">{{ date("Y/m/d", strtotime('+data.data[i].date+')) }}</span></div></div></li>'
+                          );
+                }
+                 });
 
          });
          $('html,body').animate({ scrollTop: 0 }, '1');

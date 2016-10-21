@@ -9,7 +9,7 @@ use App\SiteReg;
 
 class SiteRegController extends Controller
 {
-    //
+
     public function index(){
         $user_id = \Auth::user()->id;
         $site_reg = SiteReg::where('user_id', '=', $user_id)->get();

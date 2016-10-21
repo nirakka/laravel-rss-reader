@@ -9,17 +9,12 @@
 
                     <div class="panel-body">
                         <div class="form-group">
-                            <form method="post" action="{{ url('/tempArticle')  }}" class="form-horizontal" enctype="multipart/form-data">
+                            <form method="get" action="{{ url('/tempArticleGet')  }}" class="form-horizontal" enctype="multipart/form-data">
                                 {{ csrf_field() }}
-                            <label for="site_reg" class="col-sm-2 control-label">URL</label>
+                            <label for="site_reg" class="col-sm-2 control-label">Scroll page number</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="pageNum" name="pageNum" placeholder="" value="">
-                                @if ($errors->has('pageNum'))
-                                    <span class="error">{{ $errors->first('pageNum') }}</span>
-                                @endif
+                                <input type="text" class="form-control" id="page" name="page" placeholder="" value="">
                             </div>
-
-                            
                             <div class="col-sm-10" style="padding-top:10px;float:right;">
                                 <button type="submit" class="btn btn-default">追加</button>
                             </div>

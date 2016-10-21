@@ -18,13 +18,13 @@ class ScrollController extends Controller{
 		return view('scroll');
 	}
 
-    public function tempArticle(Request $request){
+    public function tempArticle(){
+
 
          $user = \Auth::user();
         $id=$user->id;
         $username=$user->name;
         $useremail=$user->email;
-
         $user_reg_site_ids = SiteReg::where('user_id', '=', $id)->get();
         $user_reg_site_ids = $this->articleIdToArray($user_reg_site_ids);
         $user_reg_sites = Site::whereIn('id' , $user_reg_site_ids)->get();
