@@ -124,7 +124,7 @@
      $(function(){
         
          $(".star-button").click(function(e){
-        //     e.preventDefault();
+             e.preventDefault();
              
              var user_id = {{ Auth::user()->id }};
              var article_id = $(this).data('id');
@@ -137,9 +137,9 @@
                      user_id: user_id,
                      article_id: article_id
                  }
-             }).done(function(){
+             }).done(function(data){
+                console.log(data);
                  $(".star-button").toggleClass('favorited');
-                 alert("yeee");
                  $(".star-button").find('i').toggleClass('fa-star-o');
                  $(".star-button").find('i').toggleClass('fa-star'); 
              });
@@ -164,41 +164,75 @@
      // var link = $articles->nextPageUrl();
 
      $(document).ready(function() {
+
          $(window).bottom();
          $(window).bind("bottom", function() {
 
              
-             var obj = $(this);
+             // var obj = $(this);
 
-             //「loading」がfalseの時に実行する
-             if (!obj.data("loading")) {
+             // //「loading」がfalseの時に実行する
+             // if (!obj.data("loading")) {
 
-                 //「loading」をtrueにする
-                 obj.data("loading", true);
+             //     //「loading」をtrueにする
+             //     obj.data("loading", true);
 
-                 //「Loading」画像を表示
-                 $('#magazinelist').append('<li class="load-li" style="text-align: center;"><img src="/img/load.gif"></li>');
+             //     //「Loading」画像を表示
+             //     $('#magazinelist').append('<li class="load-li" style="text-align: center;"><img src="/img/load.gif"></li>');
 
-                 //追加する処理を記述
-                 setTimeout(function() {
-                     $('#magazinelist li:last').remove();
+             //     //追加する処理を記述
+             //     setTimeout(function() {
+             //         $('#magazinelist li:last').remove();
 
-                     // 繰り返しfor文を記述
-                     for (i=0; i<5; i++, Num++) {
+             //         // 繰り返しfor文を記述
+             //         for (i=0; i<5; i++, Num++) {
 
 
 
-                         //追加するhtmlを記述
-                         // ここで追加の記事を出したい
-                         $('#magazinelist').append(
-                             '<li><div class="article_magazine_content"><div class="article_title">追加の記事'+Num+'</div><div class="article_content"><p class="textOverflow">これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。</p></div><div class="article_footer clearfix"><span class="site_title">はじめてのWEBサイト</span><span class="article_date">27/09/2015</span></div></div></li>'
-                         );
-                     }
+             //             //追加するhtmlを記述
+             //             // ここで追加の記事を出したい
+             //             $('#magazinelist').append(
+             //                 '<li><div class="article_magazine_content"><div class="article_title">追加の記事'+Num+'</div><div class="article_content"><p class="textOverflow">これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。これは、はじめての記事に対するテストようのテキストです。</p></div><div class="article_footer clearfix"><span class="site_title">はじめてのWEBサイト</span><span class="article_date">27/09/2015</span></div></div></li>'
+             //             );
+             //         }
 
-                     //処理が完了したら「Loading...」をfalseにする
-                     obj.data("loading", false);
-                 }, 1000);
-             }
+             //         //処理が完了したら「Loading...」をfalseにする
+             //         obj.data("loading", false);
+             //     }, 1000);
+             // }
+
+
+             //ToDo Scrolling bar
+             console.log("Performing scroll");
+
+             
+             var user_id = {{ Auth::user()->id }};
+             var pageNum = 2;
+             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');  
+
+             $.ajax({
+                 dataType: 'json',
+                 type:'POST',
+                 url: '/tempArticle',
+                 data:{
+                    _token: CSRF_TOKEN , 
+                     user_id: user_id,
+                     pageNum: pageNum
+                 },
+             // }).done(function(data){
+             //    console.log(data);
+             //     alert("yeee");
+             // });
+                failure: function(data) {
+                    alert('failed');
+                }
+
+                 }).done(function(data){
+                    
+                    console.log(data);
+                 });
+
+
          });
          $('html,body').animate({ scrollTop: 0 }, '1');
      });

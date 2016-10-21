@@ -37,9 +37,7 @@ class HomeController extends Controller
         $user_reg_site_ids = $this->articleIdToArray($user_reg_site_ids);
         $user_reg_sites = Site::whereIn('id' , $user_reg_site_ids)->get();
      
-        $articles = Article::whereIn('site_id', $user_reg_site_ids)->orderBy('date', 'desc')->paginate(15);
-
-        $articles->setPath('http://homestead.app/home?page=2');
+        $articles = Article::whereIn('site_id', $user_reg_site_ids)->orderBy('date', 'desc')->paginate(30);
 
         return view('home', 
             [
@@ -65,7 +63,7 @@ class HomeController extends Controller
         $user_reg_sites = Site::whereIn('id' , $user_reg_site_ids)->get();
         $target_site_title = Site::where('id' , '=' , $target_site_id)->value('site_title');
         //get articles of target_site_id
-        $articles = Article::where('site_id','=',  $target_site_id)->orderBy('date', 'desc')->paginate(15);
+        $articles = Article::where('site_id','=',  $target_site_id)->orderBy('date', 'desc')->paginate(30);
         
         return view('home', 
             [
