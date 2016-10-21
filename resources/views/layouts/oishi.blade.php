@@ -28,7 +28,7 @@
         <!-- font awesome -->
         <link href="http://netdna.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.css" rel="stylesheet" />
 
-        <!-- textOverflow -->   
+        <!-- textOverflow -->
         <script src="/js/jquery.textOverflowEllipsis.js"></script>
 
         <!-- スクロールでコンテンツ自動読み込み -->
@@ -62,8 +62,8 @@
                                     <i title="Change view mode" class="fa fa-cog" aria-hidden="true"></i>
                                 </div>
                                 <ul>
-                                    <li><a href="#articles_magazineview">Magazine view</a></li>
-                                    <li><a href="#articles_listview">List view</a></li>
+                                    <li><a href="#articles_magazineview" onclick="magazineViewMode()">Magazine view</a></li>
+                                    <li><a href="#articles_listview" onclick="listViewMode()">List view</a></li>
                                 </ul>
                             </li>
                             <li>
@@ -127,7 +127,7 @@
                         </form>
                         <i id="add-sites" class="fa fa-plus-square-o" aria-hidden="true"></i>
                     </dt>
-                             <!-- 購読サイト追加部 終わり-->                      
+                             <!-- 購読サイト追加部 終わり-->
                          <dd>
                         <ul>
                             @foreach( $user_reg_sites as $user_reg_site )
@@ -179,7 +179,7 @@
          });
 
         </script>
-        
+
         @show
 
     </body>

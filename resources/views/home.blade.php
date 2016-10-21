@@ -78,8 +78,13 @@
                                 </div>
                                 <div class="article_title_listview">
                                     <!-- <a href="{{ $i->site()->first()->site_url }}" target="_blank">{{ $i->site()->first()->site_title }}</a> -->
-                                    {{ $i->title  }}
+
+                                    <span class="article_title_listview_span">{{ $i->title  }} </span>
+                                    <span class="article_content_listview_span">{{ $i->content  }}</span>
+
                                 </div>
+
+
                                 <div class="article_date">{{ date('H:i', strtotime($i->date)) }}</div>
                             </div>
 
@@ -225,5 +230,20 @@
              window.location.href= searchLink;
          }
      });
+    </script>
+
+    <!-- css 切り替え用 スクリプト -->
+    <script type="text/javascript">
+    function listViewMode() {
+        document.getElementById("header-innner-wrap").style.maxWidth="90%";
+        document.getElementById("header-innner-wrap").style.width="90%";
+        document.getElementById("wrap").style.maxWidth="95%";
+        document.getElementById("wrap").style.width="95%";
+    }
+    function magazineViewMode() {
+        document.getElementById("header-innner-wrap").style.maxWidth="620px";
+        document.getElementById("header-innner-wrap").style.width="620px";
+        document.getElementById("wrap").style.maxWidth="620px";
+    }
     </script>
 @endsection
