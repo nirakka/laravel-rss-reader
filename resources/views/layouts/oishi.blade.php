@@ -18,8 +18,7 @@
         <link href="/css/reset.css" type="text/css" rel="stylesheet" />
         <link href="/css/style.css" type="text/css" rel="stylesheet" />
 
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js" ></script>
-        <script src="/js/jquery.mmenu.min.js" type="text/javascript"></script>
+
         <link href="/css/jquery.mmenu.css" type="text/css" rel="stylesheet" />
 
         <!-- Google Webfont -->
@@ -28,21 +27,6 @@
         <!-- font awesome -->
         <link href="http://netdna.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.css" rel="stylesheet" />
 
-        <!-- textOverflow -->   
-        <script src="/js/jquery.textOverflowEllipsis.js"></script>
-
-        <!-- スクロールでコンテンツ自動読み込み -->
-        <script src="/js/jquery.bottom-1.0.js"></script>
-
-        <!-- ui tabs.js -->
-        <script type="text/javascript" src="/js/ui.core.js"></script>
-        <script type="text/javascript" src="/js/ui.tabs.js"></script>
-        <script type="text/javascript">
-            $(function() {
-            /* selected: N で初期の番号指定 */
-            $('#view-changer > ul').tabs();
-            });
-        </script>
     </head>
     <body>
         <div id="wrap">
@@ -127,7 +111,7 @@
                         </form>
                         <i id="add-sites" class="fa fa-plus-square-o" aria-hidden="true"></i>
                     </dt>
-                             <!-- 購読サイト追加部 終わり-->                      
+                             <!-- 購読サイト追加部 終わり-->
                          <dd>
                         <ul>
                             @foreach( $user_reg_sites as $user_reg_site )
@@ -172,6 +156,14 @@
 
         @section('endbody')
 
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js" ></script>
+
+        <!-- textOverflow -->
+        <script src="/js/jquery.textOverflowEllipsis.js"></script>
+
+        <!-- スクロールでコンテンツ自動読み込み -->
+        <script src="/js/jquery.bottom-1.0.js"></script>
+
         <!-- 購読サイト追加用のボックスを表示 -->
         <script type="text/javascript">
          $(document).ready(function() {
@@ -179,7 +171,19 @@
          });
 
         </script>
-        
+
+        <script src="/js/jquery.mmenu.min.js" type="text/javascript"></script>
+
+        <!-- ui tabs.js -->
+        <script type="text/javascript" src="/js/ui.core.js"></script>
+        <script type="text/javascript" src="/js/ui.tabs.js"></script>
+        <script type="text/javascript">
+            $(function() {
+            /* selected: N で初期の番号指定 */
+            $('#view-changer > ul').tabs();
+            });
+        </script>
+
         @show
 
     </body>
