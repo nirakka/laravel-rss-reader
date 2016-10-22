@@ -28,6 +28,10 @@ Route::get('/tempArticle', 'ScrollController@form');
 
 Route::get('/search','SearchController@index');
 
+Route::get('/logout',function(){
+	Auth::logout();
+	return redirect('/login');
+});
 
 //Route::post('/search','SearchController@showresult');
 

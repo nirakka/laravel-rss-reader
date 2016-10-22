@@ -216,10 +216,6 @@ html, body{
   padding-top: 5px;
 }
 
-.article_magazine_content .action_buttons a {
-  color: black;
-}
-
 .article_magazine_content .action_buttons a:visited {
   color: black;
 }
@@ -243,9 +239,6 @@ html, body{
   text-decoration: none;
 }
 
-.article_magazine_content a {
-  color: black;
-}
 .article_magazine_content a:visited {
   color: black;
 }
@@ -510,24 +503,69 @@ html, body{
     }
 }
 
-.btn {
-    background-color: #fff; /* Green */
-    border: none;
-    color: #000;
-    padding: 8px 45px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 20px;
-    border-radius: 8px;
-    cursor:pointer;
+/* for signin page */
+
+#signin-box {
+  width: 80%;
+  max-width: 500px;
+  margin: 0 auto;
+  margin-top: 60px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 0 10px 10px 10px;
 }
 
-.favorited, .read-later-flg{
-    color:Gold;
-    
+#signin-top{
+  border-bottom: 1px solid #ddd;
+  height: 30px;
 }
 
-.has-read-flg {
-    opacity:0.4;
+#signin-title {
+  margin-top: 8px;
+  margin-left: 10px;
+  font-size:18px;
+  font-style: bold;
+}
+
+#signin-main p{
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 10px;
+  font-size: 15px;
+}
+
+#signin-box input[type=text] {
+  margin-top: 5px;
+  width: 98%;
+  font-size: 15px;
+}
+#signin-box input[type=password] {
+  margin-top: 5px;
+  width: 98%;
+  font-size: 15px;
+}
+
+
+#signin-box .email-inForm-text{
+}
+
+#signin-box .pass-inForm-text {
+  margin: ;
+}
+
+#signin-box .rememberMe {
+  font-size: 12px;
+}
+#signin-box a {
+  text-decoration: none;
+  font-size: 12px;
+  color: #ccc;
+}
+
+@media (max-width: 400px) {
+
+#header-buttons {
+  display: none;
+}
+
 }
