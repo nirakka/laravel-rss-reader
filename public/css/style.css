@@ -1,4 +1,9 @@
 /* 親要素にclearfix*/
+@import url(//fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,700,700italic);
+body{
+font-family:Avenir , "Open Sans" , "Helvetica Neue" , Helvetica , Arial , Verdana , Roboto , "游ゴシック" , "Yu Gothic" , "游ゴシック体" , "YuGothic" , "ヒラギノ角ゴ Pro W3" , "Hiragino Kaku Gothic Pro" , "Meiryo UI" , "メイリオ" , Meiryo , "ＭＳ Ｐゴシック" , "MS PGothic" , sans-serif;
+}
+
 .clearfix:after{
   content: "";
   clear: both;
@@ -29,15 +34,15 @@ html, body{
     left: 0px;                  /* 位置(右0px) */
     width: 100%;                /* 横幅100%　*/
     height: 60px;              /* 縦幅140px */
-  background: #fff;
-  border-bottom: 1px solid #ddd;
-  z-index: 100;
+    background: #fff;
+    border-bottom: 1px solid #ddd;
+    z-index: 100;
 }
 
 #header-back
 {
     height: 60px;              /* 縦幅140px */
-  background: black;
+    background: black;
 }
 
 #header-innner-wrap {
@@ -48,7 +53,7 @@ html, body{
 
 #header {
     height: 50px;
-  padding-top: 10px;
+    padding-top: 10px;
 }
 
 #header h1 {
@@ -129,7 +134,7 @@ html, body{
 }
 
 
-/* test for textOverflow in the article_content*/
+/* test for textOverflow in the _content*/
 .article_content .textOverflow {
   overflow: hidden;
   max-width: 500px;
@@ -138,11 +143,26 @@ html, body{
 
 /* #articles in main column*/
 .article_magazine_content {
-    margin: 5px auto;
+    margin: 7px auto;
     max-width: 500px;
     border-radius:5px;
     border: 1px solid #ccc;
-    padding: 10px
+    padding: 10px;
+    padding-bottom: 3px;
+}
+
+.action_buttons .test1 {
+    float: left;
+    width: 33%;
+}
+
+.action_buttons .test2 {
+    float: left;
+    width: 33%;
+}
+.action_buttons .test3 {
+    float: left;
+    width: 33%;
 }
 
 .article_title {
@@ -192,17 +212,53 @@ html, body{
   z-index: 1;
 }
 
+#articles_listview .site_title_listview {
+  font-size: 12px;
+  float: left;
+  max-width: 20%;
+  min-width: 20%;
+
+  overflow: hidden;
+  /* ▼改行を禁止した上で、はみ出る分量は「…」記号で省略 */
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: 4px 5px 6px 0;
+  color: #aaa;
+  font-weight: lighter;
+}
+
 #articles_listview .article_title_listview {
   float: left;
-  max-width: 60%;
+  max-width: 73%;
   overflow: hidden;
   /* ▼改行を禁止した上で、はみ出る分量は「…」記号で省略 */
   text-overflow: ellipsis;
   white-space: nowrap;
   font-size: 12px;
-  font-weight: bold;
   margin: 4px 0 6px 0;
 }
+
+.article_title_listview_span {
+    font-weight: bold;
+}
+
+.article_content_listview_span {
+}
+
+/*
+#articles_listview .article_content_listview {
+    float: left;
+    max-width: 20%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 12px;
+    color: #ddd;
+    margin: 4px 0 6px 0;
+}
+*/
+
+
 
 .article_magazine_content_wrap ul > li{
   margin: 0;
@@ -213,7 +269,7 @@ html, body{
   font-size: 20px;
   text-align: center;
   border-top: 1px solid #ddd;
-  padding-top: 5px;
+  display: block !important;
 }
 
 .article_magazine_content .action_buttons a {
@@ -259,21 +315,6 @@ html, body{
   margin: 4px 5px 6px 0;
 }
 
-
-
-#articles_listview .site_title_listview {
-  font-size: 12px;
-  float: left;
-  max-width: 20%;
-  overflow: hidden;
-  /* ▼改行を禁止した上で、はみ出る分量は「…」記号で省略 */
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  margin: 4px 5px 6px 0;
-  color: #aaa;
-  font-weight: lighter;
-}
-
 #articles_listview .favo-icon {
   font-size: 12px;
   margin-right: 5px;
@@ -311,6 +352,7 @@ html, body{
 
 #magazinelist{
   padding:10px;
+  padding-top: 5px;
     list-style: none;
 }
 #magazinelist li{
@@ -510,11 +552,12 @@ html, body{
     }
 }
 
+
 .btn {
-    background-color: #fff; /* Green */
+    background-color: #fff;
     border: none;
     color: #000;
-    padding: 8px 45px;
+    padding: 5px 5px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -525,9 +568,42 @@ html, body{
 
 .favorited, .read-later-flg{
     color:Gold;
-    
+
 }
 
 .has-read-flg {
     opacity:0.4;
+}
+
+
+/* window幅調整用 css*/
+
+@media (max-width: 420px) {
+
+#header-buttons {
+	display: none;
+}
+
+#articles_listview .article_title_listview {
+  max-width: 50%;
+}
+
+}
+
+@media screen and (min-device-width: 421px) and (max-device-width: 580px) {
+    #articles_listview .article_title_listview {
+      max-width: 60%;
+    }
+}
+
+@media screen and (min-device-width: 581px) and (max-device-width: 800px) {
+    #articles_listview .article_title_listview {
+      max-width: 65%;
+    }
+}
+
+@media screen and (min-device-width: 800px) {
+    #articles_listview .article_title_listview {
+      max-width: 70%;
+    }
 }

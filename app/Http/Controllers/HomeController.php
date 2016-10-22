@@ -64,6 +64,20 @@ class HomeController extends Controller
                         'read_later' => $read_later,
                         'has_read' => $has_read,
                     ]);
+
+
+        $articles = Article::whereIn('site_id', $user_reg_site_ids)->orderBy('date', 'desc')->paginate(30);
+
+        return view('home',
+            [
+                'title_name' => 'All Articles' ,
+                'articles' => $articles ,
+                'user_reg_sites' => $user_reg_sites ,
+                'username' => $username ,
+                'useremail' => $useremail ,
+
+            ]);
+
     }
 
     
@@ -83,8 +97,9 @@ class HomeController extends Controller
         $target_site_title = Site::where('id' , '=' , $target_site_id)->value('site_title');
         //get articles of target_site_id
         $articles = Article::where('site_id','=',  $target_site_id)->orderBy('date', 'desc')->paginate(30);
-        
-        return view('home', 
+
+
+        return view('home',
             [
                 'title_name' =>$target_site_title ,
                 'articles' => $articles ,
@@ -106,7 +121,7 @@ class HomeController extends Controller
 
     public function store()
     {
-        
+
         $start = microtime(true);
         $xmls = Site::all();
         foreach ($xmls as $rss){
@@ -164,7 +179,7 @@ class HomeController extends Controller
         foreach ($articles as $item)
         {
             $sub = Article::where('url', '=', $item->link['href'])->first();
-            
+
             if (is_null($sub)){
                 $query = new Article();
                 $query->title = $item->title;
@@ -182,7 +197,7 @@ class HomeController extends Controller
 		$site_link = $xml->channel->link; // サイトのリンク
 		foreach($xml->item as $item){
             $sub = Article::where('url', '=', $item->link)->first();
-            
+
             if (is_null($sub)){
                 $query = new Article();
                 $nameSpace = $xml->getNamespaces(true);
@@ -225,6 +240,5 @@ class HomeController extends Controller
         }
         return $site;
     }
-        
-}
 
+}
