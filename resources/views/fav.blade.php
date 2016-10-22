@@ -10,26 +10,28 @@
                 @foreach ($articles as $i)
                     <li>
                         <div class="article_magazine_content" id="{{ $i->article()->first()->id }}">
-                            <!-- このaタグに記事のURLを挟めばOK -->
-                            <a href="{{ $i->url}}"  target="_blank">
-                                <div class="article_wrap">
-                                    <div class="article_title">
-                                        {{ $i->article()->first()->title  }}
+                            <div class="article_magazine_hasread_wrapper">
+                                <!-- このaタグに記事のURLを挟めばOK -->
+                                <a href="{{ $i->url}}"  target="_blank">
+                                    <div class="article_wrap">
+                                        <div class="article_title">
+                                            {{ $i->article()->first()->title  }}
+                                        </div>
+                                        <!-- url は別に表示しなくても良いかな？
+                                             <div class="article_url">http://example.com/index.html</div>
+                                           -->
+                                        <div class="article_content">
+                                            <p class="textOverflow">
+                                                {{ $i->article()->first()->content  }}
+                                            </p>
+                                        </div>
+                                        <div class="article_footer clearfix">
+                                            <span class="site_title">{{ $i->article()->first()->site()->first()->site_title }}</span>
+                                            <span class="article_date">{{ date('Y/m/d', strtotime($i->article()->first()->date)) }}</span>
+                                        </div>
                                     </div>
-                                    <!-- url は別に表示しなくても良いかな？
-                                         <div class="article_url">http://example.com/index.html</div>
-                                       -->
-                                    <div class="article_content">
-                                        <p class="textOverflow">
-                                            {{ $i->article()->first()->content  }}
-                                        </p>
-                                    </div>
-                                    <div class="article_footer clearfix">
-                                        <span class="site_title">{{ $i->article()->first()->site()->first()->site_title }}</span>
-                                        <span class="article_date">{{ date('Y/m/d', strtotime($i->article()->first()->date)) }}</span>
-                                    </div>
-                                </div>
-                            </a>
+                                </a>
+                            </div>
                             <!-- 記事下のアクションボタンはココから -->
                             <!-- 正直アイコンは何でも良いけど、とりあえず -->
                             <div class="action_buttons" data-id="{{ $i->article()->first()->id }}" style="display:inline;">
