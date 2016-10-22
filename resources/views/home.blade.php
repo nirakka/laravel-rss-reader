@@ -11,7 +11,7 @@
                     <li>
                         <div class="article_magazine_content" id="{{ $i->id }}">
                             <!-- このaタグに記事のURLを挟めばOK -->
-                            <div class="article_magazine_hasread_wrapper">
+                            <div class="has-read-flg">
                                 <a href="{{ $i->url}}"  target="_blank">
                                     <div class="article_wrap">
                                         <div class="article_title">
@@ -277,6 +277,7 @@
                  }
              }).done(function(){
                  $('#' + article_id + ' .has-read-form').toggle();
+                 $('#' + article_id + ' .has-read-flg').toggleClass('article_magazine_hasread_wrapper');
              }).fail(function(){
                  alert('Error occurred!');
              }).always(function(){
@@ -302,6 +303,7 @@
                  }
              }).done(function(){
                  $('#' + article_id + ' .has-read-form').toggle();
+                 $('#' + article_id + ' .has-read-flg').toggleClass('article_magazine_hasread_wrapper');                 
              }).fail(function(){
                  alert('Error occurred!');
              }).always(function(){

@@ -10,7 +10,7 @@
                 @foreach ($articles as $i)
                     <li>
                         <div class="article_magazine_content" id="{{ $i->article()->first()->id }}">
-                            <div class="article_magazine_hasread_wrapper">
+                            <div class="has-read-flg">
                                 <!-- このaタグに記事のURLを挟めばOK -->
                                 <a href="{{ $i->url}}"  target="_blank">
                                     <div class="article_wrap">
@@ -55,20 +55,20 @@
                                 </form>
 
 
-                                <form action="/read-later" method="POST" class="read-late test2" @if (in_array($i->id, $read_later)) style="display:none;" @endif>
+                                <form action="/read-later" method="POST" class="read-late test2" @if (in_array($i->article()->first()->id, $read_later)) style="display:none;" @endif>
                                       {{ csrf_field() }}
                                     <button type="submit" class="read-later btn" data-id="{{ $i->id }}">
                                         <i class="fa fa-clock-o" aria-hidden="true"></i>
                                     </button>
                                 </form>
-                                <form action="/delete-later" method="POST" class="read-late test2" @if (!in_array($i->id, $read_later)) style="display:none;" @endif>
+                                <form action="/delete-later" method="POST" class="read-late test2" @if (!in_array($i->article()->first()->id, $read_later)) style="display:none;" @endif>
                                       {{ csrf_field() }}
                                     <button type="submit" class="btn read-later-flg" data-id="{{ $i->id }}">
                                         <i class="fa fa-clock-o" aria-hidden="true"></i>
                                     </button>
                                 </form>
 
-                                <form action="/has-read" method="POST" class="has-read-form test3"  @if (in_array($i->id, $has_read)) style="display:none;" @endif>
+                                <form action="/has-read" method="POST" class="has-read-form test3"  @if (in_array($i->article()->first()->id, $has_read)) style="display:none;" @endif>
                                       {{ csrf_field() }}
                                     <input type="hidden" name="user_id" value="1">
                                     <input type="hidden" name="article_id" value="1">
@@ -76,7 +76,7 @@
                                         <i class="fa fa-check" aria-hidden="true"></i>
                                     </button>
                                 </form>
-                                <form action="/delete-has-read" method="POST" class="has-read-form test3"  @if (!in_array($i->id, $has_read)) style="display:none;" @endif>
+                                <form action="/delete-has-read" method="POST" class="has-read-form test3"  @if (!in_array($i->article()->first()->id, $has_read)) style="display:none;" @endif>
                                       {{ csrf_field() }}
                                     <button type="submit" class="del-has-read btn" data-id="{{ $i->id }}">
                                         <i class="fa fa-check" aria-hidden="true"></i>
