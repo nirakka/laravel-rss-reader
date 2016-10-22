@@ -33,40 +33,40 @@
                             <!-- 記事下のアクションボタンはココから -->
                             <!-- 正直アイコンは何でも良いけど、とりあえず -->
                             <div class="action_buttons" data-id="{{ $i->article()->first()->id }}" style="display:inline;">
-                                
-                                <form action="/articles" method="POST" class="fav" @if (in_array($i->article()->first()->id, $fav_article)) style="display:none;" @endif>
+
+                                <form action="/articles" method="POST" class="fav test1" @if (in_array($i->article()->first()->id, $fav_article)) style="display:none;" @endif>
                                       {{ csrf_field() }}
-                                      
+
                                     <button type="submit" class="star-button btn" data-id="{{ $i->article()->first()->id }}">
                                         <i class="fa fa-star-o" aria-hidden="true"></i>
                                     </button>
 
                                 </form>
-                                
-                                <form action="/delete-fav" method="POST" class="fav" @if (!in_array($i->article()->first()->id, $fav_article)) style="display:none;" @endif>
+
+                                <form action="/delete-fav" method="POST" class="fav test1" @if (!in_array($i->article()->first()->id, $fav_article)) style="display:none;" @endif>
                                       {{ csrf_field() }}
-                                      
+
                                     <button type="submit" class="favorited btn" data-id="{{ $i->article()->first()->id }}">
                                         <i class="fa fa-star" aria-hidden="true"></i>
                                     </button>
 
                                 </form>
 
-                                
-                                <form action="/read-later" method="POST" class="read-late" @if (in_array($i->id, $read_later)) style="display:none;" @endif>
+
+                                <form action="/read-later" method="POST" class="read-late test2" @if (in_array($i->id, $read_later)) style="display:none;" @endif>
                                       {{ csrf_field() }}
                                     <button type="submit" class="read-later btn" data-id="{{ $i->id }}">
                                         <i class="fa fa-clock-o" aria-hidden="true"></i>
                                     </button>
                                 </form>
-                                <form action="/delete-later" method="POST" class="read-late" @if (!in_array($i->id, $read_later)) style="display:none;" @endif>
+                                <form action="/delete-later" method="POST" class="read-late test2" @if (!in_array($i->id, $read_later)) style="display:none;" @endif>
                                       {{ csrf_field() }}
                                     <button type="submit" class="btn read-later-flg" data-id="{{ $i->id }}">
                                         <i class="fa fa-clock-o" aria-hidden="true"></i>
                                     </button>
                                 </form>
-                                
-                                <form action="/has-read" method="POST" class="has-read-form"  @if (in_array($i->id, $has_read)) style="display:none;" @endif>
+
+                                <form action="/has-read" method="POST" class="has-read-form test3"  @if (in_array($i->id, $has_read)) style="display:none;" @endif>
                                       {{ csrf_field() }}
                                     <input type="hidden" name="user_id" value="1">
                                     <input type="hidden" name="article_id" value="1">
@@ -74,7 +74,7 @@
                                         <i class="fa fa-check" aria-hidden="true"></i>
                                     </button>
                                 </form>
-                                <form action="/delete-has-read" method="POST" class="has-read-form"  @if (!in_array($i->id, $has_read)) style="display:none;" @endif>
+                                <form action="/delete-has-read" method="POST" class="has-read-form test3"  @if (!in_array($i->id, $has_read)) style="display:none;" @endif>
                                       {{ csrf_field() }}
                                     <button type="submit" class="del-has-read btn" data-id="{{ $i->id }}">
                                         <i class="fa fa-check" aria-hidden="true"></i>
@@ -82,7 +82,7 @@
                                 </form>
 
                             </div>
-                            
+
                             <!-- 記事下のアクションボタンはココまで -->
                         </div>
                     </li>
@@ -112,7 +112,7 @@
                                 </div>
                                 <div class="article_date">{{ date('H:i', strtotime($i->article()->first()->date)) }}</div>
                             </div>
-                            
+
                         </li>
                     @endforeach
                     <li>
@@ -150,15 +150,15 @@
              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
          }
      });
-     
+
      $(function(){
-         
+
          $(".star-button").click(function(e){
              // 多重送信を防ぐため通信完了までボタンをdisableにする
              var button = $(this);
              button.attr("disabled", true);
              e.preventDefault();
-             
+
              var user_id = {{ Auth::user()->id }};
              var article_id = $(this).data('id');
              var art_id_sel = '#' + article_id + ' .star-button';
@@ -173,7 +173,7 @@
              }).done(function(){
                  $('#' + article_id + ' .fav').toggle();
              }).always(function(){
-                 button.attr("disabled", false); 
+                 button.attr("disabled", false);
              });
          });
          $(".favorited").click(function(e){
@@ -193,7 +193,7 @@
                      article_id: article_id
                  }
              }).done(function(){
-                 $('#' + article_id + ' .fav').toggle(); 
+                 $('#' + article_id + ' .fav').toggle();
              }).fail(function(){
                  alert('Error occurred!');
              }).always(function(){
@@ -206,7 +206,7 @@
              var button = $(this);
              button.attr("disabled", true);
              e.preventDefault();
-             
+
              var user_id = {{ Auth::user()->id }};
              var article_id = $(this).data('id');
              //var art_id_sel = '#' + article_id + ' .read-later';
@@ -222,12 +222,12 @@
              }).done(function(){
                  $('#' + article_id + ' .read-late').toggle();
              }).always(function(){
-                 button.attr("disabled", false); 
+                 button.attr("disabled", false);
              });
          });
 
          $(".read-later-flg").click(function(e){
-             
+
              var button = $(this);
              button.attr("disabled", true);
              e.preventDefault();
@@ -244,14 +244,14 @@
                      article_id: article_id
                  }
              }).done(function(){
-                 $('#' + article_id + ' .read-late').toggle(); 
+                 $('#' + article_id + ' .read-late').toggle();
              }).fail(function(){
                  alert('Error occurred!');
              }).always(function(){
                  button.attr("disabled", false);
              });
          });
-         
+
          $(".has-read").click(function(e){
              var article_id = $(this).parent().data('id');
              var button = $(this);
@@ -270,7 +270,7 @@
                      article_id: article_id
                  }
              }).done(function(){
-                 $('#' + article_id + ' .has-read-form').toggle(); 
+                 $('#' + article_id + ' .has-read-form').toggle();
              }).fail(function(){
                  alert('Error occurred!');
              }).always(function(){
@@ -295,7 +295,7 @@
                      article_id: article_id
                  }
              }).done(function(){
-                 $('#' + article_id + ' .has-read-form').toggle(); 
+                 $('#' + article_id + ' .has-read-form').toggle();
              }).fail(function(){
                  alert('Error occurred!');
              }).always(function(){
@@ -305,7 +305,7 @@
      });
 
 
-     
+
      //変数[addText]と[Num]を宣言
      var Num = 1;
      // var link = $articles->nextPageUrl();
@@ -314,7 +314,7 @@
          $(window).bottom();
          $(window).bind("bottom", function() {
 
-             
+
              var obj = $(this);
 
              //「loading」がfalseの時に実行する
@@ -350,7 +350,7 @@
          $('html,body').animate({ scrollTop: 0 }, '1');
      });
 
-     
+
 
      $('#add-sites').click(function() {
          //$('#add-sites').css( 'display', 'none');

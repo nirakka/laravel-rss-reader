@@ -270,6 +270,7 @@ html, body{
   text-align: center;
   border-top: 1px solid #ddd;
   display: block !important;
+  height: 33px;
 }
 
 .article_magazine_content .action_buttons a {
@@ -571,10 +572,10 @@ html, body{
 
 }
 
-.has-read-flg {
-    opacity:0.4;
+/* has-read */
+.article_magazine_hasread_wrapper {
+    opacity: 0.1;
 }
-
 
 /* window幅調整用 css*/
 
