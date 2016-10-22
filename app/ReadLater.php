@@ -4,11 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class FollowArticle extends Model
+class ReadLater extends Model
 {
     //
-    protected $table = 'favorite_article';
-    
+    protected $table = 'read_later';
 
     public $fillable = ['user_id', 'article_id'];
 
@@ -16,4 +15,6 @@ class FollowArticle extends Model
 
         return $this->hasOne('App\Article', 'id', 'article_id');
     }
+
+    
 }

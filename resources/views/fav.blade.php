@@ -9,68 +9,57 @@
 
                 @foreach ($articles as $i)
                     <li>
-                        <div class="article_magazine_content" id="{{ $i->id }}">
+                        <div class="article_magazine_content" id="{{ $i->article()->first()->id }}">
                             <!-- このaタグに記事のURLを挟めばOK -->
                             <a href="{{ $i->url}}"  target="_blank">
                                 <div class="article_wrap">
                                     <div class="article_title">
-                                        {{ $i->title  }}
+                                        {{ $i->article()->first()->title  }}
                                     </div>
                                     <!-- url は別に表示しなくても良いかな？
                                          <div class="article_url">http://example.com/index.html</div>
                                        -->
                                     <div class="article_content">
                                         <p class="textOverflow">
-                                            {{ $i->content  }}
+                                            {{ $i->article()->first()->content  }}
                                         </p>
                                     </div>
                                     <div class="article_footer clearfix">
-                                        <span class="site_title">{{ $i->site()->first()->site_title }}</span>
-                                        <span class="article_date">{{ date('Y/m/d', strtotime($i->date)) }}</span>
+                                        <span class="site_title">{{ $i->article()->first()->site()->first()->site_title }}</span>
+                                        <span class="article_date">{{ date('Y/m/d', strtotime($i->article()->first()->date)) }}</span>
                                     </div>
                                 </div>
                             </a>
                             <!-- 記事下のアクションボタンはココから -->
                             <!-- 正直アイコンは何でも良いけど、とりあえず -->
-                            <div class="action_buttons" data-id="{{ $i->id }}" style="display:inline;">
+                            <div class="action_buttons" data-id="{{ $i->article()->first()->id }}" style="display:inline;">
                                 
-                                <form action="/articles" method="POST" class="fav" @if (in_array($i->id, $fav_article)) style="display:none;" @endif>
-                                    {{ csrf_field() }}
-                                    <button type="submit" class="star-button btn" data-id="{{ $i->id }}">
+                                <form action="/articles" method="POST" class="fav" @if (in_array($i->article()->first()->id, $fav_article)) style="display:none;" @endif>
+                                      {{ csrf_field() }}
+                                      
+                                    <button type="submit" class="star-button btn" data-id="{{ $i->article()->first()->id }}">
                                         <i class="fa fa-star-o" aria-hidden="true"></i>
                                     </button>
+
                                 </form>
-                                <form action="/delete-fav" method="POST" class="fav" @if (!in_array($i->id, $fav_article)) style="display:none;" @endif>
-                                    {{ csrf_field() }}
-                                    <button type="submit" class="favorited btn" data-id="{{ $i->id }}">
+                                
+                                <form action="/delete-fav" method="POST" class="fav" @if (!in_array($i->article()->first()->id, $fav_article)) style="display:none;" @endif>
+                                      {{ csrf_field() }}
+                                      
+                                    <button type="submit" class="favorited btn" data-id="{{ $i->article()->first()->id }}">
                                         <i class="fa fa-star" aria-hidden="true"></i>
                                     </button>
+
                                 </form>
 
-                                <form action="/read-later" method="POST" class="read-late" @if (in_array($i->id, $read_later)) style="display:none;" @endif>
-                                    {{ csrf_field() }}
-                                    <button type="submit" class="read-later btn" data-id="{{ $i->id }}">
-                                    <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                <form action="">
                                     </button>
-                                </form>
-                                <form action="/delete-later" method="POST" class="read-late" @if (!in_array($i->id, $read_later)) style="display:none;" @endif>
-                                    {{ csrf_field() }}
-                                    <button type="submit" class="btn read-later-flg" data-id="{{ $i->id }}">
+                                    <button type="submit" class="read-later btn">
                                         <i class="fa fa-clock-o" aria-hidden="true"></i>
                                     </button>
                                 </form>
-                                
-                                <form action="/has-read" method="POST" class="has-read-form"  @if (in_array($i->id, $has_read)) style="display:none;" @endif>
-                                    {{ csrf_field() }}
-                                    <input type="hidden" name="user_id" value="1">
-                                    <input type="hidden" name="article_id" value="1">
-                                    <button type="submit" class="has-read btn" data-id="{{ $i->id }}">
-                                        <i class="fa fa-check" aria-hidden="true"></i>
-                                    </button>
-                                </form>
-                                <form action="/delete-has-read" method="POST" class="has-read-form"  @if (!in_array($i->id, $has_read)) style="display:none;" @endif>
-                                    {{ csrf_field() }}
-                                    <button type="submit" class="del-has-read btn" data-id="{{ $i->id }}">
+                                <form action="">
+                                    <button type="submit" class="has-read btn">
                                         <i class="fa fa-check" aria-hidden="true"></i>
                                     </button>
                                 </form>
@@ -96,14 +85,14 @@
                                     <i class="fa fa-star-o" aria-hidden="true"></i>
                                 </div>
                                 <div class="site_title_listview">
-                                    <!-- <a href={{ $i->url }} target="_blank">{{ $i->title  }}</a> -->
-                                    {{ $i->site()->first()->site_title }}
+                                    <!-- <a href={{ $i->article()->first()->url }} target="_blank">{{ $i->article()->first()->title  }}</a> -->
+                                    {{ $i->article()->first()->site()->first()->site_title }}
                                 </div>
                                 <div class="article_title_listview">
-                                    <!-- <a href="{{ $i->site()->first()->site_url }}" target="_blank">{{ $i->site()->first()->site_title }}</a> -->
-                                    {{ $i->title  }}
+                                    <!-- <a href="{{ $i->article()->first()->site()->first()->site_url }}" target="_blank">{{ $i->article()->first()->site()->first()->site_title }}</a> -->
+                                    {{ $i->article()->first()->title  }}
                                 </div>
-                                <div class="article_date">{{ date('H:i', strtotime($i->date)) }}</div>
+                                <div class="article_date">{{ date('H:i', strtotime($i->article()->first()->date)) }}</div>
                             </div>
                             
                         </li>
@@ -145,7 +134,7 @@
      });
      
      $(function(){
-        
+         
          $(".star-button").click(function(e){
              // 多重送信を防ぐため通信完了までボタンをdisableにする
              var button = $(this);
@@ -169,9 +158,7 @@
                  button.attr("disabled", false); 
              });
          });
-         
          $(".favorited").click(function(e){
-             
              var button = $(this);
              button.attr("disabled", true);
              e.preventDefault();
@@ -194,8 +181,7 @@
              }).always(function(){
                  button.attr("disabled", false);
              });
-         });    
-             
+         });
 
          $(".read-later").click(function(e){
              // 多重送信を防ぐため通信完了までボタンをdisableにする
@@ -247,60 +233,20 @@
                  button.attr("disabled", false);
              });
          });
-         $(".has-read").click(function(e){
-             var article_id = $(this).parent().data('id');
-             var button = $(this);
-             button.attr("disabled", true);
-             e.preventDefault();
+         
 
-             var user_id = {{ Auth::user()->id }};
-             var article_id = $(this).data('id');
-
-             $.ajax({
-                 dataType: 'json',
-                 type:'POST',
-                 url: '/has-read',
-                 data:{
-                     user_id: user_id,
-                     article_id: article_id
-                 }
-             }).done(function(){
-                 $('#' + article_id + ' .has-read-form').toggle(); 
-             }).fail(function(){
-                 alert('Error occurred!');
-             }).always(function(){
-                 button.attr("disabled", false);
-             });
+         $(".read-later").click(function(){
+             $(this).toggleClass('read-later-flg');
          });
-         $(".del-has-read").click(function(e){
+         $(".has-read").click(function(){
              var article_id = $(this).parent().data('id');
-             var button = $(this);
-             button.attr("disabled", true);
-             e.preventDefault();
+             $('#' + article_id + ' .article_wrap').toggleClass('has-read-flg');
 
-             var user_id = {{ Auth::user()->id }};
-             var article_id = $(this).data('id');
-
-             $.ajax({
-                 dataType: 'json',
-                 type:'POST',
-                 url: '/del-has-read',
-                 data:{
-                     user_id: user_id,
-                     article_id: article_id
-                 }
-             }).done(function(){
-                 $('#' + article_id + ' .has-read-form').toggle(); 
-             }).fail(function(){
-                 alert('Error occurred!');
-             }).always(function(){
-                 button.attr("disabled", false);
-             });
          });
      });
 
 
-    
+     
      //変数[addText]と[Num]を宣言
      var Num = 1;
      // var link = $articles->nextPageUrl();

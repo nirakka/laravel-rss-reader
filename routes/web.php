@@ -38,5 +38,12 @@ Route::post('/sites', 'SiteController@registerSite');
 Route::get('/sites_regs', 'SiteRegController@index');
 
 Route::post('/articles', 'FollowArticleController@followArticle');
-
 Route::post('/delete-fav', 'FollowArticleController@destroy');
+Route::get('/favorite', 'FollowArticleController@index');
+
+Route::post('/read-later', 'ReadLaterController@readLaterArticle');
+Route::post('/delete-later', 'ReadLaterController@destroy');
+Route::get('/read-later', 'ReadLaterController@index');
+
+Route::post('/has-read', 'HasReadController@hasRead');
+Route::post('/del-has-read', 'HasReadController@destroy');

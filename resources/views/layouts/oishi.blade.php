@@ -99,7 +99,7 @@
                       <dd>
                         <ul>
                           <li><a href=""><i class="fa fa-clock-o" aria-hidden="true"></i> あとで読む</a></li>
-                          <li><a href=""><i class="fa fa-star-o" aria-hidden="true"></i> お気に入り</a></li>
+                          <li><a href="/favorite"><i class="fa fa-star-o" aria-hidden="true"></i> お気に入り</a></li>
                         </ul>
                       </dd>
                     </dl>
@@ -183,7 +183,7 @@
             $('#view-changer > ul').tabs();
             });
         </script>
-
+        
         @show
 
     </body>
