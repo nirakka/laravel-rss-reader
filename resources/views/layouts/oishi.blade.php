@@ -147,7 +147,7 @@
                       <dt>設定</dt>
                       <dd>
                         <ul>
-                          <li><a href="">設定項目1</a></li>
+                          <li><a href="/sites_regs">購読サイト設定</a></li>
                           <li><a href="">設定項目2</a></li>
                           <li><a href="">設定項目3</a></li>
                           <li><a href="">設定項目4</a></li>

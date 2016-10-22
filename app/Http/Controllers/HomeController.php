@@ -183,7 +183,7 @@ class HomeController extends Controller
             if (is_null($sub)){
                 $query = new Article();
                 $query->title = $item->title;
-                $query->content = $item->summary;
+                $query->content = mb_strimwidth($item->summary, 0, 300);
                 $query->date = date("Y-m-d H:i:s",strtotime($item->issued));
                 $query->url = $item->link['href'];
                 $query->site_id = $site_id;
@@ -204,7 +204,7 @@ class HomeController extends Controller
                 $gNode = $item->children($nameSpace['dc']);
                 $query->title = $item->title;
                 $query->url = $item->link;
-                $query->content = $item->description;
+                $query->content = mb_strimwidth($item->description, 0, 300);
                 $query->date = date("Y-m-d H:i:s",strtotime($gNode->date));
                 $query->site_id = $site_id;
                 $query->save();
@@ -224,7 +224,7 @@ class HomeController extends Controller
                 $query->url	= $item->link;
                 $date	= $item->pubDate;
                 $query->date	= date("Y-m-d H:i:s",strtotime($date));
-                $query->content = strip_tags($item->description);
+                $query->content = mb_strimwidth(strip_tags($item->description), 0, 300);
                 $query->site_id = $site_id;
                 $query->save();
             }
