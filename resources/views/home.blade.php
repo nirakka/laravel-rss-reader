@@ -361,8 +361,11 @@
                                 }
 
                                  }).done(function(data){
+                                    var var1;
                                     console.log(data);
-                                    console.log(data.articles.data[1].url);
+                                    if (data.articles.data[i].id.indexOf(data.fav_article[i]) >= 0){
+                                        ;
+                                    }                                    
                                     pageNum = pageNum +1 ;
                                     //記事の末尾からアッペンド(pagination が初期値１５)
                                     var articleNum = 15;
@@ -376,10 +379,8 @@
 
                             for (i=0; i<15; i++, Num++)
                             {
-                                $('#magazinelist').append(
-                                        '<li><div class="article_magazine_content"><div class="article_title">'+data.articles.data[i].title+'</div><div class="article_content"><p class="textOverflow">'+data.articles.data[i].content+'</p></div><div class="article_footer clearfix"><span class="site_title">'+data.site_title_scroll[i]+'</span><span class="article_date">'+data.site_date_scroll[i]+'</span></div></div></li>');
 
-                            }
+                                $('#magazinelist').append('<li>yeey</li>');}
 
                              //処理が完了したら「Loading...」をfalseにする
                              obj.data("loading", false);

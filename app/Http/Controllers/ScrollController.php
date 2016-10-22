@@ -30,6 +30,17 @@ class ScrollController extends Controller{
         $user_reg_sites = Site::whereIn('id' , $user_reg_site_ids)->get();
 
         $articles = Article::whereIn('site_id', $user_reg_site_ids)->orderBy('date', 'desc')->paginate(15);
+
+        $fav_article_query = FollowArticle::where('user_id', '=', $id)->get();
+        $fav_article = $this->objectIdToArray($fav_article_query, 'article_id');
+
+        $read_later_query = ReadLater::where('user_id','=',$id)->get();
+        $read_later = $this->objectIdToArray($read_later_query, 'article_id');
+
+        $has_read_query = HasRead::where('user_id','=',$id)->get();
+        $has_read = $this->objectIdToArray($read_later_query, 'article_id');
+        
+
         $site_title_scroll = [];
         foreach ($articles as $article) {
             $site_title_scroll[] = $article->site()->first()->site_title;
@@ -43,7 +54,8 @@ class ScrollController extends Controller{
             $site_date_scroll[] = date("Y/m/d", strtotime($article->date));
         }
         
-        return response()->json(compact('site_title_scroll','articles','site_date_scroll'));
+
+        return response()->json(compact('site_title_scroll','articles','site_date_scroll','fav_article','read_later','has_read'));
         // return (
         //     [
         //         'title_name' =>$target_site_title ,
@@ -65,5 +77,14 @@ class ScrollController extends Controller{
         }
         return $site;
     }
+        private function objectIdToArray($data, $column){
+
+        $site = [];
+        foreach ($data as $i) {
+            $site[] = $i->$column;
+        }
+        return $site;
+    }
+
         
 }
