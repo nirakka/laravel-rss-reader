@@ -591,6 +591,20 @@ html, body{
     #articles_listview .article_title_listview {
       max-width: 60%;
     }
+}
+
+/* 効いてる */
+@media (max-width: 420px) {
+
+#header-buttons {
+	display: none;
+}
+
+#articles_listview .article_title_listview {
+  max-width: 50%;
+}
+
+}
 
 /* for signin page */
 
@@ -649,26 +663,4 @@ html, body{
   text-decoration: none;
   font-size: 12px;
   color: #ccc;
-}
-
-@media (max-width: 400px) {
-
-#header-buttons {
-  display: none;
-}
-
-
-}
-
-/* 効いてる */
-@media (max-width: 420px) {
-
-#header-buttons {
-	display: none;
-}
-
-#articles_listview .article_title_listview {
-  max-width: 50%;
-}
-
 }
