@@ -578,6 +578,26 @@ html, body{
 
 /* window幅調整用 css*/
 
+/* 効いてる */
+@media screen and (min-width: 801px) {
+    #articles_listview .article_title_listview {
+      max-width: 70%;
+    }
+}
+
+@media screen and (min-width: 581px) and (max-width: 800px) {
+    #articles_listview .article_title_listview {
+      max-width: 65%;
+    }
+}
+
+@media screen and (min-width: 421px) and (max-width: 580px) {
+    #articles_listview .article_title_listview {
+      max-width: 60%;
+    }
+}
+
+/* 効いてる */
 @media (max-width: 420px) {
 
 #header-buttons {
@@ -588,22 +608,4 @@ html, body{
   max-width: 50%;
 }
 
-}
-
-@media screen and (min-device-width: 421px) and (max-device-width: 580px) {
-    #articles_listview .article_title_listview {
-      max-width: 60%;
-    }
-}
-
-@media screen and (min-device-width: 581px) and (max-device-width: 800px) {
-    #articles_listview .article_title_listview {
-      max-width: 65%;
-    }
-}
-
-@media screen and (min-device-width: 800px) {
-    #articles_listview .article_title_listview {
-      max-width: 70%;
-    }
 }
