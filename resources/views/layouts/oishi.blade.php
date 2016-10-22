@@ -58,7 +58,9 @@
                         <a href="#my-menu" title="menu"><i class="fa fa-bars" aria-hidden="true"></i></a>
                     </div>
                     <div id="title-box">
-                        <h1 id="title">{{$title_name}}</h1>
+                        <div id="title-overflow">
+                            <h1 id="title">{{$title_name}}</h1>
+                        </div>
                         <span id="info-about-current-page">Information related this page.</span>
                     </div>
                     <div id="header-buttons">
@@ -206,8 +208,8 @@
                  type:'POST',
                  url: '/sites',
                  data:{
-                    _token: CSRF_TOKEN , 
-                    site_reg : siteLink 
+                    _token: CSRF_TOKEN ,
+                    site_reg : siteLink
                  },
                  statusCode: {
                    404: function () {

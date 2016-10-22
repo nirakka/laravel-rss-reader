@@ -93,7 +93,7 @@ html, body{
 #header #reload-button {
     float: right;
     font-size: 25px;
-  color: black;
+    color: black;
     text-align: center;
     width: 25px;
     margin: 10px 5px;
@@ -116,6 +116,18 @@ html, body{
 #header #title-box {
   float: left;
   margin: 8px 20px 10px 10px;
+  width: 60%;
+}
+
+#title-box #title-overflow {
+    overflow: hidden;
+    /* ▼改行を禁止した上で、はみ出る分量は「…」記号で省略 */
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#title-box h1 {
+    display: inline;
 }
 
 #header-buttons {
@@ -574,10 +586,12 @@ html, body{
 
 /* window幅調整用 css*/
 
-/* 効いてる */
 @media screen and (min-width: 801px) {
     #articles_listview .article_title_listview {
       max-width: 70%;
+    }
+    #header #title-box {
+        width: 65%;
     }
 }
 
@@ -585,25 +599,33 @@ html, body{
     #articles_listview .article_title_listview {
       max-width: 65%;
     }
+    #header #title-box {
+        width: 65%;
+    }
 }
 
 @media screen and (min-width: 421px) and (max-width: 580px) {
     #articles_listview .article_title_listview {
       max-width: 60%;
     }
+    #header #title-box {
+        width: 50%;
+    }
 }
 
-/* 効いてる */
 @media (max-width: 420px) {
 
-#header-buttons {
-	display: none;
-}
+    #header-buttons {
+    	display: none;
+    }
 
-#articles_listview .article_title_listview {
-  max-width: 50%;
-}
+    #articles_listview .article_title_listview {
+      max-width: 50%;
+    }
 
+    #header #title-box {
+        width: 70%;
+    }
 }
 
 /* for signin page */
