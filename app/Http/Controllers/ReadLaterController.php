@@ -57,7 +57,9 @@ class ReadLaterController extends Controller
     }
     
     public function readLaterArticle(Request $request){
-        $read_later = ReadLater::create($request->all());
+        $user = \Auth::user();
+        $user_id=$user->id;
+        $read_later = ReadLater::create(compact($user_id,$request->all()));
 
         return response()->json($read_later);
     }
