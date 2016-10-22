@@ -232,7 +232,7 @@ html, body{
 
   overflow: hidden;
   /* ▼改行を禁止した上で、はみ出る分量は「…」記号で省略 */
-  flow: ellipsis;
+  text-overflow: ellipsis;
   white-space: nowrap;
   margin: 4px 5px 6px 0;
   color: #aaa;
