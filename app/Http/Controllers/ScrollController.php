@@ -30,8 +30,20 @@ class ScrollController extends Controller{
         $user_reg_sites = Site::whereIn('id' , $user_reg_site_ids)->get();
 
         $articles = Article::whereIn('site_id', $user_reg_site_ids)->orderBy('date', 'desc')->paginate(15);
+        $site_title_scroll = [];
+        foreach ($articles as $article) {
+            $site_title_scroll[] = $article->site()->first()->site_title;
+            # code...
+        }
+
+        $site_date_scroll = [];
+
+        foreach ($articles as $article){
+            # code...
+            $site_date_scroll[] = date("Y/m/d", strtotime($article->date));
+        }
         
-        return response()->json($articles);
+        return response()->json(compact('site_title_scroll','articles','site_date_scroll'));
         // return (
         //     [
         //         'title_name' =>$target_site_title ,
