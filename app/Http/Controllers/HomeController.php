@@ -65,19 +65,6 @@ class HomeController extends Controller
                         'has_read' => $has_read,
                     ]);
 
-
-        $articles = Article::whereIn('site_id', $user_reg_site_ids)->orderBy('date', 'desc')->paginate(30);
-
-        return view('home',
-            [
-                'title_name' => 'All Articles' ,
-                'articles' => $articles ,
-                'user_reg_sites' => $user_reg_sites ,
-                'username' => $username ,
-                'useremail' => $useremail ,
-
-            ]);
-
     }
 
     
@@ -98,6 +85,15 @@ class HomeController extends Controller
         //get articles of target_site_id
         $articles = Article::where('site_id','=',  $target_site_id)->orderBy('date', 'desc')->paginate(30);
 
+        $fav_article_query = FollowArticle::where('user_id', '=', $id)->get();
+        $fav_article = $this->objectIdToArray($fav_article_query, 'article_id');
+
+        $read_later_query = ReadLater::where('user_id','=',$id)->get();
+        $read_later = $this->objectIdToArray($read_later_query, 'article_id');
+
+        $has_read_query = HasRead::where('user_id','=',$id)->get();
+        $has_read = $this->objectIdToArray($read_later_query, 'article_id');
+
 
         return view('home',
             [
@@ -106,6 +102,9 @@ class HomeController extends Controller
                 'user_reg_sites' => $user_reg_sites ,
                 'username' => $username ,
                 'useremail' => $useremail ,
+                'fav_article' => $fav_article ,
+                'read_later' => $read_later,
+                'has_read' => $has_read,
             ]);
     }
     public function oldhome()
