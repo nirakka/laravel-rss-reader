@@ -15,7 +15,13 @@ class SiteController extends Controller
     public function registerSite(SiteRequest $request){
         $url = $request->site_reg;
 
-        
+        if (Site::where('site_url', '=', $url)->exists()){
+            
+            $site_id = Site::where('site_url', '=', $url)->first()->id;
+            SiteReg::create(['user_id' => \Auth::user()->id, 'site_id' => $site_id]);
+
+            return 'success!';
+        }
         //        if (strpos($url, 'http://') === false || strpos($url, 'https://')) {
             //            $url =  'http://' . $url;            
             //}                                       

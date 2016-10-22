@@ -12,7 +12,7 @@
                         <div class="article_magazine_content" id="{{ $i->article()->first()->id }}">
                             <div class="has-read-flg">
                                 <!-- このaタグに記事のURLを挟めばOK -->
-                                <a href="{{ $i->url}}"  target="_blank">
+                                <a href="{{ $i->article()->first()->url }}"  target="_blank">
                                     <div class="article_wrap">
                                         <div class="article_title">
                                             {{ $i->article()->first()->title  }}
@@ -202,7 +202,7 @@
                  button.attr("disabled", false);
              });
          });
-
+         
          $(".read-later").click(function(e){
              // 多重送信を防ぐため通信完了までボタンをdisableにする
              var button = $(this);
@@ -212,6 +212,7 @@
              var user_id = {{ Auth::user()->id }};
              var article_id = $(this).data('id');
              //var art_id_sel = '#' + article_id + ' .read-later';
+
 
              $.ajax({
                  dataType: 'json',
@@ -227,7 +228,6 @@
                  button.attr("disabled", false);
              });
          });
-
          $(".read-later-flg").click(function(e){
 
              var button = $(this);
@@ -236,7 +236,6 @@
 
              var user_id = {{ Auth::user()->id }};
              var article_id = $(this).data('id');
-
              $.ajax({
                  dataType: 'json',
                  type:'POST',
@@ -246,14 +245,14 @@
                      article_id: article_id
                  }
              }).done(function(){
-                 $('#' + article_id + ' .read-late').toggle();
+
              }).fail(function(){
                  alert('Error occurred!');
              }).always(function(){
                  button.attr("disabled", false);
              });
          });
-
+         
          $(".has-read").click(function(e){
              var article_id = $(this).parent().data('id');
              var button = $(this);
@@ -273,6 +272,7 @@
                  }
              }).done(function(){
                  $('#' + article_id + ' .has-read-form').toggle();
+                 $('#' + article_id + ' .has-read-flg').toggleClass('article_magazine_hasread_wrapper');
              }).fail(function(){
                  alert('Error occurred!');
              }).always(function(){
@@ -298,12 +298,14 @@
                  }
              }).done(function(){
                  $('#' + article_id + ' .has-read-form').toggle();
+                 $('#' + article_id + ' .has-read-flg').toggleClass('article_magazine_hasread_wrapper');                 
              }).fail(function(){
                  alert('Error occurred!');
              }).always(function(){
                  button.attr("disabled", false);
              });
          });
+   
      });
 
 

@@ -12,4 +12,6 @@ class SiteReg extends Model
     public function siteInfo(){
         return $this->belongsTo('App\Site', 'site_id');
     }
+
+    protected $fillable = ['user_id' , 'site_id'];
 }
