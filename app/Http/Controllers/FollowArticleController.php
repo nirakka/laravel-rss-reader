@@ -10,6 +10,8 @@ use App\FollowArticle;
 
 use App\Site;
 use App\SiteReg;
+use App\ReadLater;
+use App\HasRead;
 
 class FollowArticleController extends Controller
 {
@@ -28,6 +30,12 @@ class FollowArticleController extends Controller
         $username=$user->name;
         $useremail=$user->email;
         $fav_article = $this->objectIdToArray($fav_article_query, 'article_id');
+
+        $read_later_query = ReadLater::where('user_id','=',$id)->get();
+        $read_later = $this->objectIdToArray($read_later_query, 'article_id');
+
+        $has_read_query = HasRead::where('user_id','=',$id)->get();
+        $has_read = $this->objectIdToArray($read_later_query, 'article_id');
         return view('fav',
                     [
                         'title_name' => 'Favorite',
@@ -35,7 +43,9 @@ class FollowArticleController extends Controller
                         'user_reg_sites' => $user_reg_sites ,
                         'username' => $username ,
                         'useremail' => $useremail ,
-                        'fav_article' => $fav_article
+                        'fav_article' => $fav_article,
+                        'read_later' => $read_later,
+                        'has_read' => $has_read,
                     ]
         );
     }

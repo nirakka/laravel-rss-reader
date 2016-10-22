@@ -9,6 +9,8 @@ use App\Http\Requests;
 use App\ReadLater;
 use App\SiteReg;
 use App\Site;
+use App\HasRead;
+use App\FollowArticle;
 
 class ReadLaterController extends Controller
 {
@@ -18,7 +20,7 @@ class ReadLaterController extends Controller
         $user = \Auth::user();
         $id = $user->id;
         $articles = ReadLater::where('user_id', '=', $id)->paginate('30');
-        $fav_article_query = ReadLater::where('user_id', '=', $id)->get();
+        $fav_article_query = FollowArticle::where('user_id', '=', $id)->get();
         $user_reg_site_ids = SiteReg::where('user_id', '=', $id)->get();
         $user_reg_site_ids = $this->objectIdToArray($user_reg_site_ids, 'site_id');
         $user_reg_sites = Site::whereIn('id' , $user_reg_site_ids)->get();
@@ -26,6 +28,12 @@ class ReadLaterController extends Controller
         $username=$user->name;
         $useremail=$user->email;
         $fav_article = $this->objectIdToArray($fav_article_query, 'article_id');
+        
+        $read_later_query = ReadLater::where('user_id','=',$id)->get();
+        $read_later = $this->objectIdToArray($read_later_query, 'article_id');
+
+        $has_read_query = HasRead::where('user_id','=',$id)->get();
+        $has_read = $this->objectIdToArray($read_later_query, 'article_id');
         return view('fav',
                     [
                         'title_name' => '後で読む',
@@ -33,7 +41,9 @@ class ReadLaterController extends Controller
                         'user_reg_sites' => $user_reg_sites ,
                         'username' => $username ,
                         'useremail' => $useremail ,
-                        'fav_article' => $fav_article
+                        'fav_article' => $fav_article,
+                        'read_later' => $read_later,
+                        'has_read' => $has_read,
                     ]
         );
     }

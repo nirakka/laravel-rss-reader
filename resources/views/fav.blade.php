@@ -52,17 +52,35 @@
 
                                 </form>
 
-                                <form action="">
-                                    </button>
-                                    <button type="submit" class="read-later btn">
+                                
+                                <form action="/read-later" method="POST" class="read-late" @if (in_array($i->id, $read_later)) style="display:none;" @endif>
+                                      {{ csrf_field() }}
+                                    <button type="submit" class="read-later btn" data-id="{{ $i->id }}">
                                         <i class="fa fa-clock-o" aria-hidden="true"></i>
                                     </button>
                                 </form>
-                                <form action="">
-                                    <button type="submit" class="has-read btn">
+                                <form action="/delete-later" method="POST" class="read-late" @if (!in_array($i->id, $read_later)) style="display:none;" @endif>
+                                      {{ csrf_field() }}
+                                    <button type="submit" class="btn read-later-flg" data-id="{{ $i->id }}">
+                                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                    </button>
+                                </form>
+                                
+                                <form action="/has-read" method="POST" class="has-read-form"  @if (in_array($i->id, $has_read)) style="display:none;" @endif>
+                                      {{ csrf_field() }}
+                                    <input type="hidden" name="user_id" value="1">
+                                    <input type="hidden" name="article_id" value="1">
+                                    <button type="submit" class="has-read btn" data-id="{{ $i->id }}">
                                         <i class="fa fa-check" aria-hidden="true"></i>
                                     </button>
                                 </form>
+                                <form action="/delete-has-read" method="POST" class="has-read-form"  @if (!in_array($i->id, $has_read)) style="display:none;" @endif>
+                                      {{ csrf_field() }}
+                                    <button type="submit" class="del-has-read btn" data-id="{{ $i->id }}">
+                                        <i class="fa fa-check" aria-hidden="true"></i>
+                                    </button>
+                                </form>
+
                             </div>
                             
                             <!-- 記事下のアクションボタンはココまで -->
@@ -234,14 +252,55 @@
              });
          });
          
-
-         $(".read-later").click(function(){
-             $(this).toggleClass('read-later-flg');
-         });
-         $(".has-read").click(function(){
+         $(".has-read").click(function(e){
              var article_id = $(this).parent().data('id');
-             $('#' + article_id + ' .article_wrap').toggleClass('has-read-flg');
+             var button = $(this);
+             button.attr("disabled", true);
+             e.preventDefault();
 
+             var user_id = {{ Auth::user()->id }};
+             var article_id = $(this).data('id');
+
+             $.ajax({
+                 dataType: 'json',
+                 type:'POST',
+                 url: '/has-read',
+                 data:{
+                     user_id: user_id,
+                     article_id: article_id
+                 }
+             }).done(function(){
+                 $('#' + article_id + ' .has-read-form').toggle(); 
+             }).fail(function(){
+                 alert('Error occurred!');
+             }).always(function(){
+                 button.attr("disabled", false);
+             });
+         });
+         $(".del-has-read").click(function(e){
+             var article_id = $(this).parent().data('id');
+             var button = $(this);
+             button.attr("disabled", true);
+             e.preventDefault();
+
+             var user_id = {{ Auth::user()->id }};
+             var article_id = $(this).data('id');
+
+             $.ajax({
+                 dataType: 'json',
+                 type:'POST',
+                 url: '/del-has-read',
+                 data:{
+                     user_id: user_id,
+                     article_id: article_id
+                 }
+             }).done(function(){
+                 $('#' + article_id + ' .has-read-form').toggle(); 
+             }).fail(function(){
+                 alert('Error occurred!');
+             }).always(function(){
+                 button.attr("disabled", false);
+             });
          });
      });
 

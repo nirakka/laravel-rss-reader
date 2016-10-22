@@ -40,7 +40,8 @@ class HomeController extends Controller
         $user_reg_site_ids = $this->objectIdToArray($user_reg_site_ids, 'site_id');
         $user_reg_sites = Site::whereIn('id' , $user_reg_site_ids)->get();
      
-        $articles = Article::whereIn('site_id', $user_reg_site_ids)->orderBy('date', 'desc')->paginate(15);
+
+        $articles = Article::whereIn('site_id', $user_reg_site_ids)->orderBy('date', 'desc')->paginate(30);
 
         $fav_article_query = FollowArticle::where('user_id', '=', $id)->get();
         $fav_article = $this->objectIdToArray($fav_article_query, 'article_id');
@@ -51,6 +52,7 @@ class HomeController extends Controller
         $has_read_query = HasRead::where('user_id','=',$id)->get();
         $has_read = $this->objectIdToArray($read_later_query, 'article_id');
         
+
         return view('home', 
                     [
                         'title_name' => 'All Articles' ,
@@ -80,7 +82,7 @@ class HomeController extends Controller
         $user_reg_sites = Site::whereIn('id' , $user_reg_site_ids)->get();
         $target_site_title = Site::where('id' , '=' , $target_site_id)->value('site_title');
         //get articles of target_site_id
-        $articles = Article::where('site_id','=',  $target_site_id)->orderBy('date', 'desc')->paginate(15);
+        $articles = Article::where('site_id','=',  $target_site_id)->orderBy('date', 'desc')->paginate(30);
         
         return view('home', 
             [
@@ -127,6 +129,34 @@ class HomeController extends Controller
         $end = microtime(true);
         return "success! 処理時間:" . ($end - $start) . "秒" ;
     }
+
+    public function tempArticle(Request $request){
+
+         $user = \Auth::user();
+        $id=$user->id;
+        
+        $user_reg_site_ids = SiteReg::where('user_id', '=', $id)->get();
+        $user_reg_site_ids = $this->articleIdToArray($user_reg_site_ids);
+
+        $user_reg_sites = Site::whereIn('id' , $user_reg_site_ids)->get();
+        $target_site_title = Site::where('id' , '=' , $target_site_id)->value('site_title');
+        //get articles of target_site_id
+        $articles = Article::where('site_id','=',  $target_site_id)->orderBy('date', 'desc')->paginate(15);
+        
+        return (
+            [
+                'title_name' =>$target_site_title ,
+                'articles' => $articles ,
+                'user_reg_sites' => $user_reg_sites ,
+                'username' => $username ,
+                'useremail' => $useremail ,
+            ]);
+
+        // return response()->json();
+        //return $request->all();
+
+    }
+
     private function storeAtom($xml, $site_id){
         $articles = $xml->entry;
         $site_title = $xml->title;
@@ -186,7 +216,9 @@ class HomeController extends Controller
         }
     }
 
+
     private function objectIdToArray($data, $column){
+
         $site = [];
         foreach ($data as $i) {
             $site[] = $i->$column;

@@ -23,7 +23,11 @@ Route::get('/home/pid={site_id}', 'HomeController@showArticlesofTargetSite');
 
 Route::get('/rss', 'HomeController@store');
 
+Route::get('/tempArticleGet','ScrollController@tempArticle');
+Route::get('/tempArticle', 'ScrollController@form');
+
 Route::get('/search','SearchController@index');
+
 
 //Route::post('/search','SearchController@showresult');
 

@@ -73,7 +73,6 @@
                 </div>
             </header>
 
-
     @yield('content')
 
 
@@ -108,12 +107,14 @@
                     <dt class="clearfix">
                         <span class="float-left">購読サイト一覧</span>
                         <input id="add-sites-edit" name="add-sites" style="display:none;" placeholder=" Feed's url">
-                        </form>
                         <i id="add-sites" class="fa fa-plus-square-o" aria-hidden="true"></i>
                     </dt>
                              <!-- 購読サイト追加部 終わり-->
                          <dd>
                         <ul>
+
+                                <li><a href="/home">All Articles</a></li>
+
                             @foreach( $user_reg_sites as $user_reg_site )
                                 <li><a href="/home/pid={{$user_reg_site->id}}">{{$user_reg_site->site_title}} (未読数出したい)</a></li>
                             @endforeach
@@ -153,8 +154,8 @@
                 </ul>
             </div>
         </div>
-
         @section('endbody')
+
 
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js" ></script>
 
@@ -165,10 +166,54 @@
         <script src="/js/jquery.bottom-1.0.js"></script>
 
         <!-- 購読サイト追加用のボックスを表示 -->
+
         <script type="text/javascript">
+
          $(document).ready(function() {
              $("#my-menu").mmenu();
          });
+
+         $("#add-sites-edit").keyup(function(event){
+         if(event.keyCode == 13){
+            var siteLink = document.getElementById("add-sites-edit").value;
+            // console.log(siteLink);
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+            $.ajax({
+                 dataType: 'json',
+                 type:'POST',
+                 url: '/sites',
+                 data:{
+                    _token: CSRF_TOKEN , 
+                    site_reg : siteLink 
+                 },
+                 statusCode: {
+                   404: function () {
+                       //do somethign with error 404
+                       alert('Error: 404: Could not contact server.');
+                   },
+                   500: function () {
+                       //do something with error 500
+                       alert('Error: 500: Server error occurred.');
+                   },
+                   200: function () {
+                       //do something with error 500
+                       alert('Success 200 : Successfully added.');
+                   }
+                 },
+                success: function(data) {
+                    alert('success');
+                },
+                failure: function(data) {
+                    alert('failed');
+                }
+
+                 }).done(function(){
+                    alert('Done!');
+                 });
+
+            }
+        });
 
         </script>
 
