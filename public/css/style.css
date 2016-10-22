@@ -273,10 +273,6 @@ html, body{
   height: 33px;
 }
 
-.article_magazine_content .action_buttons a {
-  color: black;
-}
-
 .article_magazine_content .action_buttons a:visited {
   color: black;
 }
@@ -297,14 +293,12 @@ html, body{
 }
 
 .article_magazine_content a{
-  text-decoration: none;
+    text-decoration: none;
+    color: black !important;
 }
 
-.article_magazine_content a {
-  color: black;
-}
 .article_magazine_content a:visited {
-  color: black;
+  color: black !important;
 }
 
 
@@ -554,6 +548,7 @@ html, body{
 }
 
 
+
 .btn {
     background-color: #fff;
     border: none;
@@ -607,4 +602,71 @@ html, body{
     #articles_listview .article_title_listview {
       max-width: 70%;
     }
+
+/* for signin page */
+
+#signin-box {
+  width: 80%;
+  max-width: 500px;
+  margin: 0 auto;
+  margin-top: 60px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 0 10px 10px 10px;
+}
+
+#signin-top{
+  border-bottom: 1px solid #ddd;
+  height: 30px;
+}
+
+#signin-title {
+  margin-top: 8px;
+  margin-left: 10px;
+  font-size:18px;
+  font-style: bold;
+}
+
+#signin-main p{
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 10px;
+  font-size: 15px;
+}
+
+#signin-box input[type=text] {
+  margin-top: 5px;
+  width: 98%;
+  font-size: 15px;
+}
+#signin-box input[type=password] {
+  margin-top: 5px;
+  width: 98%;
+  font-size: 15px;
+}
+
+
+#signin-box .email-inForm-text{
+}
+
+#signin-box .pass-inForm-text {
+  margin: ;
+}
+
+#signin-box .rememberMe {
+  font-size: 12px;
+}
+#signin-box a {
+  text-decoration: none;
+  font-size: 12px;
+  color: #ccc;
+}
+
+@media (max-width: 400px) {
+
+#header-buttons {
+  display: none;
+}
+
+
 }
