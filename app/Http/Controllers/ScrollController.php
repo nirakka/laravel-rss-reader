@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 use App\Article;
 use App\Site;
 use App\SiteReg;
+use App\HasRead;
 
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-
+use App\ReadLater;
 use App\FollowArticle;
 
 class ScrollController extends Controller{
@@ -32,13 +33,13 @@ class ScrollController extends Controller{
         $articles = Article::whereIn('site_id', $user_reg_site_ids)->orderBy('date', 'desc')->paginate(15);
 
         $fav_article_query = FollowArticle::where('user_id', '=', $id)->get();
-        $fav_article = $this->objectIdToArray($fav_article_query, 'article_id');
+        $fav_article_ob = $this->objectIdToArray($fav_article_query, 'article_id');
 
         $read_later_query = ReadLater::where('user_id','=',$id)->get();
-        $read_later = $this->objectIdToArray($read_later_query, 'article_id');
+        $read_later_ob = $this->objectIdToArray($read_later_query, 'article_id');
 
         $has_read_query = HasRead::where('user_id','=',$id)->get();
-        $has_read = $this->objectIdToArray($read_later_query, 'article_id');
+        $has_read_ob = $this->objectIdToArray($read_later_query, 'article_id');
         
 
         $site_title_scroll = [];
@@ -48,9 +49,27 @@ class ScrollController extends Controller{
         }
 
         $site_date_scroll = [];
+        $has_read = [];
+        $read_later = [];
+        $fav_article = [];
+        foreach ($has_read_ob as $i) {
+        $has_read [] = $i;
+            # code...
+        }
+
+        foreach ($read_later_ob as $i) {
+        $read_later [] = $i;
+            # code...
+        }
+
+foreach ($fav_article_ob as $i) {
+        $fav_article [] = $i;
+    # code...
+}
 
         foreach ($articles as $article){
             # code...
+
             $site_date_scroll[] = date("Y/m/d", strtotime($article->date));
         }
         

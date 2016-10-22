@@ -363,7 +363,7 @@
                                  }).done(function(data){
                                     var var1;
                                     console.log(data);
-                                    if (data.articles.data[i].id.indexOf(data.fav_article[i]) >= 0){
+                                    if (data.articles.data[0].id.indexOf(data.fav_article[0]) >= 0){
                                         ;
                                     }                                    
                                     pageNum = pageNum +1 ;
