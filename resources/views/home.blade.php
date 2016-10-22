@@ -175,14 +175,6 @@
                  $('#' + article_id + ' .fav').toggle();
              }).always(function(){
                  button.attr("disabled", false); 
-
-             }).done(function(data){
-                console.log(data);
-                 $(".star-button").toggleClass('favorited');
-                 $(".star-button").find('i').toggleClass('fa-star-o');
-
-                 $(".star-button").find('i').toggleClass('fa-star'); 
-
              });
          });
          
