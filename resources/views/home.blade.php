@@ -11,30 +11,32 @@
                     <li>
                         <div class="article_magazine_content" id="{{ $i->id }}">
                             <!-- このaタグに記事のURLを挟めばOK -->
-                            <a href="{{ $i->url}}"  target="_blank">
-                                <div class="article_wrap">
-                                    <div class="article_title">
-                                        {{ $i->title  }}
+                            <div class="article_magazine_hasread_wrapper">
+                                <a href="{{ $i->url}}"  target="_blank">
+                                    <div class="article_wrap">
+                                        <div class="article_title">
+                                            {{ $i->title  }}
+                                        </div>
+                                        <!-- url は別に表示しなくても良いかな？
+                                             <div class="article_url">http://example.com/index.html</div>
+                                           -->
+                                        <div class="article_content">
+                                            <p class="textOverflow">
+                                                {{ $i->content  }}
+                                            </p>
+                                        </div>
+                                        <div class="article_footer clearfix">
+                                            <span class="site_title">{{ $i->site()->first()->site_title }}</span>
+                                            <span class="article_date">{{ date('Y/m/d', strtotime($i->date)) }}</span>
+                                        </div>
                                     </div>
-                                    <!-- url は別に表示しなくても良いかな？
-                                         <div class="article_url">http://example.com/index.html</div>
-                                       -->
-                                    <div class="article_content">
-                                        <p class="textOverflow">
-                                            {{ $i->content  }}
-                                        </p>
-                                    </div>
-                                    <div class="article_footer clearfix">
-                                        <span class="site_title">{{ $i->site()->first()->site_title }}</span>
-                                        <span class="article_date">{{ date('Y/m/d', strtotime($i->date)) }}</span>
-                                    </div>
-                                </div>
-                            </a>
+                                </a>
+                            </div>
                             <!-- 記事下のアクションボタンはココから -->
                             <!-- 正直アイコンは何でも良いけど、とりあえず -->
 
-                            <div class="action_buttons" data-id="{{ $i->id }}" style="display:inline;">
-                                
+                            <div class="action_buttons" data-id="{{ $i->id }}">
+
                                 <form action="/articles" method="POST" class="fav test1" @if (in_array($i->id, $fav_article)) style="display:none;" @endif>
                                     {{ csrf_field() }}
                                     <button type="submit" class="star-button btn" data-id="{{ $i->id }}">
@@ -61,7 +63,7 @@
                                         <i class="fa fa-clock-o" aria-hidden="true"></i>
                                     </button>
                                 </form>
-                                
+
                                 <form action="/has-read" method="POST" class="has-read-form test3"  @if (in_array($i->id, $has_read)) style="display:none;" @endif>
                                     {{ csrf_field() }}
                                     <input type="hidden" name="user_id" value="1">
@@ -70,7 +72,6 @@
                                         <i class="fa fa-check" aria-hidden="true"></i>
                                     </button>
                                 </form>
-
                                 <form action="/delete-has-read" method="POST" class="has-read-form test3"  @if (!in_array($i->id, $has_read)) style="display:none;" @endif>
                                     {{ csrf_field() }}
                                     <button type="submit" class="del-has-read btn" data-id="{{ $i->id }}">
@@ -175,11 +176,12 @@
                  $('#' + article_id + ' .fav').toggle();
              }).always(function(){
                  button.attr("disabled", false); 
+
              });
          });
-         
+
          $(".favorited").click(function(e){
-             
+
              var button = $(this);
              button.attr("disabled", true);
              e.preventDefault();
@@ -196,21 +198,21 @@
                      article_id: article_id
                  }
              }).done(function(){
-                 $('#' + article_id + ' .fav').toggle(); 
+                 $('#' + article_id + ' .fav').toggle();
              }).fail(function(){
                  alert('Error occurred!');
              }).always(function(){
                  button.attr("disabled", false);
              });
-         });    
-             
+         });
+
 
          $(".read-later").click(function(e){
              // 多重送信を防ぐため通信完了までボタンをdisableにする
              var button = $(this);
              button.attr("disabled", true);
              e.preventDefault();
-             
+
              var user_id = {{ Auth::user()->id }};
              var article_id = $(this).data('id');
              //var art_id_sel = '#' + article_id + ' .read-later';
@@ -227,12 +229,12 @@
              }).done(function(){
                  $('#' + article_id + ' .read-late').toggle();
              }).always(function(){
-                 button.attr("disabled", false); 
+                 button.attr("disabled", false);
              });
          });
 
          $(".read-later-flg").click(function(e){
-             
+
              var button = $(this);
              button.attr("disabled", true);
              e.preventDefault();
@@ -249,7 +251,7 @@
                      article_id: article_id
                  }
              }).done(function(){
-                 $('#' + article_id + ' .read-late').toggle(); 
+                 $('#' + article_id + ' .read-late').toggle();
              }).fail(function(){
                  alert('Error occurred!');
              }).always(function(){
@@ -274,7 +276,7 @@
                      article_id: article_id
                  }
              }).done(function(){
-                 $('#' + article_id + ' .has-read-form').toggle(); 
+                 $('#' + article_id + ' .has-read-form').toggle();
              }).fail(function(){
                  alert('Error occurred!');
              }).always(function(){
@@ -299,7 +301,7 @@
                      article_id: article_id
                  }
              }).done(function(){
-                 $('#' + article_id + ' .has-read-form').toggle(); 
+                 $('#' + article_id + ' .has-read-form').toggle();
              }).fail(function(){
                  alert('Error occurred!');
              }).always(function(){
@@ -323,7 +325,7 @@
          $(window).bottom();
          $(window).bind("bottom", function() {
 
-             
+
              // var obj = $(this);
 
              // //「loading」がfalseの時に実行する
@@ -360,9 +362,9 @@
              //ToDo Scrolling bar
              console.log("Performing scroll");
 
-             
+
              var user_id = {{ Auth::user()->id }};
-             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');  
+             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
              $.ajax({
                  dataType: 'json',
@@ -388,7 +390,7 @@
                     var obj = $(this);
 
                      //「loading」がfalseの時に実行する
-                     if (!obj.data("loading")) 
+                     if (!obj.data("loading"))
                      {
 
                          //「loading」をtrueにする
@@ -398,13 +400,13 @@
                          $('#magazinelist').append('<li class="load-li" style="text-align: center;"><img src="/img/load.gif"></li>');
 
                          //追加する処理を記述
-                         setTimeout(function() 
+                         setTimeout(function()
                          {
                              $('#magazinelist li:last').remove();
 
 
 
-                            for (i=0; i<15; i++, Num++) 
+                            for (i=0; i<15; i++, Num++)
                             {
                                 $('#magazinelist').append(
                                         '<li><div class="article_magazine_content"><div class="article_title">'+data.data[i].title+'</div><div class="article_content"><p class="textOverflow">'+data.data[i].content+'</p></div><div class="article_footer clearfix"><span class="site_title">'+data.data[i].url+'</span><span class="article_date">{{ date("Y/m/d", strtotime('+data.data[i].date+')) }}</span></div></div></li>');
@@ -417,7 +419,7 @@
 
 
                  });
-     
+
          });
 
 
