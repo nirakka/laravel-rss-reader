@@ -43,5 +43,14 @@ class SiteRegController extends Controller
         }
         return $site;
     }
+
+    public function destroy(Request $request){
+        $delete = SiteReg::where('user_id', '=', $request->user_id)
+                ->where('site_id', '=', $request->site_id)
+                ->delete();
+
+        return response()->json($delete);
+
+    }
     
 }

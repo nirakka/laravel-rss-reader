@@ -44,6 +44,7 @@ Route::get('/sites', 'SiteController@showRegisterForm');
 Route::post('/sites', 'SiteController@registerSite');
 
 Route::get('/sites_regs', 'SiteRegController@index');
+Route::post('/sites_regs', 'SiteRegController@destroy');
 
 Route::post('/articles', 'FollowArticleController@followArticle');
 Route::post('/delete-fav', 'FollowArticleController@destroy');
