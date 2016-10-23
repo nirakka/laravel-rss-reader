@@ -49,7 +49,7 @@ class SiteRegController extends Controller
                 ->where('site_id', '=', $request->site_id)
                 ->delete();
 
-        return response()->json($delete);
+        return redirect('sites_regs');
 
     }
     
