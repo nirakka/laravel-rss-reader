@@ -1,6 +1,7 @@
 @extends('layouts.guest')
 @section('Title')
     <h1 id="title">Login Page</h1>
+    </div>
 
 @endsection
 @section('content')
