@@ -152,30 +152,11 @@
                           <li><a href="/sites_regs">購読サイト設定</a></li>
                           <li><a href="">設定項目2</a></li>
                           <li><a href="">設定項目3</a></li>
-                          <li><a href="">設定項目4</a></li>
+                          <li><a href="/logout">ログアウト</a></li>
                         </ul>
                       </dd>
                     </dl>
                 </div>
-                <ul>
-                    <li><a href="">メニュー1</a></li>
-                    <li><a href="">メニュー2</a>
-                      <ul>
-                        <li><a href="#about/team/management">Management</a>
-                            <ul>
-                                <li><a href="#about/team/management">Management</a></li>
-                                <li><a href="#about/team/sales">Sales</a></li>
-                                <li><a href="#about/team/development">Development</a></li>
-                            </ul>
-                         </li>
-                         <li><a href="#about/team/sales">Sales</a></li>
-                         <li><a href="#about/team/development">Development</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="">メニュー3</a></li>
-                    <li><a href="">メニュー4</a></li>
-                    <li><a href="">メニュー5</a></li>
-                </ul>
             </div>
         </div>
         @section('endbody')
