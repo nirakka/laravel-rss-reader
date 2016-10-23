@@ -43,12 +43,13 @@
             <header id="header">
                 <div id="header-innner-wrap">
                     <div id="menu-button">
-                        <a href="#my-menu" title="menu"><i class="fa fa-bars" aria-hidden="true"></i></a>
+                        <img src=/favicon/favicon-196x196.png alt=RSS_Reader_icon >
                     </div>
                     <div id="title-box">
-                       @yield('Title')
-                    </div>
+                        @yield('Title')
+
                     
+
                 </div>
             </header>
             <div id="header-back">
