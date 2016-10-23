@@ -117,24 +117,7 @@
 
                         </li>
                     @endforeach
-                    <li>
-                        <a href="">
-                            <div class="article_list_content clearfix">
-                                <div class="read_or_unread">
-                                </div>
-                                <div class="favo-icon">
-                                    <i class="fa fa-star-o" aria-hidden="true"></i>
-                                </div>
-                                <div class="site_title_listview">
-                                    はじめてのWEBサイトはじめてのWEBサイト
-                                </div>
-                                <div class="article_title_listview">
-                                    はじめての記事 30（リストビュー用でござんす）はじめての記事 30（リストビュー用でござんす）
-                                </div>
-                                <div class="article_date">27/09/2015</div>
-                            </div>
-                        </a>
-                    </li>
+                    
                 </ul>
             </div>
         </div>
