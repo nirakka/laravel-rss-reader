@@ -57,3 +57,6 @@ Route::get('/read-later', 'ReadLaterController@index');
 
 Route::post('/has-read', 'HasReadController@hasRead');
 Route::post('/del-has-read', 'HasReadController@destroy');
+
+Route::get('/edit-view', 'UserController@editDefaultViewType');
+Route::post('/edit-view', 'UserController@updateDefaultViewType');

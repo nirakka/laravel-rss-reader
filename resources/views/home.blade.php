@@ -482,12 +482,17 @@
 
     <!-- css 切り替え用 スクリプト -->
     <script type="text/javascript">
-    var flag = 0; // 0: magazine_view 1: list_view
-    function listViewMode() {
-        document.getElementById("header-innner-wrap").style.maxWidth="90%";
-        document.getElementById("header-innner-wrap").style.maxWidth="90%";
-        document.getElementById("wrap").style.maxWidth="95%";
-        document.getElementById("wrap").style.width="95%";
+     var flag = {{ \Auth::user()->view_type }}; // 0: magazine_view 1: list_view
+     if (flag == 0){
+         listViewMode();
+     } else {
+         magazineViewMode();
+     }
+     function listViewMode() {
+         document.getElementById("header-innner-wrap").style.maxWidth="90%";
+         document.getElementById("header-innner-wrap").style.maxWidth="90%";
+         document.getElementById("wrap").style.maxWidth="95%";
+         document.getElementById("wrap").style.width="95%";
         flag = 1;
         console.log("flag = "+flag);
     }

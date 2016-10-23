@@ -7,14 +7,18 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\SiteReg;
 use App\Site;
-class SiteRegController extends Controller
+use App\User;
+class UserController extends Controller
 {
+    //
+    protected $table = 'users';
 
-    public function index(){
+    public function editDefaultViewType(){
         $user_id = \Auth::user()->id;
         $site_reg = SiteReg::where('user_id', '=', $user_id)->get();
         $user = \Auth::user();
         $id = $user->id;
+
         
         $user_reg_site_ids = SiteReg::where('user_id', '=', $id)->get();
         $user_reg_site_ids = $this->objectIdToArray($user_reg_site_ids, 'site_id');
@@ -23,16 +27,15 @@ class SiteRegController extends Controller
         $username=$user->name;
         $useremail=$user->email;
         
-        return view('site_reg.site_list',
+        return view('editViewType',
                     [
-                        'title_name' => '購読サイト設定',
+                        'title_name' => '表示設定',
                         'user_reg_sites' => $user_reg_sites ,
                         'username' => $username ,
                         'useremail' => $useremail ,
-                        'site_reg' => $site_reg,
+
                     ]
         );
-
     }
 
     private function objectIdToArray($data, $column){
@@ -43,13 +46,12 @@ class SiteRegController extends Controller
         return $site;
     }
 
-    public function destroy(Request $request){
-        $delete = SiteReg::where('user_id', '=', $request->user_id)
-                ->where('site_id', '=', $request->site_id)
-                ->delete();
+    public function updateDefaultViewType(Request $request){
+        
+        $user = User::where('id', '=', \Auth::user()->id)->first();
+        $user->view_type = $request->view_type;
+        $user->save();
 
-        return redirect('sites_regs');
-
+        return 'success';
     }
-    
 }
