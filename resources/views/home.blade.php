@@ -174,7 +174,7 @@
                  }
              }).done(function(){
                  $('#' + article_id + ' .fav').toggle();
-                 console.log("done toggle");
+                 console.log("light up done toggle");
              }).always(function(){
                  button.attr("disabled", false); 
 
@@ -199,7 +199,7 @@
                      article_id: article_id
                  }
              }).done(function(){
-                 console.log('yeeeee');
+                 console.log('light  down done togle');
                  $('#' + article_id + ' .fav').toggle();
              }).fail(function(){
                  alert('Error occurred!');
@@ -389,9 +389,6 @@
                                 }
 
                                  }).done(function(data){
-                                    var var1;
-                                    var1='style="display:none"';
-                                    console.log(var1);
                                     console.log(data);
 
                                     pageNum = pageNum +1 ;
@@ -414,6 +411,8 @@
                                 if(contains.call(data.fav_article,data.articles.data[i].id)){
 
                                     favarticle1='style="display:none"';
+                                    console.log("favarticle1=");
+                            console.log(favarticle1);
                                     favarticle2='';
                                 }
                                 else {favarticle1='';
@@ -436,7 +435,7 @@
 
 
                                
-                $('#magazinelist').append('<li><div class="article_magazine_content" id="'+data.articles.data[i].id+'"><div class="has-read-flg"><a href=""target="_blank"><div class="article_wrap"><div class="article_title">'+data.articles.data[i].title+'</div><div class="article_content"><p class="textOverflow">'+data.articles.data[i].content+'</p></div><div class="article_footerclearfix"><span class="site_title">'+data.site_title_scroll[i]+'</span><span class="article_date" >'+data.site_date_scroll[i]+'</span></div></div></a></div><div class="action_buttons" data-id="'+data.articles.data[i].id+'"> <form action="/articles" method="POST" class="fav test1" '+favarticle1+'>{{csrf_field()}}<button type="submit" class="star-button btn" data-id="'+data.articles.data[i].id+'"><i class="fa fa-star-o" aria-hidden="true"></i></button></form><form action="/delete-fav" method="POST" class="fav test1" '+favarticle2+'>{{csrf_field()}}<button type="submit" class="favorited btn" data-id="'+data.articles.data[i].id+'"><i class="fa fa-star" aria-hidden="true"></i></button></form><form action="/read-later" method="POST" class="read-late test2" '+readLater1+'>{{csrf_field()}}<button type="submit" class="read-later btn" data-id="'+data.articles.data[i].id+'"><i class="fa fa-clock-o" aria-hidden="true"></i></button></form><form action="/delete-later" method="POST" class="read-late test2" '+readLater2+'>{{csrf_field()}}<button type="submit" class="btn read-later-flg" data-id="'+data.articles.data[i].id+'"><i class="fa fa-clock-o" aria-hidden="true"></i></button></form><form action="/has-read" method="POST" class="has-read-form test3" '+hasRead1+'>{{csrf_field()}}<input type="hidden" name="user_id" value="1"><input type="hidden" name="article_id" value="1"><button type="submit" class="has-read btn" data-id="'+data.articles.data[i].id+'"><i class="fa fa-check" aria-hidden="true"></i></button></form><form action="/delete-has-read" method="POST" class="has-read-form test3" '+hasRead2+'>{{csrf_field()}}<button type="submit" class="del-has-read btn" data-id="'+data.articles.data[i].id+'"><i class="fa fa-check" aria-hidden="true"></i></button></form></div></div></li>');
+                 $('#magazinelist').append('<li><div class="article_magazine_content" id="'+data.articles.data[i].id+'"><div class="has-read-flg"><a href="'+data.articles.data[i].url+'" target="_blank"><div class="article_wrap"><div class="article_title">'+data.articles.data[i].title+'</div><div class="article_content"><p class="textOverflow">'+data.articles.data[i].content+'</p></div><div class="article_footerclearfix"><span class="site_title">'+data.site_title_scroll[i]+'</span><span class="article_date" >'+data.site_date_scroll[i]+'</span></div></div></a></div><div class="action_buttons" data-id="'+data.articles.data[i].id+'"> <form action="/articles" method="POST" class="fav test1" '+favarticle1+'>{{csrf_field()}}<button type="submit" class="star-button btn" data-id="'+data.articles.data[i].id+'"><i class="fa fa-star-o" aria-hidden="true"></i></button></form><form action="/delete-fav" method="POST" class="fav test1" '+favarticle2+'>{{csrf_field()}}<button type="submit" class="favorited btn" data-id="'+data.articles.data[i].id+'"><i class="fa fa-star" aria-hidden="true"></i></button></form><form action="/read-later" method="POST" class="read-late test2" '+readLater1+'>{{csrf_field()}}<button type="submit" class="read-later btn" data-id="'+data.articles.data[i].id+'"><i class="fa fa-clock-o" aria-hidden="true"></i></button></form><form action="/delete-later" method="POST" class="read-late test2" '+readLater2+'>{{csrf_field()}}<button type="submit" class="btn read-later-flg" data-id="'+data.articles.data[i].id+'"><i class="fa fa-clock-o" aria-hidden="true"></i></button></form><form action="/has-read" method="POST" class="has-read-form test3" '+hasRead1+'>{{csrf_field()}}<input type="hidden" name="user_id" value="1"><input type="hidden" name="article_id" value="1"><button type="submit" class="has-read btn" data-id="'+data.articles.data[i].id+'"><i class="fa fa-check" aria-hidden="true"></i></button></form><form action="/delete-has-read" method="POST" class="has-read-form test3" '+hasRead2+'>{{csrf_field()}}<button type="submit" class="del-has-read btn" data-id="'+data.articles.data[i].id+'"><i class="fa fa-check" aria-hidden="true"></i></button></form></div></div></li>');
                                 }
 
 
