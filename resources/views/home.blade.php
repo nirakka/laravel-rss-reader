@@ -155,7 +155,7 @@
 
      $(function(){
 
-         $(".star-button").click(function(e){
+         $(".star-button").on('click', function(e){
              // 多重送信を防ぐため通信完了までボタンをdisableにする
              var button = $(this);
              button.attr("disabled", true);
@@ -180,7 +180,7 @@
              });
          });
 
-         $(".favorited").click(function(e){
+         $(".favorited").on('click',function(e){
 
              var button = $(this);
              button.attr("disabled", true);
@@ -207,7 +207,7 @@
          });
 
 
-         $(".read-later").click(function(e){
+         $(".read-later").on('click',function(e){
              // 多重送信を防ぐため通信完了までボタンをdisableにする
              var button = $(this);
              button.attr("disabled", true);
@@ -233,7 +233,7 @@
              });
          });
 
-         $(".read-later-flg").click(function(e){
+         $(".read-later-flg").on('click',function(e){
 
              var button = $(this);
              button.attr("disabled", true);
@@ -258,7 +258,7 @@
                  button.attr("disabled", false);
              });
          });
-         $(".has-read").click(function(e){
+         $(".has-read").on('click',function(e){
              var article_id = $(this).parent().data('id');
              var button = $(this);
              button.attr("disabled", true);
@@ -284,7 +284,7 @@
                  button.attr("disabled", false);
              });
          });
-         $(".del-has-read").click(function(e){
+         $(".del-has-read").on('click',function(e){
              var article_id = $(this).parent().data('id');
              var button = $(this);
              button.attr("disabled", true);

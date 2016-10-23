@@ -247,10 +247,23 @@
         <script type="text/javascript" src="/js/ui.core.js"></script>
         <script type="text/javascript" src="/js/ui.tabs.js"></script>
         <script type="text/javascript">
-            $(function() {
-            /* selected: N で初期の番号指定 */
-            $('#view-changer > ul').tabs();
-            });
+         $(function() {
+             /* selected: N で初期の番号指定 */
+             $('#view-changer > ul').tabs();
+         });
+         
+         $("#reload-button a").click(function(e){
+            
+             $.ajax({
+                 dataType: 'json',
+                 type:'get',
+                 url: '/rss',
+             }).done(function(){
+                 windlow.location = '/home';
+             }).always(function(){
+
+             });
+         });
         </script>
 
         @show
