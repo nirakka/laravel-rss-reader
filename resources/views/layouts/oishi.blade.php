@@ -233,14 +233,13 @@
              $('#view-changer > ul').tabs();
          });
          
-         $("#reload-button a").click(function(e){
+         $("#reload-button").on('click',function(e){
             
              $.ajax({
-                 dataType: 'json',
                  type:'get',
                  url: '/rss',
              }).done(function(){
-                 windlow.location = '/home';
+                 window.location = '/home';
              }).always(function(){
 
              });
