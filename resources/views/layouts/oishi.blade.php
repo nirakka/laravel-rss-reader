@@ -230,7 +230,7 @@
         <script type="text/javascript">
          $(function() {
              /* selected: N で初期の番号指定 */
-             $('#view-changer > ul').tabs();
+             $('#view-changer > ul').tabs({selected:1});
          });
          
          $("#reload-button").on('click',function(e){
