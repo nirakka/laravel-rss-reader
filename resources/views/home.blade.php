@@ -153,9 +153,9 @@
          }
      });
 
-     $(function(){
+//     $(function(){
 
-         $(".star-button").on('click', function(e){
+         $("#magazinelist").on('click','.star-button', function(e){
              // 多重送信を防ぐため通信完了までボタンをdisableにする
              var button = $(this);
              button.attr("disabled", true);
@@ -180,7 +180,7 @@
              });
          });
 
-         $(".favorited").on('click',function(e){
+         $("#magazinelist").on('click', '.favorited', function(e){
 
              var button = $(this);
              button.attr("disabled", true);
@@ -198,6 +198,7 @@
                      article_id: article_id
                  }
              }).done(function(){
+                 console.log('yeeeee');
                  $('#' + article_id + ' .fav').toggle();
              }).fail(function(){
                  alert('Error occurred!');
@@ -207,7 +208,7 @@
          });
 
 
-         $(".read-later").on('click',function(e){
+         $("#magazinelist").on('click','.read-later',function(e){
              // 多重送信を防ぐため通信完了までボタンをdisableにする
              var button = $(this);
              button.attr("disabled", true);
@@ -233,7 +234,7 @@
              });
          });
 
-         $(".read-later-flg").on('click',function(e){
+         $("#magazinelist").on('click','.read-later-flg',function(e){
 
              var button = $(this);
              button.attr("disabled", true);
@@ -258,7 +259,7 @@
                  button.attr("disabled", false);
              });
          });
-         $(".has-read").on('click',function(e){
+         $("#magazinelist").on('click','.has-read',function(e){
              var article_id = $(this).parent().data('id');
              var button = $(this);
              button.attr("disabled", true);
@@ -284,7 +285,7 @@
                  button.attr("disabled", false);
              });
          });
-         $(".del-has-read").on('click',function(e){
+         $("#magazinelist").on('click','.del-has-read',function(e){
              var article_id = $(this).parent().data('id');
              var button = $(this);
              button.attr("disabled", true);
@@ -310,7 +311,7 @@
                  button.attr("disabled", false);
              });
          });
-     });
+//     });
 
 
 
