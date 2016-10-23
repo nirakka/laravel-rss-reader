@@ -1,4 +1,11 @@
 @extends('layouts.guest')
+@section('Title')
+    <h1 id="title">RSS READER</h1>
+	</div>
+	<div class="header-login-button-wrap">
+		<p class="header-login-button"><button onClick="location.href='/login'">Log in</button></p>
+	</div>
+@endsection
 
 @section('content')
 

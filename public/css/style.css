@@ -42,13 +42,20 @@ html, body{
 #header-back
 {
     height: 60px;              /* 縦幅140px */
-    background: black;
 }
 
 #header-innner-wrap {
+    position: relative;
     margin: 0 auto;
     max-width: 620px;
     background: #fff;
+}
+
+#menu-button img {
+    position: absolute;
+    width: 40px; height: 40px;
+    top: 0px;                   /* 位置(上0px) */
+    left: 10px;
 }
 
 #header {
@@ -624,7 +631,7 @@ html, body{
     }
 
     #header #title-box {
-        width: 70%;
+        width: 55%;
     }
 }
 
@@ -707,4 +714,23 @@ html, body{
 
 #signin-box .submit-button {
 
+}
+
+.header-login-button-wrap {
+    float: right;
+    margin-right: 10px;
+    padding: 3px;
+}
+.header-login-button button{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    padding: 0;
+    appearance: none;
+    width: 50px;
+    height: 30px;
+    font-size: 13px;
+    color: #444;
+    margin: 0 auto;
 }
