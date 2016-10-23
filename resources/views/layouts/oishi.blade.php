@@ -140,7 +140,7 @@
                                 <li><a href="/home">All Articles</a></li>
 
                             @foreach( $user_reg_sites as $user_reg_site )
-                                <li><a href="/home/pid={{$user_reg_site->id}}">{{$user_reg_site->site_title}} (未読数出したい)</a></li>
+                                <li><a href="/home/pid={{$user_reg_site->id}}">{{$user_reg_site->site_title}}</a></li>
                             @endforeach
                         </ul>
                       </dd>
@@ -232,9 +232,9 @@
              /* selected: N で初期の番号指定 */
              $('#view-changer > ul').tabs();
          });
-         
+
          $("#reload-button a").click(function(e){
-            
+
              $.ajax({
                  dataType: 'json',
                  type:'get',
