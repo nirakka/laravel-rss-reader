@@ -387,6 +387,14 @@ html, body{
   padding:10px;
     list-style: none;
 }
+
+#listlist {
+  color:black !important;
+}
+
+#listlist a{
+  color: black;
+}
 #listlist li{
   font-size:14px;
   line-height:1.5em;
@@ -607,7 +615,7 @@ html, body{
 
 @media screen and (min-width: 801px) {
     #articles_listview .article_title_listview {
-      max-width: 70%;
+      max-width: 65%;
     }
     #header #title-box {
         width: 65%;
