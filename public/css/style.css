@@ -293,7 +293,7 @@ html, body{
 }
 
 .article_magazine_content .action_buttons a:visited {
-  color: black;
+  color: #aaa;
 }
 
 .article_magazine_content .action_buttons .fa-star-o {
@@ -311,13 +311,18 @@ html, body{
   margin-right: 10%;
 }
 
+.article_magazine_content .action_buttons button:active{
+    outline: 0;
+    border: none;
+}
+
 .article_magazine_content a{
     text-decoration: none;
     color: black !important;
 }
 
 .article_magazine_content a:visited {
-  color: black !important;
+    color: black !important;
 }
 
 
@@ -581,9 +586,16 @@ html, body{
     cursor:pointer;
 }
 
-.favorited, .read-later-flg{
-    color:Gold;
-
+/* read-later-flg */
+/* delete-has-read*/
+.favorited {
+    color: #FCE38A;
+}
+.read-later-flg{
+    color: #ddd;
+}
+.has-read {
+    color: #537780;
 }
 
 /* has-read */
