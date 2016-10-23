@@ -110,7 +110,7 @@
                         </div>
                         <!--検索ボックス ココまで -->
 
-                        <img src="/img/profile.jpg" class="user_photo" width="50" height="50" alt="Nobuyuki's photo">
+                        <img src="/favicon/favicon-96x96.png" class="user_photo" width="50" height="50" alt="user's photo">
                         <div id="user_info">
                             <!-- フォントサイズ変えたいかも -->
                             <p id="user_name">{{$username}}</p>
@@ -140,7 +140,7 @@
                                 <li><a href="/home">All Articles</a></li>
 
                             @foreach( $user_reg_sites as $user_reg_site )
-                                <li><a href="/home/pid={{$user_reg_site->id}}">{{$user_reg_site->site_title}}</a></li>
+                                <li><a href="/home/pid={{$user_reg_site->id}}">{{$user_reg_site->site_title}} </a></li>
                             @endforeach
                         </ul>
                       </dd>
@@ -232,7 +232,7 @@
              /* selected: N で初期の番号指定 */
              $('#view-changer > ul').tabs({selected:1});
          });
-         
+
          $("#reload-button").on('click',function(e){
 
              $.ajax({
