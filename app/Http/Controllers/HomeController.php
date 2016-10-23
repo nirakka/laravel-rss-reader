@@ -41,7 +41,7 @@ class HomeController extends Controller
         $user_reg_sites = Site::whereIn('id' , $user_reg_site_ids)->get();
      
 
-        $articles = Article::whereIn('site_id', $user_reg_site_ids)->orderBy('date', 'desc')->paginate(30);
+        $articles = Article::whereIn('site_id', $user_reg_site_ids)->orderBy('date', 'desc')->paginate(45);
 
         $fav_article_query = FollowArticle::where('user_id', '=', $id)->get();
         $fav_article = $this->objectIdToArray($fav_article_query, 'article_id');
@@ -51,7 +51,7 @@ class HomeController extends Controller
 
         $has_read_query = HasRead::where('user_id','=',$id)->get();
         $has_read = $this->objectIdToArray($read_later_query, 'article_id');
-        
+            
 
         return view('home', 
                     [
@@ -83,7 +83,7 @@ class HomeController extends Controller
         $user_reg_sites = Site::whereIn('id' , $user_reg_site_ids)->get();
         $target_site_title = Site::where('id' , '=' , $target_site_id)->value('site_title');
         //get articles of target_site_id
-        $articles = Article::where('site_id','=',  $target_site_id)->orderBy('date', 'desc')->paginate(30);
+        $articles = Article::where('site_id','=',  $target_site_id)->orderBy('date', 'desc')->paginate(45);
 
         $fav_article_query = FollowArticle::where('user_id', '=', $id)->get();
         $fav_article = $this->objectIdToArray($fav_article_query, 'article_id');

@@ -93,6 +93,7 @@
                 <ul id="listlist">
                     @foreach ($articles as $i)
                         <li>
+                            <a href="{{ $i->url }}" target="_blank" >
                             <div class="article_list_content clearfix">
                                 <div class="read_or_unread">
                                 </div>
@@ -112,29 +113,11 @@
                                 </div>
 
 
-                                <div class="article_date">{{ date('H:i', strtotime($i->date)) }}</div>
+                                <div class="article_date">{{ date('Y/m/d', strtotime($i->date)) }}</div>
                             </div>
-
+                            </a>
                         </li>
                     @endforeach
-                    <li>
-                        <a href="">
-                            <div class="article_list_content clearfix">
-                                <div class="read_or_unread">
-                                </div>
-                                <div class="favo-icon">
-                                    <i class="fa fa-star-o" aria-hidden="true"></i>
-                                </div>
-                                <div class="site_title_listview">
-                                    はじめてのWEBサイトはじめてのWEBサイト
-                                </div>
-                                <div class="article_title_listview">
-                                    はじめての記事 30（リストビュー用でござんす）はじめての記事 30（リストビュー用でござんす）
-                                </div>
-                                <div class="article_date">27/09/2015</div>
-                            </div>
-                        </a>
-                    </li>
                 </ul>
             </div>
         </div>
@@ -174,6 +157,7 @@
                  }
              }).done(function(){
                  $('#' + article_id + ' .fav').toggle();
+                 console.log(article_id);
                  console.log("light up done toggle");
              }).always(function(){
                  button.attr("disabled", false); 
@@ -322,7 +306,9 @@
 
     var Num = 1;
     var LoadPicToggle =0;
-    var pageNum = 2;
+    var pageNumMagazine =2;
+    var pageNumList = 2;
+    var pageNum;
      // var link = $articles->nextPageUrl();
      var contains = function(needle) {
     // Per spec, the way to identify NaN is that it is not equal to itself
@@ -360,8 +346,8 @@
              
              var user_id = {{ Auth::user()->id }};
              var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-             // if(LoadPicToggle==0){
-             //    LoadPicToggle = 1;
+             if(LoadPicToggle==0){
+                LoadPicToggle = 1;
 
 
                     var obj = $(this);
@@ -370,11 +356,22 @@
                      if (!obj.data("loading"))
                      {
 
-                         //「loading」をtrueにする
-                         obj.data("loading", true);
+                         //「loading」をtrueにする拡張
+                         if(flag === 0) {
+                                    $('#magazinelist').append('<li class="load-li" style="text-align: center;"><img src="img/load.gif"></li>');
+                                } else if(flag === 1) {
+                                    $('#listlist').append('<li class="load-li" style="text-align: center;"><img src="img/load.gif"></li>');
+                                }
+                         // obj.data("loading", true);
 
                          //「Loading」画像を表示
-                         $('#magazinelist').append('<li class="load-li" style="text-align: center;"><img src="/img/load.gif"></li>');
+                         // $('#magazinelist').append('<li class="load-li" style="text-align: center;"><img src="/img/load.gif"></li>');
+                            if(flag==1){
+                                pageNum=pageNumList;
+                            }else {
+                                pageNum=pageNumMagazine;
+
+                            }
 
                              $.ajax({
                                  dataType: 'json',
@@ -392,61 +389,95 @@
                                     console.log(data);
 
                                     pageNum = pageNum +1 ;
-                                    //記事の末尾からアッペンド(pagination が初期値１５)
-                                    var articleNum = 15;
+                                    if(flag==1){
+                                pageNumList=pageNumList+1;
+                                console.log(pageNumList);
+                            }else {
+                                pageNumMagazine=pageNumMagazine+1;
+                                console.log(pageNumMagazine);
 
-                                     //追加する処理を記述
-                                     setTimeout(function()
-                                         {
-                                             $('#magazinelist li:last').remove();
-                                             var favarticle1;
-                            var favarticle2;
-                            var readLater1;
-                            var readLater2;
-                            var hasRead1;
-                            var hasRead2;
-
-                            for (i=0; i<15; i++, Num++)
-                            {
-                                if(contains.call(data.fav_article,data.articles.data[i].id)){
-                                    favarticle1='style="display:none"';
-                                    console.log("favarticle1=");
-                            console.log(favarticle1);
-                                    favarticle2='';
-                                }
-                                else {favarticle1='';
-                                    favarticle2='style="display:none"'};
-                                if(contains.call(data.read_later[i],data.articles.data[i].id)){
-                                    readLater1='style="display:none"';
-                                    readLater2='';
-                                }else{
-                                    readLater2='style="display:none"';
-                                    readLater1='';
-                                }
-                                if(contains.call(data.has_read[i],data.articles.data[i].id)){
-                                hasRead1='style="display:none"';
-                                hasRead2='';
-                            }else{
-                                hasRead2='style="display:none"';
-                                hasRead1='';
                             }
 
+                            //flagによって，magazine ka list ka wo kimeru
+                            if(flag==1){
+                                //list
+                                //記事の末尾からアッペンド(pagination が初期値１５)
+                                        var articleNum = 15;
 
+                                         //追加する処理を記述
+                                         setTimeout(function()
+                                             {
 
-                               
-                 $('#magazinelist').append('<li><div class="article_magazine_content" id="'+data.articles.data[i].id+'"><div class="has-read-flg"><a href="'+data.articles.data[i].url+'" target="_blank"><div class="article_wrap"><div class="article_title">'+data.articles.data[i].title+'</div><div class="article_content"><p class="textOverflow">'+data.articles.data[i].content+'</p></div><div class="article_footerclearfix"><span class="site_title">'+data.site_title_scroll[i]+'</span><span class="article_date" >'+data.site_date_scroll[i]+'</span></div></div></a></div><div class="action_buttons" data-id="'+data.articles.data[i].id+'"> <form action="/articles" method="POST" class="fav test1" '+favarticle1+'>{{csrf_field()}}<button type="submit" class="star-button btn" data-id="'+data.articles.data[i].id+'"><i class="fa fa-star-o" aria-hidden="true"></i></button></form><form action="/delete-fav" method="POST" class="fav test1" '+favarticle2+'>{{csrf_field()}}<button type="submit" class="favorited btn" data-id="'+data.articles.data[i].id+'"><i class="fa fa-star" aria-hidden="true"></i></button></form><form action="/read-later" method="POST" class="read-late test2" '+readLater1+'>{{csrf_field()}}<button type="submit" class="read-later btn" data-id="'+data.articles.data[i].id+'"><i class="fa fa-clock-o" aria-hidden="true"></i></button></form><form action="/delete-later" method="POST" class="read-late test2" '+readLater2+'>{{csrf_field()}}<button type="submit" class="btn read-later-flg" data-id="'+data.articles.data[i].id+'"><i class="fa fa-clock-o" aria-hidden="true"></i></button></form><form action="/has-read" method="POST" class="has-read-form test3" '+hasRead1+'>{{csrf_field()}}<input type="hidden" name="user_id" value="1"><input type="hidden" name="article_id" value="1"><button type="submit" class="has-read btn" data-id="'+data.articles.data[i].id+'"><i class="fa fa-check" aria-hidden="true"></i></button></form><form action="/delete-has-read" method="POST" class="has-read-form test3" '+hasRead2+'>{{csrf_field()}}<button type="submit" class="del-has-read btn" data-id="'+data.articles.data[i].id+'"><i class="fa fa-check" aria-hidden="true"></i></button></form></div></div></li>');
+                                        $('#listlist li:last').remove();
+
+                                for (i=0; i<15; i++)
+                                {                  
+                                     $('#listlist').append( '<li><a href="'+data.articles.data[i].url+'"><div class="article_list_content clearfix"><div class="read_or_unread"></div><div class="favo-icon"><i class="fa fa-star-o" aria-hidden="true"></i></div><div class="site_title_listview">'+data.site_title_scroll[i]+'</div><div class="article_title_listview"><span class="article_title_listview_span">'+data.site_title_scroll[i]+' </span><span class="article_content_listview_span">'+data.articles.data[i].title+'</span></div><div class="article_date">'+data.site_date_scroll[i]+'</div></div></a></li>');}
+
+                                 //処理が完了したら「Loading...」をfalseにする
+                                 obj.data("loading", false);
+                                 LoadPicToggle=0;
+                             }, 1000);
+
+                            }else if(flag==0){
+                                    //magazineview
+
+                                        //記事の末尾からアッペンド(pagination が初期値１５)
+                                        var articleNum = 15;
+
+                                         //追加する処理を記述
+                                         setTimeout(function()
+                                             {
+                                                 $('#magazinelist li:last').remove();
+                                                 var favarticle1;
+                                var favarticle2;
+                                var readLater1;
+                                var readLater2;
+                                var hasRead1;
+                                var hasRead2;
+
+                                for (i=0; i<15; i++, Num++)
+                                {
+                                    if(contains.call(data.fav_article,data.articles.data[i].id)){
+                                        favarticle1='style="display:none"';
+                                        favarticle2='';
+                                    }
+                                    else {favarticle1='';
+                                        favarticle2='style="display:none"'};
+                                    if(contains.call(data.read_later[i],data.articles.data[i].id)){
+                                        readLater1='style="display:none"';
+                                        readLater2='';
+                                    }else{
+                                        readLater2='style="display:none"';
+                                        readLater1='';
+                                    }
+                                    if(contains.call(data.has_read[i],data.articles.data[i].id)){
+                                    hasRead1='style="display:none"';
+                                    hasRead2='';
+                                }else{
+                                    hasRead2='style="display:none"';
+                                    hasRead1='';
                                 }
 
 
-                             //処理が完了したら「Loading...」をfalseにする
-                             obj.data("loading", false);
-                             LoadPicToggle=0;
-                         }, 1000);
-                    
+
+                                                   
+                                     $('#magazinelist').append('<li><div class="article_magazine_content" id="'+data.articles.data[i].id+'"><div class="has-read-flg"><a href="'+data.articles.data[i].url+'" target="_blank"><div class="article_wrap"><div class="article_title">'+data.articles.data[i].title+'</div><div class="article_content"><p class="textOverflow">'+data.articles.data[i].content+'</p></div><div class="article_footerclearfix"><span class="site_title">'+data.site_title_scroll[i]+'</span><span class="article_date" >'+data.site_date_scroll[i]+'</span></div></div></a></div><div class="action_buttons" data-id="'+data.articles.data[i].id+'"> <form action="/articles" method="POST" class="fav test1" '+favarticle1+'>{{csrf_field()}}<button type="submit" class="star-button btn" data-id="'+data.articles.data[i].id+'"><i class="fa fa-star-o" aria-hidden="true"></i></button></form><form action="/delete-fav" method="POST" class="fav test1" '+favarticle2+'>{{csrf_field()}}<button type="submit" class="favorited btn" data-id="'+data.articles.data[i].id+'"><i class="fa fa-star" aria-hidden="true"></i></button></form><form action="/read-later" method="POST" class="read-late test2" '+readLater1+'>{{csrf_field()}}<button type="submit" class="read-later btn" data-id="'+data.articles.data[i].id+'"><i class="fa fa-clock-o" aria-hidden="true"></i></button></form><form action="/delete-later" method="POST" class="read-late test2" '+readLater2+'>{{csrf_field()}}<button type="submit" class="btn read-later-flg" data-id="'+data.articles.data[i].id+'"><i class="fa fa-clock-o" aria-hidden="true"></i></button></form><form action="/has-read" method="POST" class="has-read-form test3" '+hasRead1+'>{{csrf_field()}}<input type="hidden" name="user_id" value="1"><input type="hidden" name="article_id" value="1"><button type="submit" class="has-read btn" data-id="'+data.articles.data[i].id+'"><i class="fa fa-check" aria-hidden="true"></i></button></form><form action="/delete-has-read" method="POST" class="has-read-form test3" '+hasRead2+'>{{csrf_field()}}<button type="submit" class="del-has-read btn" data-id="'+data.articles.data[i].id+'"><i class="fa fa-check" aria-hidden="true"></i></button></form></div></div></li>');
+                                                    }
+
+
+                                 //処理が完了したら「Loading...」をfalseにする
+                                 obj.data("loading", false);
+                                 LoadPicToggle=0;
+                             }, 1000);}
+                             else {
+                                console.log("flag error");
+                             }
+                        
 
 
                  });
-                 //}
+                 }
              }
 
          });
@@ -483,6 +514,9 @@
     <!-- css 切り替え用 スクリプト -->
     <script type="text/javascript">
     var flag = 0; // 0: magazine_view 1: list_view
+    // console.log("data on kirikae");
+    // console.log(data);
+
     function listViewMode() {
         document.getElementById("header-innner-wrap").style.maxWidth="90%";
         document.getElementById("header-innner-wrap").style.maxWidth="90%";
