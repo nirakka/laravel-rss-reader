@@ -21,7 +21,7 @@ class FollowArticleController extends Controller
     {
         $user = \Auth::user();
         $id = $user->id;
-        $articles = FollowArticle::where('user_id', '=', $id)->paginate('30');
+        $articles = FollowArticle::where('user_id', '=', $id)->get();
         $fav_article_query = FollowArticle::where('user_id', '=', $id)->get();
         $user_reg_site_ids = SiteReg::where('user_id', '=', $id)->get();
         $user_reg_site_ids = $this->objectIdToArray($user_reg_site_ids, 'site_id');

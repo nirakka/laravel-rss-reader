@@ -19,7 +19,7 @@ class ReadLaterController extends Controller
     {
         $user = \Auth::user();
         $id = $user->id;
-        $articles = ReadLater::where('user_id', '=', $id)->paginate('30');
+        $articles = ReadLater::where('user_id', '=', $id)->get();
 
         $user_reg_site_ids = SiteReg::where('user_id', '=', $id)->get();
         $user_reg_site_ids = $this->objectIdToArray($user_reg_site_ids, 'site_id');

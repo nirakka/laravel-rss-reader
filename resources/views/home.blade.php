@@ -398,11 +398,11 @@
                                     //記事の末尾からアッペンド(pagination が初期値１５)
                                     var articleNum = 15;
 
-                                         //追加する処理を記述
-                                         setTimeout(function()
+                                     //追加する処理を記述
+                                     setTimeout(function()
                                          {
                                              $('#magazinelist li:last').remove();
-                            var favarticle1;
+                                             var favarticle1;
                             var favarticle2;
                             var readLater1;
                             var readLater2;
@@ -412,7 +412,6 @@
                             for (i=0; i<15; i++, Num++)
                             {
                                 if(contains.call(data.fav_article,data.articles.data[i].id)){
-
                                     favarticle1='style="display:none"';
                                     favarticle2='';
                                 }
