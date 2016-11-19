@@ -355,12 +355,12 @@
                      //「loading」がfalseの時に実行する
                      if (!obj.data("loading"))
                      {
-
+                        var base_url = window.location.origin;
                          //「loading」をtrueにする拡張
                          if(flag === 0) {
-                                    $('#magazinelist').append('<li class="load-li" style="text-align: center;"><img src="img/load.gif"></li>');
+                                    $('#magazinelist').append('<li class="load-li" style="text-align: center;"><img src="'+base_url+'/img/load.gif"></li>');
                                 } else if(flag === 1) {
-                                    $('#listlist').append('<li class="load-li" style="text-align: center;"><img src="img/load.gif"></li>');
+                                    $('#listlist').append('<li class="load-li" style="text-align: center;"><img src="'+base_url+'/img/load.gif"></li>');
                                 }
                          // obj.data("loading", true);
 
@@ -372,11 +372,30 @@
                                 pageNum=pageNumMagazine;
 
                             }
+                            var getLink;
+                            var url=window.location.href;
+                            //特定サイトが選択されているかpidを確認
+                            if(url.indexOf("pid=") >= 0) {
+                                //pid がある
+                                var digitEnd=url.indexOf("pid=")+4;
+                                do{
+                                    var letter = url[digitEnd];
+                                        console.log(letter);
+                                        if(!isNaN(letter))
+                                            digitEnd++;
+                                        else break;
+                                        break;
+
+                                }while(true);
+                                getLink= '/tempArticleGet/pid='+ url.substring(url.indexOf("pid=")+4,++digitEnd) ;
+
+                            }else 
+                                getLink= '/tempArticleGet'
 
                              $.ajax({
                                  dataType: 'json',
                                  type:'GET',
-                                 url: '/tempArticleGet',
+                                 url: getLink,
                                  data:{
                                     _token: CSRF_TOKEN,
                                      page: pageNum
