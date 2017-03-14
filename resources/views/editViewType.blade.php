@@ -8,7 +8,7 @@
                 <div style="padding:20px;">
                     <form action="/edit-view" method="post" style="display:block;">
                         {{ csrf_field() }}
-                        <select name="view_type" value="1">
+                        <select name="view_type" value="0">
                             <option value="0">0</option>
                             <option value="1">1</option>
 
