@@ -417,7 +417,7 @@
 
                             }
 
-                            //flagによって，magazine ka list ka wo kimeru
+                            //flagによって，magazineビューかlistビューかを決める
                             if(flag==1){
                                 //list
                                 //記事の末尾からアッペンド(pagination が初期値１５)
@@ -581,6 +581,7 @@
     <!-- css 切り替え用 スクリプト -->
     <script type="text/javascript">
     var flag = 0; // 0: magazine_view 1: list_view
+    // debug
     // console.log("data on kirikae");
     // console.log(data);
 

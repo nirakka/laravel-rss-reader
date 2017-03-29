@@ -68,7 +68,7 @@ class HomeController extends Controller
     }
 
     
-    
+    //特定のサイトのニュースを持ってくる
     public function showArticlesofTargetSite($target_site_id)
     {
 
