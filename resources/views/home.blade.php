@@ -503,31 +503,12 @@
          $('html,body').animate({ scrollTop: 0 }, '1');
      });
 
-    //サイト追加ボタンを押した時，
-     $('#add-sites').click(function() {
-         //$('#add-sites').css( 'display', 'none');
-         $('#add-sites-edit')
-             .val( $( '#add-sites').text())
-             .toggle('slow')
-             .focus();
-     });
-
-     $('#add-sites-edit').blur(function() {
-         $('#add-sites-edit').toggle('slow');
-     });
-     // エンターキーを押したときサイト追加が実行される
-     $("#search_box").keyup(function(event){
-         if(event.keyCode == 13){
-             var searchLink = document.getElementById("searchText").value;
-             var str1= "http://homestead.app/search?searchWord=";
-             var searchLink= str1.concat(searchLink);
-             // console.log(searchLink);
-             window.location.href= searchLink;
-         }
-     });
     </script>
-
+    <!-- サイト追加ボタン用スクリプト -->
+    <script type="text/javascript" src="/js/newSiteButton.home.js"></script>
+    <!-- 検索用ボタンスクリプト -->
+    <script type="text/javascript" src="/js/searchButton.home.js"></script>
     <!-- css 切り替え用 スクリプト -->
-    <script type="text/javascript" src="/js/changeViewMode.js"></script>
+    <script type="text/javascript" src="/js/changeViewMode.home.js"></script>
 
 @endsection

@@ -1,4 +1,5 @@
-var flag = 0; // 0: magazine_view 1: list_view
+var flag = 0; 
+// 0: magazine_view 1: list_view
 // console.log("data on kirikae");
 // console.log(data);
 
