@@ -136,21 +136,7 @@ class ScrollController extends Controller{
         foreach ($articles as $article){
             $site_date_scroll[] = date("Y/m/d", strtotime($article->date));
         }
-        
-
         return response()->json(compact('site_title_scroll','articles','site_date_scroll','fav_article','read_later','has_read'));
-        // return (
-        //     [
-        //         'title_name' =>$target_site_title ,
-        //         'articles' => $articles ,
-        //         'user_reg_sites' => $user_reg_sites ,
-        //         'username' => $username ,
-        //         'useremail' => $useremail ,
-        //     ]);
-
-        // return response()->json();
-        //return $request->all();
-
     }
 
     private function articleIdToArray($data){
