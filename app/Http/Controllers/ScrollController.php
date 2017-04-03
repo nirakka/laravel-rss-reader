@@ -20,8 +20,6 @@ class ScrollController extends Controller{
 	}
 
     public function tempArticle(){
-
-
         $user = \Auth::user();
         $id=$user->id;
         $username=$user->name;
@@ -45,50 +43,29 @@ class ScrollController extends Controller{
         $site_title_scroll = [];
         foreach ($articles as $article) {
             $site_title_scroll[] = $article->site()->first()->site_title;
-            # code...
         }
-
         $site_date_scroll = [];
         $has_read = [];
         $read_later = [];
         $fav_article = [];
         foreach ($has_read_ob as $i) {
-        $has_read [] = $i;
-            # code...
+            $has_read [] = $i;
         }
-
         foreach ($read_later_ob as $i) {
-        $read_later [] = $i;
+            $read_later [] = $i;
         }
-
         foreach ($fav_article_ob as $i) {
-                $fav_article [] = $i;
-            # code...
+            $fav_article [] = $i;
         }
-
         foreach ($articles as $article){
             $site_date_scroll[] = date("Y/m/d", strtotime($article->date));
         }
-        
-
         return response()->json(compact('site_title_scroll','articles','site_date_scroll','fav_article','read_later','has_read'));
-        // return (
-        //     [
-        //         'title_name' =>$target_site_title ,
-        //         'articles' => $articles ,
-        //         'user_reg_sites' => $user_reg_sites ,
-        //         'username' => $username ,
-        //         'useremail' => $useremail ,
-        //     ]);
-
-        // return response()->json();
-        //return $request->all();
-
     }
 
+    //特定のサイトのスクロール
+    // 入力：　特定のサイトID
      public function tempArticleofTargetSite($target_site_id){
-
-
         $user = \Auth::user();
         $id=$user->id;
         $username=$user->name;
@@ -97,6 +74,7 @@ class ScrollController extends Controller{
         $user_reg_site_ids = $this->articleIdToArray($user_reg_site_ids);
         $user_reg_sites = Site::whereIn('id' , $user_reg_site_ids)->get();
 
+        //15個の記事ずつ取り出す
         $articles = Article::where('site_id','=',  $target_site_id)->orderBy('date', 'desc')->paginate(15);
 
         $fav_article_query = FollowArticle::where('user_id', '=', $id)->get();
@@ -136,21 +114,7 @@ class ScrollController extends Controller{
         foreach ($articles as $article){
             $site_date_scroll[] = date("Y/m/d", strtotime($article->date));
         }
-        
-
         return response()->json(compact('site_title_scroll','articles','site_date_scroll','fav_article','read_later','has_read'));
-        // return (
-        //     [
-        //         'title_name' =>$target_site_title ,
-        //         'articles' => $articles ,
-        //         'user_reg_sites' => $user_reg_sites ,
-        //         'username' => $username ,
-        //         'useremail' => $useremail ,
-        //     ]);
-
-        // return response()->json();
-        //return $request->all();
-
     }
 
     private function articleIdToArray($data){
